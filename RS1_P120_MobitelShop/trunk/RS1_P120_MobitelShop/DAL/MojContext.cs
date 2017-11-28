@@ -17,7 +17,6 @@ namespace RS1_P120_MobitelShop.DAL
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Korisnik>().HasOptional(x => x.Administrator).WithRequired(x => x.Korisnik);
             modelBuilder.Entity<Korisnik>().HasOptional(x => x.Klijent).WithRequired(x => x.Korisnik);
