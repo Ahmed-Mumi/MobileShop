@@ -18,8 +18,18 @@ namespace RS1_P120_MobitelShop.Controllers
         
          public ActionResult Index()
         {
-            Artikal art = ctx.Artikli.FirstOrDefault();
-            return View(art);
-        }
-	}
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+
+            if (k == null)
+                return RedirectToAction("Logout", "Autentifikacija", new { area = "" });
+
+            if (k.Administrator != null)
+                return RedirectToAction("Index", "Home", new { area = "ModulAdministracija" });
+
+            if (k.Klijent != null)
+                return RedirectToAction("Index", "Home", new { area = "ModulKlijenti" });
+
+            return RedirectToAction("Logout", "Autenficikacija", new { area = "" });
+        }  
+    }
 }
