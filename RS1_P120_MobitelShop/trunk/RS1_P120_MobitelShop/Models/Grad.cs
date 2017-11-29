@@ -11,7 +11,7 @@ namespace RS1_P120_MobitelShop.Models
         public string Naziv { get; set; }
         public string PostanskiBroj { get; set; }
         public int Id { get; set; }
-        public Kanton Kanton { get; set; }
+        public virtual Kanton Kanton { get; set; }
         public int KantonId { get; set; }
     }
 }

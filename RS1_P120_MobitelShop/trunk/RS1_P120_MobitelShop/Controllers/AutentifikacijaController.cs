@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using RS1_P120_MobitelShop.Models;
 using RS1_P120_MobitelShop.Helper;
+using RS1_P120_MobitelShop.ViewModel;
 
 namespace RS1_P120_MobitelShop.Controllers
 {
@@ -38,6 +39,38 @@ namespace RS1_P120_MobitelShop.Controllers
         {
             Autentifikacija.PokreniNovuSesiju(null, HttpContext, true);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Dodaj()
+        {
+            Klijent klijent;
+            klijent = new Klijent();
+            klijent.Korisnik = new Korisnik();
+            klijent.Korisnik.Login = new Login();
+
+            RegistrationVM Model = new RegistrationVM();
+            Model.Klijent = klijent;
+            return View("Registration",Model);
+        }
+
+        public ActionResult Registration(RegistrationVM vm)
+        {
+            Klijent klijent = new Klijent();
+            klijent.Korisnik = new Korisnik();
+            klijent.Korisnik.Login = new Login();
+            ctx.Klijenti.Add(klijent);
+
+            klijent.Korisnik.Ime = vm.Ime;
+            klijent.Korisnik.Login.Username = vm.Username;
+            klijent.Korisnik.Login.Password = vm.Password;
+            klijent.Korisnik.Prezime = vm.Prezime;
+            klijent.Korisnik.Telefon = vm.Telefon;
+            klijent.Korisnik.Adresa = vm.Adresa;
+            klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
+            klijent.Korisnik.Email = vm.Email;
+
+            ctx.SaveChanges();
+            return Redirect("/Autentifikacija");
         }
     }
 }

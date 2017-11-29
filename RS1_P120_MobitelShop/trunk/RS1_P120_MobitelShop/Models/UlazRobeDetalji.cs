@@ -11,10 +11,10 @@ namespace RS1_P120_MobitelShop.Models
         public int Kolicina { get; set; }
         public DateTime Datum { get; set; }
 
-        public Filijala Filijala { get; set; }
+        public virtual Filijala Filijala { get; set; }
         public int FilijalaId { get; set; }
 
-        public Dobavljac Dovabljac { get; set; }
+        public virtual Dobavljac Dovabljac { get; set; }
         public int DobavljacId { get; set; }
     }
 }

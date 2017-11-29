@@ -13,7 +13,7 @@ namespace RS1_P120_MobitelShop.Models
         public string Opis { get; set; }
         public int Kolicina { get; set; }
         public int Id { get; set; }
-        public Grad Grad { get; set; }
+        public virtual Grad Grad { get; set; }
         public int GradId { get; set; }
     }
 }

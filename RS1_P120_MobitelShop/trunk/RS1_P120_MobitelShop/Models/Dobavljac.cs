@@ -14,10 +14,10 @@ namespace RS1_P120_MobitelShop.Models
         public string Telefon { get; set; }
         public string Adresa { get; set; }
 
-        public Skladiste Skladiste { get; set; }
+        public virtual Skladiste Skladiste { get; set; }
         public int SkladisteId { get; set; }
 
-        public Grad Grad { get; set; }
+        public virtual Grad Grad { get; set; }
         public int GradId { get; set; }
     }
 }

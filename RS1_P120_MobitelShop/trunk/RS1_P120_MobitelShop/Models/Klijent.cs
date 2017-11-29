@@ -10,7 +10,7 @@ namespace RS1_P120_MobitelShop.Models
     {
         
         public int Id { get; set; }
-        public Korisnik Korisnik { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
         public int KorisnikId { get; set; }
     }
 }

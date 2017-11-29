@@ -13,10 +13,10 @@ namespace RS1_P120_MobitelShop.Models
         public string StatusNarudzbe { get; set; }
         public bool Otkazano { get; set; }
 
-        public Isporuka Isporuka { get; set; }
+        public virtual Isporuka Isporuka { get; set; }
         public int IsporukaId { get; set; }
 
-        public Klijent Klijent { get; set; }
+        public virtual Klijent Klijent { get; set; }
         public int KlijentId { get; set; }
 
         public int Id { get; set; }

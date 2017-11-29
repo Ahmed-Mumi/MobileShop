@@ -16,13 +16,13 @@ namespace RS1_P120_MobitelShop.Models
         public string Marka { get; set; }
         public double Cijena { get; set; }
 
-        public Specifikacije Specifikacije { get; set; }
+        public virtual Specifikacije Specifikacije { get; set; }
         public int SpecifikacijeId { get; set; }
 
-        public Popust Popust { get; set; }
+        public virtual Popust Popust { get; set; }
         public int PopustId { get; set; }
 
-        public TipServisa TipServisa { get; set; }
+        public virtual TipServisa TipServisa { get; set; }
         public int TipServisaId { get; set; }       
     }
 }

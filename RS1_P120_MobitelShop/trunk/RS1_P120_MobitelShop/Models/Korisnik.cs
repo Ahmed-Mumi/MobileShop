@@ -19,16 +19,16 @@ namespace RS1_P120_MobitelShop.Models
         public string LozinkaHash { get; set; }
         public string LozinkaSalt { get; set; }
 
-        public Klijent Klijent { get; set; }
+        public virtual Klijent Klijent { get; set; }
         public int KlijentId { get; set; }
 
-        public Login Login { get; set; }
-       
+        public virtual Login Login { get; set; }
 
-        public Administrator Administrator { get; set; }
+
+        public virtual Administrator Administrator { get; set; }
         public int AdministratorId { get; set; }
 
-        public Grad Grad { get; set; }
+        public virtual Grad Grad { get; set; }
         public int GradId { get; set; }
 
         public int LoginId { get; set; }

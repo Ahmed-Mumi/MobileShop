@@ -11,10 +11,10 @@ namespace RS1_P120_MobitelShop.Models
         public int Id { get; set; }
         public int Kolicina { get; set; }
 
-        public Artikal Artikal { get; set; }
+        public virtual Artikal Artikal { get; set; }
         public int ArtikalId { get; set; }
 
-        public Skladiste Skladiste { get; set; }
+        public virtual Skladiste Skladiste { get; set; }
         public int SkladisteId { get; set; }
     }
 }

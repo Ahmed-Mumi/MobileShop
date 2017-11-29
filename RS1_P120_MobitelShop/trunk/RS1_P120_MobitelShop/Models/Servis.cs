@@ -14,13 +14,13 @@ namespace RS1_P120_MobitelShop.Models
         public string Opis { get; set; }
         public double Cijena { get; set; }
 
-        public Administrator Administrator { get; set; }
+        public virtual Administrator Administrator { get; set; }
         public int AdministratorId { get; set; }
 
-        public Klijent Klijent { get; set; }
+        public virtual Klijent Klijent { get; set; }
         public int KlijentId { get; set; }
 
-        public TipServisa TipServisa { get; set; }
+        public virtual TipServisa TipServisa { get; set; }
         public int TipServisaId { get; set; }
     }
 }

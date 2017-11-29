@@ -12,10 +12,10 @@ namespace RS1_P120_MobitelShop.Models
         public DateTime DatumKomentiranja { get; set; }
         public int Id { get; set; }
 
-        public Klijent Klijent { get; set; }
+        public virtual Klijent Klijent { get; set; }
         public int KlijentId { get; set; }
 
-        public Artikal Artikal { get; set; }
+        public virtual Artikal Artikal { get; set; }
         public int ArtikalId { get; set; }
     }
 }
