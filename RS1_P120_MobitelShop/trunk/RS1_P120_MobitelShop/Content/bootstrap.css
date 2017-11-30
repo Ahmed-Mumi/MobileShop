@@ -2548,7 +2548,7 @@ output {
 }
 .form-control {
   display: block;
-  width: 100%;
+  width: 30%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -2936,7 +2936,7 @@ select[multiple].input-lg {
     width: auto;
   }
   .form-inline .input-group > .form-control {
-    width: 100%;
+    width: 50%;
   }
   .form-inline .control-label {
     margin-bottom: 0;
@@ -3827,7 +3827,7 @@ tbody.collapse.in {
   position: relative;
   z-index: 2;
   float: left;
-  width: 100%;
+  width: 50%;
   margin-bottom: 0;
 }
 .input-group .form-control:focus {
@@ -4399,7 +4399,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     width: auto;
   }
   .navbar-form .input-group > .form-control {
-    width: 100%;
+    width: 50%;
   }
   .navbar-form .control-label {
     margin-bottom: 0;

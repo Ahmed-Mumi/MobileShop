@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    //Layout = null;
 }
 
 <!DOCTYPE html>
@@ -8,26 +8,35 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>MobitelShop</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
         @using (Html.BeginForm("Provjera", "Autentifikacija", FormMethod.Get))
         {
+            <br />
+            <br />
             <h2>Logiranje na sistem</h2>
-
+            <hr />
             <input type="text" class="form-control" name="username" id="username" placeholder="korisničko ime" required autofocus />
-
-            <input type="password" class="form-control" id="password" name="password" placeholder="Lozinka" required />
+            <br />
+            <br />
+            <input type="password" class="form-control" id="password" name="password" placeholder="lozinka" required />
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="zapamti" name="zapamti" />
+                    <input type="checkbox" id="zapamti" name="zapamti"  class="arrow"/>
                     Zapamti me
                 </label>
             </div>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Prijavi se</button>
+            
+            <hr />
+    <span>Nemate profil</span> @Html.ActionLink("Registruj se","Dodaj")
+            <br />
+            <br />
+           <input type="submit" value="Prijavi se" class="btn btn-default" />
         }
     </div>
+    
 </body>
 </html>

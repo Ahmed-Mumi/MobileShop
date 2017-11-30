@@ -27,9 +27,9 @@ namespace RS1_P120_MobitelShop.Controllers
                 return RedirectToAction("Index", "Home", new { area = "ModulAdministracija" });
 
             if (k.Klijent != null)
-                return RedirectToAction("Index", "Home", new { area = "ModulKlijenti" });
+                return RedirectToAction("Index", "Korpa", new { area = "ModulKlijenti" });
 
-            return RedirectToAction("Logout", "Autenficikacija", new { area = "" });
+            return RedirectToAction("Logout", "Autentifikacija", new { area = "" });
         }  
     }
 }

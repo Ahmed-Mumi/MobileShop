@@ -24,7 +24,6 @@ namespace RS1_P120_MobitelShop.Models
 
         public virtual Login Login { get; set; }
 
-
         public virtual Administrator Administrator { get; set; }
         public int AdministratorId { get; set; }
 

@@ -33,6 +33,26 @@ namespace RS1_P120_MobitelShop.Controllers
 
             Autentifikacija.PokreniNovuSesiju(korisnik,HttpContext,(zapamti =="on"));
 
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+
+            if (k.Administrator != null  && k.Klijent == null)
+            {
+                Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
+                return Redirect("/ModulAdministracija/AdminHome");
+            }
+
+            //else if (k.Administrator == null && k.Klijent == null)
+            //{
+            //    Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
+            //    return Redirect("/PrikazPonude");
+            //}
+
+            else if (k.Administrator == null && k.Klijent != null)
+            {
+                Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
+                return Redirect("/ModulKlijenti/Korpa/Index");
+            }
+
             return RedirectToAction("Index","Home");          
         }
         public ActionResult Logout()
@@ -50,7 +70,16 @@ namespace RS1_P120_MobitelShop.Controllers
 
             RegistrationVM Model = new RegistrationVM();
             Model.Klijent = klijent;
+            Model.gradoviStavke = ucitajGradove();
             return View("Registration",Model);
+        }
+
+        private List<SelectListItem> ucitajGradove()
+        {
+            var gradovi = new List<SelectListItem>();
+            gradovi.Add(new SelectListItem { Value = null, Text = "Izaberite grad" });
+            gradovi.AddRange(ctx.Gradovi.Select(x=> new SelectListItem{Value = x.Id.ToString(),Text = x.Naziv}));
+            return gradovi;
         }
 
         public ActionResult Registration(RegistrationVM vm)
@@ -68,9 +97,10 @@ namespace RS1_P120_MobitelShop.Controllers
             klijent.Korisnik.Adresa = vm.Adresa;
             klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
             klijent.Korisnik.Email = vm.Email;
-
+            klijent.Korisnik.GradId = vm.GradId;
             ctx.SaveChanges();
             return Redirect("/Autentifikacija");
         }
+
     }
 }
