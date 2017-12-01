@@ -1,0 +1,60 @@
+﻿@using RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
+@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.KlijentiEditVM
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Uredi</title>
+</head>
+<body>
+    <div>
+        <span>Uređivanje profila klijenta</span>
+        @using (Html.BeginForm("Snimi", "Klijenti"))
+        {
+            @Html.HiddenFor(model => model.KlijentId)
+
+            <div>
+                <span>Ime :</span>
+                @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" })
+            </div>
+            <div>
+                <span>Prezime :</span>
+                @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" })
+            </div>
+    <div>
+        <span>Datum rođenja :</span>
+        @Html.TextBoxFor(model => model.DatumRodjenja, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Email :</span>
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Telefon :</span>
+        @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Adresa :</span>
+        @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Korisničko ime :</span>
+        @Html.TextBoxFor(model => model.KorisnickoIme, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Grad :</span>
+        @Html.DropDownListFor(model => model.GradId,Model.gradovi, new { @class = "form-control" })
+    </div>
+            <br />
+            <input type="submit" value="Snimi" />
+        }
+    </div>
+</body>
+</html>
+
+          

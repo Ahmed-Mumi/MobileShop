@@ -1,14 +1,17 @@
-﻿using RS1_P120_MobitelShop.Helper;
+﻿using RS1_P120_MobitelShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
-namespace RS1_P120_MobitelShop.Models
+
+namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
 {
-    public class Korisnik : IEntity
+    public class KlijentiEditVM
     {
         public int Id { get; set; }
+        public Klijent Klijent { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public DateTime DatumRodjenja { get; set; }
@@ -16,20 +19,10 @@ namespace RS1_P120_MobitelShop.Models
         public string Telefon { get; set; }
         public string Adresa { get; set; }
         public string KorisnickoIme { get; set; }
-        public string LozinkaHash { get; set; }
-        public string LozinkaSalt { get; set; }
-
-        public virtual Klijent Klijent { get; set; }
-
-
-        public virtual Administrator Administrator { get; set; }
-     
-
-        public virtual Grad Grad { get; set; }
+        public List<SelectListItem> gradovi { get; set; }
+        public string GradNaziv { get; set; }
         public int GradId { get; set; }
-
-        public virtual Login Login { get; set; }
         public int LoginId { get; set; }
-      
+        public int KlijentId { get; set; }
     }
 }

@@ -1,0 +1,55 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels.KlijentiPrikaziVM
+@using RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Datum rođenja</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th>Adresa</th>
+                <th>Korisničko ime</th>
+                <th>Grad</th>
+                <th>Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (KlijentiPrikaziVM.KlijentInfo x in Model.klijentStavke)
+            {
+                <tr>
+                    <td>
+                        @x.Ime
+                    </td>
+                    <td>@x.Prezime</td>
+                    <td>@x.DatumRodjenja</td>
+                    <td>@x.Email</td>
+                    <td>@x.Telefon</td>
+                    <td>@x.Adresa</td>
+                    <td>@x.KorisnickoIme</td>
+                    <td>@x.Grad</td>
+                    <td>
+                        @Html.ActionLink("Obriši","Obrisi") |
+                        @Html.ActionLink("Uredi", "Uredi", new { id = x.KlijentId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+    </div>
+</body>
+</html>
+

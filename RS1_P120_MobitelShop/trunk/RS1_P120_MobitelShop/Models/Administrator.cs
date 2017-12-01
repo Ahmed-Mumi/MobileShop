@@ -9,8 +9,6 @@ namespace RS1_P120_MobitelShop.Models
     public class Administrator : IEntity
     {
         public int Id { get; set; }
-        public virtual Korisnik Korisnik { get; set; }
-        public int KorisnikId { get; set; }
-        
+        public virtual Korisnik Korisnik { get; set; }    
     }
 }

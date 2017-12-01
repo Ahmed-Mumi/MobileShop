@@ -95,6 +95,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\ModulAdministracija\Views\web.config" />
@@ -108,6 +109,13 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\ModulKlijenti\Views\Korpa\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\AdminHome\UpravljackaPloca.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Klijenti\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Klijenti\Prikazi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Klijenti\Uredi.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -122,13 +130,18 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\KlijentiController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\KlijentiEditVM.cs" />
     <Compile Include="Areas\ModulAdministracija\ModulAdministracijaAreaRegistration.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\KorpaController.cs" />
     <Compile Include="Areas\ModulKlijenti\ModulKlijentiAreaRegistration.cs" />
     <Compile Include="Controllers\AutentifikacijaController.cs" />
@@ -188,9 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\ModulAdministracija\Controllers\" />
-    <Folder Include="Areas\ModulAdministracija\Models\" />
-    <Folder Include="Areas\ModulAdministracija\Views\Shared\" />
     <Folder Include="Areas\ModulKlijenti\Models\" />
     <Folder Include="Areas\ModulKlijenti\Views\Shared\" />
     <Folder Include="Views\Login\" />
