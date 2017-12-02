@@ -1,5 +1,5 @@
-﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels.KlijentiPrikaziVM
-@using RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.AdminPrikaziVM
+@using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
 @{
     //Layout = null;
 }
@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (KlijentiPrikaziVM.KlijentInfo x in Model.klijentStavke)
+            @foreach (AdminPrikaziVM.AdminInfo x in Model.adminStavke)
             {
                 <tr>
                     <td>
@@ -41,8 +41,8 @@
                     <td>@x.KorisnickoIme</td>
                     <td>@x.Grad</td>
                     <td>
-                        @Html.ActionLink("Obriši", "Obrisi", new { id = x.KlijentId }, new { @class = "btn btn-danger" }) 
-                        @Html.ActionLink("Uredi", "Uredi", new { id = x.KlijentId }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Obriši", "Obrisi", new { id = x.AdministratorId},new{ @class = "btn btn-danger" }) 
+                        @Html.ActionLink("Uredi", "Uredi", new { id = x.AdministratorId }, new { @class = "btn btn-info" })
                     </td>
                 </tr>
             }

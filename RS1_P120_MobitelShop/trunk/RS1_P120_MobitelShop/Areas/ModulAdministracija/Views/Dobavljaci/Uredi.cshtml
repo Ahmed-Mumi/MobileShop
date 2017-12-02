@@ -1,0 +1,49 @@
+﻿@using RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
+@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.DobavljaciEditVM
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Uredi</title>
+</head>
+<body>
+    <div>
+        <span>Dodavanje dobavljača</span>
+        @using (Html.BeginForm("Snimi", "Dobavljaci"))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div>
+                <span>Naziv :</span>
+                @Html.TextBoxFor(model => model.Naziv, new { @class = "form-control" })
+            </div>
+            <div>
+                <span>Email :</span>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            </div>
+            <div>
+                <span>Telefon :</span>
+                @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
+            </div>
+            <div>
+                <span>Adresa :</span>
+                @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
+            </div>
+            <div>
+                <span>Grad :</span>
+                @Html.DropDownListFor(model => model.GradId, Model.gradovi, new { @class = "form-control" })
+            </div>
+    <div>
+        <span>Skladište  :</span>
+        @Html.DropDownListFor(model => model.SkladisteId, Model.skladiste, new { @class = "form-control" })
+    </div>
+            <br />
+            <input type="submit" value="Snimi" class="btn btn-success" />
+        }
+    </div>
+</body>
+</html>
+

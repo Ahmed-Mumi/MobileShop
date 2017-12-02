@@ -45,19 +45,19 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
         }
         
 
-        public ActionResult Dodaj()
-        {
-            Klijent klijent;
-            klijent = new Klijent();
-            klijent.Korisnik = new Korisnik();
-            klijent.Korisnik.Login = new Login();
-            KlijentiEditVM Model = new KlijentiEditVM()
-            {
-                 Klijent = klijent,
-                gradovi = ucitajGradove()
-            };
-            return View("Uredi",Model);
-        }
+        //public ActionResult Dodaj()
+        //{
+        //    Klijent klijent;
+        //    klijent = new Klijent();
+        //    klijent.Korisnik = new Korisnik();
+        //    klijent.Korisnik.Login = new Login();
+        //    KlijentiEditVM Model = new KlijentiEditVM()
+        //    {
+        //         Klijent = klijent,
+        //        gradovi = ucitajGradove()
+        //    };
+        //    return View("Uredi",Model);
+        //}
         public ActionResult Uredi(int id)
         {
             Klijent k = ctx.Klijenti.Where(y => y.Korisnik.Id == id).FirstOrDefault();
@@ -72,7 +72,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 KorisnickoIme = k.Korisnik.Login.Username,
                 gradovi = ucitajGradove(),
                 LoginId = k.Korisnik.LoginId,
-                GradId = k.Korisnik.GradId
+                GradId = k.Korisnik.GradId,
+                KlijentId = k.Korisnik.Klijent.Id
             };
             return View("Uredi", Model);
         }
@@ -83,23 +84,28 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             grad.AddRange(ctx.Gradovi.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Naziv }));
             return grad;
         }
-
+        public ActionResult Obrisi(int id)
+        {
+            Klijent k = ctx.Klijenti.Find(id);
+            ctx.Klijenti.Remove(k);
+            ctx.SaveChanges();
+            return RedirectToAction("Prikazi");
+        }
         public ActionResult Snimi(KlijentiEditVM vm)
         {
-            Klijent klijent;
-            if(vm.KlijentId==0)
-            {
-                klijent = new Klijent();
-                klijent.Korisnik = new Korisnik();
-                klijent.Korisnik.Login = new Login();
-                ctx.Klijenti.Add(klijent);
-            }
-            else
-            {
-                klijent = ctx.Klijenti.Where(x => x.Id == vm.KlijentId).Include(x => x.Korisnik).Include(x => x.Korisnik.Login).FirstOrDefault();
-            }
+            Klijent klijent = new Klijent();
+            //if(vm.KlijentId==0)
+            //{
+            //    klijent = new Klijent();
+            //    klijent.Korisnik = new Korisnik();
+            //    klijent.Korisnik.Login = new Login();
+            //    ctx.Klijenti.Add(klijent);
+            //}
+            //else
+            //{
+            //}
 
-
+            klijent = ctx.Klijenti.Where(x => x.Id == vm.KlijentId).Include(x => x.Korisnik).Include(x => x.Korisnik.Login).FirstOrDefault();
             klijent.Korisnik.Ime = vm.Ime;
             klijent.Korisnik.Login.Username = vm.KorisnickoIme;
             klijent.Korisnik.Prezime = vm.Prezime;
@@ -108,6 +114,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
             klijent.Korisnik.Email = vm.Email;
             klijent.Korisnik.GradId = vm.GradId;
+           
             ctx.SaveChanges();
             return RedirectToAction("Prikazi");
         }

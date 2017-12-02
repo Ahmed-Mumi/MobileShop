@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RS1_P120_MobitelShop.Models;
 
 namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
 {
@@ -15,14 +16,17 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
     {
         // GET: ModulAdministracija/AdminHome
 
+
+
         public static int Administratori { get; set; }
         public static int Klijenti { get; set; }
         public static int Dobavljaci { get; set; }
         public static int Artikli { get; set; }
-
+        public string admin { get; set; }
         MojContext ctx = new MojContext();
         public ActionResult Index()
         {
+            admin = ctx.Administratori.Select(x => x.Korisnik.Ime + " " + x.Korisnik.Prezime).FirstOrDefault();
             Administratori = ctx.Administratori.Count();
             Klijenti = ctx.Klijenti.Count();
             Dobavljaci = ctx.Dobavljaci.Count();

@@ -1,5 +1,5 @@
-﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels.KlijentiPrikaziVM
-@using RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.DobavljaciPrikaziVM
+@using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
 @{
     //Layout = null;
 }
@@ -15,34 +15,30 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Datum rođenja</th>
-                <th>Email</th>
+                <th>Naziv</th>
+                <th>Email</th>         
                 <th>Telefon</th>
                 <th>Adresa</th>
-                <th>Korisničko ime</th>
+                <th>Skladište dobavljača</th>
                 <th>Grad</th>
                 <th>Akcija</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (KlijentiPrikaziVM.KlijentInfo x in Model.klijentStavke)
+            @foreach (DobavljaciPrikaziVM.DobavljaciInfo x in Model.dobavljaciStavke)
             {
                 <tr>
                     <td>
-                        @x.Ime
+                        @x.Naziv
                     </td>
-                    <td>@x.Prezime</td>
-                    <td>@x.DatumRodjenja</td>
                     <td>@x.Email</td>
                     <td>@x.Telefon</td>
                     <td>@x.Adresa</td>
-                    <td>@x.KorisnickoIme</td>
+                    <td>@x.skladista</td>
                     <td>@x.Grad</td>
                     <td>
-                        @Html.ActionLink("Obriši", "Obrisi", new { id = x.KlijentId }, new { @class = "btn btn-danger" }) 
-                        @Html.ActionLink("Uredi", "Uredi", new { id = x.KlijentId }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-info" })
                     </td>
                 </tr>
             }

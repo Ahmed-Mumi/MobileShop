@@ -116,6 +116,12 @@
     <Content Include="Areas\ModulAdministracija\Views\Klijenti\Index.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Klijenti\Prikazi.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Klijenti\Uredi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Administratori\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Administratori\Prikazi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Administratori\Uredi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Dobavljaci\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Dobavljaci\Prikazi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Dobavljaci\Uredi.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -138,7 +144,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\AdministratoriController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\DobavljaciController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\KlijentiController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\AdminEditVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\AdminPrikaziVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\DobavljaciEditVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\DobavljaciPrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiEditVM.cs" />
     <Compile Include="Areas\ModulAdministracija\ModulAdministracijaAreaRegistration.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
