@@ -15,6 +15,7 @@ namespace RS1_P120_MobitelShop.Models
         public string Model { get; set; }
         public string Marka { get; set; }
         public double Cijena { get; set; }
+        public DateTime DatumObjave { get; set; }
         public string Garancija { get; set; }
         public virtual Specifikacije Specifikacije { get; set; }
         public int SpecifikacijeId { get; set; }  

@@ -225,6 +225,7 @@
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\KorpaController.cs" />
     <Compile Include="Areas\ModulKlijenti\ModulKlijentiAreaRegistration.cs" />
+    <Compile Include="Areas\ModulKlijenti\ViewModel\HomeIndexVM.cs" />
     <Compile Include="Controllers\AutentifikacijaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\MojContext.cs" />
