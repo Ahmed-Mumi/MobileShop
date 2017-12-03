@@ -25,7 +25,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                     Marka=p.Marka,
                     Cijena=p.Cijena,
                     ArtikalId=p.Id
-                }).Take(5).ToList()
+                }).Take(2).ToList()
             };
             return View("Index",Model);
         }
