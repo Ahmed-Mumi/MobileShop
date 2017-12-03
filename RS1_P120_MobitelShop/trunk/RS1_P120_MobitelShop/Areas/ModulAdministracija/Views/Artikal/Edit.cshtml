@@ -1,0 +1,40 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.ArtikalEditVM
+@{
+    //Layout = null;
+}
+
+@using (Html.BeginForm("Snimi","Artikal"))
+{
+    @Html.HiddenFor(model=> model.ArtikalId)
+
+    <div>
+        <span>Šifra telefona:</span>
+        @Html.TextBoxFor(model => model.sifraArtikla, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Marka telefona:</span>
+        @Html.TextBoxFor(model => model.marka, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Model telefona:</span>
+        @Html.TextBoxFor(model => model.model, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Slika:</span>
+        @Html.TextBoxFor(model => model.slika, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Cijena:</span>
+        @Html.TextBoxFor(model => model.cijena, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Garancija:</span>
+        @Html.TextBoxFor(model => model.garancija, new { @class = "form-control" })
+    </div>
+    <br />
+    <input type="submit" value="Snimi" class="btn btn-success" />
+    @*<div>
+        <span>Popust telefona:</span>
+        @Html.TextBoxFor(model => model.marka, new { @class = "form-control" })
+    </div>*@
+}

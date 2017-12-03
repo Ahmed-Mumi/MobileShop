@@ -10,5 +10,9 @@ namespace RS1_P120_MobitelShop.Models
         public int Id { get; set; }
         public string Tip { get; set; }
         public int Cijena { get; set; }
+        public virtual Artikal Artikal { get; set; }
+        public int? ArtikalId { get; set; }
+
+        
     }
 }

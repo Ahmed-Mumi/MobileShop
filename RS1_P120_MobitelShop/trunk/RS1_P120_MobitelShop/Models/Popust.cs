@@ -12,6 +12,7 @@ namespace RS1_P120_MobitelShop.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int IznosPopusta { get; set; }
-
+        public virtual Artikal Artikal { get; set; }
+        public int? ArtikalId { get; set; }      
     }
 }

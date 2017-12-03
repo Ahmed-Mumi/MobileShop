@@ -22,5 +22,6 @@ namespace RS1_P120_MobitelShop.Models
 
         public virtual TipServisa TipServisa { get; set; }
         public int TipServisaId { get; set; }
+            
     }
 }

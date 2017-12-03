@@ -1,0 +1,59 @@
+﻿@using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
+@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.ArtikalPrikaziVM
+@{
+    //Layout = null;
+}
+
+<div id="page-wrapper">
+    <div style="margin-left:250px; margin-right:30px">
+
+        <h1>Artikli</h1>
+
+        @*<form>
+            <b>Pretraga po tipu:</b> @Html.DropDownListFor(model => model.TipID, Model.tipoviStavke)
+            <b>Pretraga po tipu :</b> @Html.TextBox("searchStringTip")
+            <b>Cijena od:</b>   @Html.TextBox("CijenaOd")
+            <b>Cijena do:</b>    @Html.TextBox("CijenaDo")
+            <button type="submit" value="Prikaži" class="btn btn-success btn-sm">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </form>*@
+        <br />
+
+        <div class="row">
+            @foreach (ArtikalPrikaziVM.ArtikalInfo x in Model.artikal)
+            {
+                <div class="col-sm-6 col-md-3">
+                    <div class="img-thumbnail">
+                        <img src="@Url.Content(@x.slika)" class="img-thumbnail" style="width:242px;height:200px" />
+                        <div class="caption">
+                            <p><b>Marka telefona: </b>@x.marka</p>
+                            <p> <h3><b>Model telefona : </b>@x.model</h3></p>
+                            <p><b>Cijena: </b>@x.cijena KM</p>
+                            <p><b>Šifra: </b>@x.sifraArtikla</p>
+                            <p><b>Garancija: </b>@x.garancija</p>
+                            @*<p>
+                                @using (Ajax.BeginForm("Uredi", "Artikli", new { }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @style = "display: inline" }))
+                                {
+                                    @Html.Hidden("ArtikalId", @x.Id)
+                                    <input type="submit" value="Uredi" class="btn btn-info btn-sm">
+                                }
+                                <a href="/ModulAdministratori/Artikli/Detalji?ArtikalId=@x.Id" class="btn btn-success btn-sm">
+                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                    Detalji
+                                </a>
+
+                                <a href="/ModulAdministratori/Artikli/Obrisi?ArtikalId=@x.Id" class=" btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+
+                                </a>
+                            </p>*@
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+        </div>
+</div>

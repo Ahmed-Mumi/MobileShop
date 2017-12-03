@@ -40,6 +40,13 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             };
             return View("Prikazi", Model);
         }
+        public ActionResult Obrisi(int id)
+        {
+            Dobavljac dobavljac = ctx.Dobavljaci.Find(id);
+            ctx.Dobavljaci.Remove(dobavljac);
+            ctx.SaveChanges();
+            return RedirectToAction("Prikazi");
+        }
         public ActionResult Dodaj()
         {
             Dobavljac dobavljac;
