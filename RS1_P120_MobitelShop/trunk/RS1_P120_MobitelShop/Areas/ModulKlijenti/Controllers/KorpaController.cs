@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using RS1_P120_MobitelShop.DAL;
 using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
+using RS1_P120_MobitelShop.Models;
 
 namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 {
@@ -28,6 +29,13 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 }).Take(2).ToList()
             };
             return View("Index",Model);
+        }
+
+        public ActionResult PretraziPoRamu(string CourseLevel)
+        {
+            List<Artikal> premaraum = new List<Artikal>();
+
+            return View("Artikli");
         }
     } 
 }

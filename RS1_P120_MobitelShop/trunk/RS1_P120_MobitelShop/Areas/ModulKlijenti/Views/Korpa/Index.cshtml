@@ -45,6 +45,17 @@
             </a>
         </div>
     </div>
-
+    <div>
+   @using (Html.BeginForm("PretraziPoRamu","Korpa"))
+   { 
+        <label>
+            <input type="checkbox" name="courselevel" value="3GB" /> <span>3 GB</span>
+        </label>
+        <label>
+            <input type="checkbox" name="courselevel" value="4GB" /> <span>4 GB</span>
+        </label> 
+       <input type="submit" value="Pretrazi" />
+   }
+    </div>
 </body>
 </html> 
