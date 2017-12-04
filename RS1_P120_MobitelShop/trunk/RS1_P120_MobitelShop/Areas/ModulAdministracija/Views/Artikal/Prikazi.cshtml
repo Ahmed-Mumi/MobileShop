@@ -24,14 +24,28 @@
             @foreach (ArtikalPrikaziVM.ArtikalInfo x in Model.artikal)
             {
                 <div class="col-sm-6 col-md-3">
+                        <br />
                     <div class="img-thumbnail">
-                        <img src="@Url.Content(@x.slika)" class="img-thumbnail" style="width:242px;height:200px" />
+                        <img src="@Url.Content(@x.slika)" class="img-thumbnail" style="width:240px;height:190px" />
                         <div class="caption">
                             <p><b>Marka telefona: </b>@x.marka</p>
-                            <p> <h3><b>Model telefona : </b>@x.model</h3></p>
+                            <p> <h4><b>Model telefona : </b>@x.model</h4></p>
                             <p><b>Cijena: </b>@x.cijena KM</p>
                             <p><b>Šifra: </b>@x.sifraArtikla</p>
                             <p><b>Garancija: </b>@x.garancija</p>
+
+                            <p>
+                                @*@using (Ajax.BeginForm("Prikazi detalje","Artikal",new{},new AjaxOptions(){UpdateTargetId = "detalji"}, new { @style = "display: inline" }))
+                                {
+                                    
+                                }*@
+                                @Ajax.ActionLink("Detalji telefona", "Detalji", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "specifikacije" }, new { @class = "btn btn-info" })
+                           @*@Html.ActionLink("Detalji", "Detalji", new { id = x.Id})*@
+                            @Ajax.ActionLink("Uredi", "Uredi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "specifikacije" }, new { @class = "btn btn-warning" })
+                                </p>
+                            <p>
+                                @Html.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger btn-block" })
+                            </p>
                             @*<p>
                                 @using (Ajax.BeginForm("Uredi", "Artikli", new { }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @style = "display: inline" }))
                                 {
@@ -57,3 +71,6 @@
         </div>
         </div>
 </div>
+<div id="specifikacije">
+</div>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

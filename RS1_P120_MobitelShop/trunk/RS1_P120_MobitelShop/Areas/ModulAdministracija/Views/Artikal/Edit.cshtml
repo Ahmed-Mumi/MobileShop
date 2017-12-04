@@ -6,7 +6,7 @@
 @using (Html.BeginForm("Snimi","Artikal"))
 {
     @Html.HiddenFor(model=> model.ArtikalId)
-
+    @Html.HiddenFor(model=> model.SpecifikacijeId)
     <div>
         <span>Šifra telefona:</span>
         @Html.TextBoxFor(model => model.sifraArtikla, new { @class = "form-control" })
@@ -24,12 +24,52 @@
         @Html.TextBoxFor(model => model.slika, new { @class = "form-control" })
     </div>
     <div>
+        <span>Datum objave:</span>
+        @Html.TextBoxFor(model => model.datumObjave, new { @class = "form-control" })
+    </div>
+    <div>
         <span>Cijena:</span>
         @Html.TextBoxFor(model => model.cijena, new { @class = "form-control" })
     </div>
     <div>
         <span>Garancija:</span>
         @Html.TextBoxFor(model => model.garancija, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Operativni sistem:</span>
+        @Html.TextBoxFor(model => model.operativniSistem, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Eksterna memorija:</span>
+        @Html.TextBoxFor(model => model.eksternaMemorija, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Ekran:</span>
+        @Html.TextBoxFor(model => model.ekran, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Rezolucija:</span>
+        @Html.TextBoxFor(model => model.rezolucija, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Vrsta ekrana:</span>
+        @Html.TextBoxFor(model => model.vrstaEkrana, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Jezgre procesora:</span>
+        @Html.TextBoxFor(model => model.jezgreProcesora, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Kamera:</span>
+        @Html.TextBoxFor(model => model.kamera, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>Povezivanje:</span>
+        @Html.TextBoxFor(model => model.povezivanje, new { @class = "form-control" })
+    </div>
+    <div>
+        <span>RAM:</span>
+        @Html.TextBoxFor(model => model.RAM, new { @class = "form-control" })
     </div>
     <br />
     <input type="submit" value="Snimi" class="btn btn-success" />

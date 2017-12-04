@@ -17,6 +17,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
             public string marka { get; set; }
             public double cijena { get; set; }
             public string garancija { get; set; }
+            public int SpecifikacijeId { get; set; }
         }
         public List<ArtikalInfo> artikal { get; set; }
         public int SpecifikacijeId { get; set; }

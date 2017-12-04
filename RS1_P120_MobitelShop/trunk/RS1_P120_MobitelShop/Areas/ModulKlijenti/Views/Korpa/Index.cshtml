@@ -13,7 +13,7 @@
 <body>
 
     <div class="container">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:100%;height:300px">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:100%;height:400px">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 @foreach (HomeIndexRow hir in Model.listaNajnovijihArtikala)
@@ -27,7 +27,8 @@
                 @foreach (HomeIndexRow hir in Model.listaNajnovijihArtikala)
                 {
                     <div class="@(hir==Model.listaNajnovijihArtikala.FirstOrDefault()?"item active":"item")">
-                        <img src="@hir.Slika" alt="@(hir.Marka+" "+hir.Model)" style="width:100%;height:300px">
+                      
+                        <img src="@hir.Slika" alt="@(hir.Marka+" "+hir.Model)" style="width:50%;height:400px">
                     </div>
                 }
 
