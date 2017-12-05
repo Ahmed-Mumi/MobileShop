@@ -3,74 +3,135 @@
 @{
     //Layout = null;
 }
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/css/sb-admin.css" rel="stylesheet" />
+@*<div id="page-wrapper">
+    <div style="margin-left:320px; margin-right:20px; padding-bottom:3px">*@
 
-<div id="page-wrapper">
-    <div style="margin-left:250px; margin-right:30px">
+      
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/ModulAdministracija/AdminHome">Admin home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Artikli</li>
+                </ol>
+                <div class="row">
+                    <div id="page-wrapper">
+                        <div style="margin-left:40px; margin-right:0px; padding-bottom:3px">
+                            @*<form>
+                                    <b>Pretraga po tipu:</b> @Html.DropDownListFor(model => model.TipID, Model.tipoviStavke)
+                                    <b>Pretraga po tipu :</b> @Html.TextBox("searchStringTip")
+                                    <b>Cijena od:</b>   @Html.TextBox("CijenaOd")
+                                    <b>Cijena do:</b>    @Html.TextBox("CijenaDo")
+                                    <button type="submit" value="Prikaži" class="btn btn-success btn-sm">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </form>*@
 
-        <h1>Artikli</h1>
-
-        @*<form>
-            <b>Pretraga po tipu:</b> @Html.DropDownListFor(model => model.TipID, Model.tipoviStavke)
-            <b>Pretraga po tipu :</b> @Html.TextBox("searchStringTip")
-            <b>Cijena od:</b>   @Html.TextBox("CijenaOd")
-            <b>Cijena do:</b>    @Html.TextBox("CijenaDo")
-            <button type="submit" value="Prikaži" class="btn btn-success btn-sm">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            </button>
-        </form>*@
-        <br />
-
-        <div class="row">
-            @foreach (ArtikalPrikaziVM.ArtikalInfo x in Model.artikal)
-            {
-                <div class="col-sm-6 col-md-3">
-                        <br />
-                    <div class="img-thumbnail">
-                        <img src="@Url.Content(@x.slika)" class="img-thumbnail" style="width:240px;height:190px" />
-                        <div class="caption">
-                            <p><b>Marka telefona: </b>@x.marka</p>
-                            <p> <h4><b>Model telefona : </b>@x.model</h4></p>
-                            <p><b>Cijena: </b>@x.cijena KM</p>
-                            <p><b>Šifra: </b>@x.sifraArtikla</p>
-                            <p><b>Garancija: </b>@x.garancija</p>
-
-                            <p>
-                                @*@using (Ajax.BeginForm("Prikazi detalje","Artikal",new{},new AjaxOptions(){UpdateTargetId = "detalji"}, new { @style = "display: inline" }))
+                            <div class="row">
+                                @foreach (ArtikalPrikaziVM.ArtikalInfo x in Model.artikal)
                                 {
-                                    
-                                }*@
-                                @Ajax.ActionLink("Detalji telefona", "Detalji", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "specifikacije" }, new { @class = "btn btn-info" })
-                           @*@Html.ActionLink("Detalji", "Detalji", new { id = x.Id})*@
-                            @Ajax.ActionLink("Uredi", "Uredi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "specifikacije" }, new { @class = "btn btn-warning" })
-                                </p>
-                            <p>
-                                @Html.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger btn-block" })
-                            </p>
-                            @*<p>
-                                @using (Ajax.BeginForm("Uredi", "Artikli", new { }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @style = "display: inline" }))
-                                {
-                                    @Html.Hidden("ArtikalId", @x.Id)
-                                    <input type="submit" value="Uredi" class="btn btn-info btn-sm">
+                                    <div class="col-sm-7 col-md-3" style="box-shadow: -1px 5px 25px #000; margin-bottom:25px;padding-top:0px;width:250px;padding-bottom:15px;margin-right:9px;background-color:white">
+                                        <br />
+                                        <div class="img-thumbnail">
+                                            <img src="@Url.Content(@x.slika)" class="img-thumbnail" style="width:250px;height:185px" />
+                                            <div class="caption">
+                                                <p><b>Marka telefona: </b>@x.marka</p>
+                                                <p><b>Model telefona:<br /> </b>@x.model</p>
+                                                <p><b>Šifra: </b>@x.sifraArtikla</p>
+                                                <p><b>Garancija: </b>@x.garancija</p>
+                                                <p><b>Cijena:</b><h4>@x.cijena KM</h4></p>
+
+                                                <p>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            @Ajax.ActionLink(" Detalji", "Detalji", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "specifikacije" }, new { @class = "btn btn-info glyphicon glyphicon-list" })
+
+
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            @Ajax.ActionLink(" Uredi", "Uredi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "specifikacije" }, new { @class = "btn btn-warning"})
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            @Html.ActionLink(" ", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger fa-trash-o" })
+                                                        </div>
+
+                                                    </div>
+                                                </p>
+                                                @*@using (Ajax.BeginForm("Prikazi detalje","Artikal",new{},new AjaxOptions(){UpdateTargetId = "detalji"}, new { @style = "display: inline" }))
+                                                    {
+
+                                                    }*@
+                                                @*@Html.ActionLink("Detalji", "Detalji", new { id = x.Id})*@
+                                                @*@Ajax.ActionLink("Uredi", "Uredi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "specifikacije" }, new { @class = "btn btn-warning" })*@
+
+                                                @*<p>
+                                                        @using (Ajax.BeginForm("Uredi", "Artikli", new { }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @style = "display: inline" }))
+                                                        {
+                                                            @Html.Hidden("ArtikalId", @x.Id)
+                                                            <input type="submit" value="Uredi" class="btn btn-info btn-sm">
+                                                        }
+                                                        <a href="/ModulAdministratori/Artikli/Detalji?ArtikalId=@x.Id" class="btn btn-success btn-sm">
+                                                            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                                            Detalji
+                                                        </a>
+
+                                                        <a href="/ModulAdministratori/Artikli/Obrisi?ArtikalId=@x.Id" class=" btn btn-danger btn-sm">
+                                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+
+                                                        </a>
+                                                    </p>*@
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 }
-                                <a href="/ModulAdministratori/Artikli/Detalji?ArtikalId=@x.Id" class="btn btn-success btn-sm">
-                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-                                    Detalji
-                                </a>
-
-                                <a href="/ModulAdministratori/Artikli/Obrisi?ArtikalId=@x.Id" class=" btn btn-danger btn-sm">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-
-                                </a>
-                            </p>*@
-
+                                
+                            </div>
+                        </div>
                         </div>
                     </div>
+                    </div>
+            <div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="pagination pagination-lg"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            </div>
 
-                </div>
-            }
-        </div>
-        </div>
-</div>
-<div id="specifikacije">
-</div>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+                    <script src="~/Areas/ModulAdministracija/Content/vendor/jquery/jquery.min.js"></script>
+                    <script src="~/Areas/ModulAdministracija/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                    <script src="~/Areas/ModulAdministracija/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+                    <script src="~/Areas/ModulAdministracija/Content/vendor/datatables/jquery.dataTables.js"></script>
+                    <script src="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+                    <script src="~/Areas/ModulAdministracija/Content/js/sb-admin.min.js"></script>
+                    <script src="~/Areas/ModulAdministracija/Content/js/sb-admin-datatables.min.js"></script>
+
+
+                    <br />
+                    <div id="specifikacije">
+                    </div>
+                    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

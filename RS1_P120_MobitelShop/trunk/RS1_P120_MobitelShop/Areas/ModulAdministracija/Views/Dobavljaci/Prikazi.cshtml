@@ -10,42 +10,59 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Naziv</th>
-                <th>Email</th>         
-                <th>Telefon</th>
-                <th>Adresa</th>
-                <th>Skladište dobavljača</th>
-                <th>Grad</th>
-                <th>Akcija</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (DobavljaciPrikaziVM.DobavljaciInfo x in Model.dobavljaciStavke)
-            {
-                <tr>
-                    <td>
-                        @x.Naziv
-                    </td>
-                    <td>@x.Email</td>
-                    <td>@x.Telefon</td>
-                    <td>@x.Adresa</td>
-                    <td>@x.skladista</td>
-                    <td>@x.Grad</td>
-                    <td>
-                        @Html.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger" })
-                        @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-info" })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/ModulAdministracija/AdminHome">Admin home</a>
+                </li>
+                <li class="breadcrumb-item active">Dobavljači</li>
+            </ol>
+            <div class="row">
+                <div class="table">
+                    <table class="table" style="width:99%">
+                        <thead>
+                            <tr>
+                                <th>Naziv</th>
+                                <th>Email</th>
+                                <th>Telefon</th>
+                                <th>Adresa</th>
+                                <th>Skladište dobavljača</th>
+                                <th>Grad</th>
+                                <th>Akcija</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (DobavljaciPrikaziVM.DobavljaciInfo x in Model.dobavljaciStavke)
+                            {
+                                <tr>
+                                    <td>
+                                        @x.Naziv
+                                    </td>
+                                    <td>@x.Email</td>
+                                    <td>@x.Telefon</td>
+                                    <td>@x.Adresa</td>
+                                    <td>@x.skladista</td>
+                                    <td>@x.Grad</td>
+                                    <td>
+                                        @Html.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger" })
+                                        @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-info" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+                    @*@Html.ActionLink("Dodaj", "Dodaj", new { @class = "btn btn-info" })*@
+            </div>
+        </div>
+    </div>
     <div>
     </div>
 </body>
 </html>
-

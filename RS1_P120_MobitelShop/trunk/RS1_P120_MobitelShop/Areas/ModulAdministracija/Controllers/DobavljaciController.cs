@@ -47,6 +47,23 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             ctx.SaveChanges();
             return RedirectToAction("Prikazi");
         }
+        public ActionResult Uredi(int id)
+        {
+            Dobavljac dobavljac = ctx.Dobavljaci.Where(y => y.Id == id).FirstOrDefault();
+            DobavljaciEditVM Model = new DobavljaciEditVM()
+            {            
+                Id = dobavljac.Id,
+                Naziv = dobavljac.Naziv,
+                Email = dobavljac.Email,
+                Telefon = dobavljac.Telefon,
+                Adresa = dobavljac.Adresa,
+                SkladisteId = dobavljac.Skladiste.Id,
+                GradId = dobavljac.Grad.Id,
+                gradovi = ucitajGradove(),
+                skladiste = ucitajSkladista()
+            };
+            return View("Uredi", Model);
+        }
         public ActionResult Dodaj()
         {
             Dobavljac dobavljac;

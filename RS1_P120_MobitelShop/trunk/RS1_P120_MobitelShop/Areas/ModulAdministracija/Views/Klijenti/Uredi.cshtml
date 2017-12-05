@@ -12,48 +12,65 @@
     <title>Uredi</title>
 </head>
 <body>
-    <div>
-        <span>Uređivanje profila klijenta</span>
-        @using (Html.BeginForm("Snimi", "Klijenti"))
-        {
-            @Html.HiddenFor(model => model.KlijentId)
+    @*<div id="page-wrapper">
+        <div style="margin-left: 200px; margin-right: 30px;color:white;font-size:20px" >*@
+    <br />
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/ModulAdministracija/AdminHome">Admin home</a>
+                </li>
+                <li class="breadcrumb-item active">Uređivanje profila klijenta</li>
+            </ol>
+            <div class="row">
+                <div id="page-wrapper">
+                    <div style="margin-left:20px; margin-right:20px; padding-bottom:3px">
+                        <span>Uređivanje profila klijenta</span>
+                        @using (Html.BeginForm("Snimi", "Klijenti"))
+                        {
+                            @Html.HiddenFor(model => model.KlijentId)
 
-            <div>
-                <span>Ime :</span>
-                @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" })
+                            <div>
+                                <span>Ime :</span>
+                                @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Prezime :</span>
+                                @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Datum rođenja :</span>
+                                @Html.TextBoxFor(model => model.DatumRodjenja, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Email :</span>
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Telefon :</span>
+                                @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Adresa :</span>
+                                @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Korisničko ime :</span>
+                                @Html.TextBoxFor(model => model.KorisnickoIme, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Grad :</span>
+                                @Html.DropDownListFor(model => model.GradId, Model.gradovi, new { @class = "form-control" })
+                            </div>
+                            <br />
+                            <input type="submit" value="Snimi" class="btn btn-success" />
+                        }
+                    </div>
+                </div>
+                </div>
             </div>
-            <div>
-                <span>Prezime :</span>
-                @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" })
-            </div>
-    <div>
-        <span>Datum rođenja :</span>
-        @Html.TextBoxFor(model => model.DatumRodjenja, new { @class = "form-control" })
-    </div>
-    <div>
-        <span>Email :</span>
-        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
-    </div>
-    <div>
-        <span>Telefon :</span>
-        @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
-    </div>
-    <div>
-        <span>Adresa :</span>
-        @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
-    </div>
-    <div>
-        <span>Korisničko ime :</span>
-        @Html.TextBoxFor(model => model.KorisnickoIme, new { @class = "form-control" })
-    </div>
-    <div>
-        <span>Grad :</span>
-        @Html.DropDownListFor(model => model.GradId,Model.gradovi, new { @class = "form-control" })
-    </div>
-            <br />
-            <input type="submit" value="Snimi" class="btn btn-success"/>
-        }
-    </div>
 </body>
 </html>
 
