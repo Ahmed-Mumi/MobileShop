@@ -31,11 +31,46 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             return View("Index",Model);
         }
 
-        public ActionResult PretraziPoRamu(string CourseLevel)
+        
+        public ActionResult IspisiSpecifikacije()
         {
-            List<Artikal> premaraum = new List<Artikal>();
+            List<SpecifikacijeVM> specifikacijeLista = new List<SpecifikacijeVM>();
+            foreach (var x in ctx.Artikli)
+            {
+                if (specifikacijeLista.Count == 0)
+                    specifikacijeLista.Add(new SpecifikacijeVM { RamId = x.Id, RamNaziv = x.Specifikacije.RAM, isChecked = false });
+                else
+                {
+                    bool ima=false;
+                    foreach (var p in specifikacijeLista.ToList())
+                    {
+                        if (p.RamNaziv == x.Specifikacije.RAM)
+                            ima = true;  
+                    }
+                    if(!ima)
+                        specifikacijeLista.Add(new SpecifikacijeVM { RamId = x.Id, RamNaziv = x.Specifikacije.RAM, isChecked = false }); 
+                }
+            }
+            //specifikacijeLista.Add(new SpecifikacijeVM { RamId = 1, RamNaziv = "3 GB", isChecked = false });
+            //specifikacijeLista.Add(new SpecifikacijeVM { RamId = 2, RamNaziv = "4 GB", isChecked = false });
+            SpecifikacijeList listaspec = new SpecifikacijeList();
+            listaspec.specifikacije = specifikacijeLista;
+            return View("Specifikacije",listaspec);
+        }
+        [HttpPost]
+        public ActionResult IspisiSpecifikacije(SpecifikacijeList spec)
+        { 
+            SpecifikacijeList Model = new SpecifikacijeList();
+            foreach (var item in spec.specifikacije)
+            { 
+                if (item.isChecked)
+                { 
+                    Model.listaArtikala.AddRange(ctx.Artikli.Where(x => x.Specifikacije.RAM == item.RamNaziv).ToList()); 
+                } 
 
-            return View("Artikli");
+            }
+            return View("IspisPoFilteru", Model);
         }
     } 
-}
+} 
+ 
