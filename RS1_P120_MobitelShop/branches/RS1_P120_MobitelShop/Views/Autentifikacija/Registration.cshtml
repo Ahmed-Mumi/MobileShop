@@ -1,0 +1,61 @@
+﻿@using RS1_P120_MobitelShop.ViewModel
+@using RS1_P120_MobitelShop.Models
+@model RS1_P120_MobitelShop.ViewModel.RegistrationVM
+@{
+    //Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Registration", "Autentifikacija"))
+{
+    <br />
+    <br />
+    <h1>Mobitel Shop</h1>
+    <h2>Registracija korisnika</h2>
+    <div class="form-group">
+        <label>Username</label>
+        @Html.TextBoxFor(model=> model.Username,new{@class="form-control"})
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Ime</label>
+        @Html.TextBoxFor(model=> model.Ime,new{@class="form-control"})
+    </div>
+    <div class="form-group">
+        <label>Prezime</label>
+        @Html.TextBoxFor(model=> model.Prezime,new{@class="form-control"})
+    </div>
+    <div class="form-group">
+        <label>Grad</label>
+        @Html.DropDownListFor(model => model.GradId,Model.gradoviStavke, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Datum rođenja</label>
+        @Html.TextBoxFor(model => model.DatumRodjenja, new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label>Telefon</label>
+        @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>E-mail</label>
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Adresa</label>
+        @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label>Spol</label>
+        @Html.TextBoxFor(model => model.Spol, new { @class = "form-control" })
+    </div>
+    <br />
+    <input type="submit" value="Kreiraj profil" class="btn btn-info" />
+
+    
+<script src="~/Scripts/bootstrap.js"></script>
+}

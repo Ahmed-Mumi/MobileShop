@@ -1,0 +1,51 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.ArtikalEditVM
+@{
+    //Layout = null;
+}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/ModulAdministracija/AdminHome">Admin home</a>
+            </li>
+            <li class="breadcrumb-item active">Specifikacije telefona</li>
+        </ol>
+            <div>
+                <span>Operativni sistem:</span>
+                @Html.TextBoxFor(model => model.operativniSistem, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>Eksterna memorija:</span>
+                @Html.TextBoxFor(model => model.eksternaMemorija, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>Ekran:</span>
+                @Html.TextBoxFor(model => model.ekran, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>Rezolucija:</span>
+                @Html.TextBoxFor(model => model.rezolucija, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>Vrsta ekrana:</span>
+                @Html.TextBoxFor(model => model.vrstaEkrana, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>Jezgre procesora:</span>
+                @Html.TextBoxFor(model => model.jezgreProcesora, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>Kamera:</span>
+                @Html.TextBoxFor(model => model.kamera, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>Povezivanje:</span>
+                @Html.TextBoxFor(model => model.povezivanje, new { @class = "form-control", @readonly = true })
+            </div>
+            <div>
+                <span>RAM:</span>
+                @Html.TextBoxFor(model => model.RAM, new { @class = "form-control", @readonly = true })
+            </div>
+            </div>
+        </div>

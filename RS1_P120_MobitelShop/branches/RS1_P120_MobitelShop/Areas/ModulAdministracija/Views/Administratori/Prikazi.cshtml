@@ -1,0 +1,84 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.AdminPrikaziVM
+@using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/ModulAdministracija/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Areas/ModulAdministracija/Content/css/sb-admin.css" rel="stylesheet" />
+</head>
+<body>
+ 
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/ModulAdministracija/AdminHome">Admin home</a>
+                </li>
+                <li class="breadcrumb-item active">Administratori</li>
+            </ol>
+            <div class="row">
+
+                <div class="table">
+                    <table class="table" style="width:99%">
+                        <thead>
+                            <tr>
+                                <th>Ime</th>
+                                <th>Prezime</th>
+                                <th>Datum rođenja</th>
+                                <th>Email</th>
+                                <th>Telefon</th>
+                                <th>Adresa</th>
+                                <th>Korisničko ime</th>
+                                <th>Grad</th>
+                                <th>Akcija</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (AdminPrikaziVM.AdminInfo x in Model.adminStavke)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @x.Ime
+                                    </td>
+                                    <td>@x.Prezime</td>
+                                    <td>@x.DatumRodjenja</td>
+                                    <td>@x.Email</td>
+                                    <td>@x.Telefon</td>
+                                    <td>@x.Adresa</td>
+                                    <td>@x.KorisnickoIme</td>
+                                    <td>@x.Grad</td>
+                                    <td>
+                                        <p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    @Html.ActionLink("Obriši", "Obrisi", new { id = x.AdministratorId }, new { @class = "btn btn-danger" })
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.ActionLink("Uredi", "Uredi", new { id = x.AdministratorId }, new { @class = "btn btn-info" })
+                                                </div>
+                                            </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

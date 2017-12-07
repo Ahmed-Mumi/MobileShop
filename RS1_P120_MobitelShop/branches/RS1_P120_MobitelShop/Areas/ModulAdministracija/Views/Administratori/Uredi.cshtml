@@ -1,0 +1,80 @@
+﻿@using RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
+@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.AdminEditVM
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Uredi</title>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/ModulAdministracija/AdminHome">Admin home</a>
+                </li>
+                <li class="breadcrumb-item active">Dodavanje novog administratora</li>
+            </ol>
+            <div class="row">
+                <div id="page-wrapper">
+                    <div style="margin-left:20px; margin-right:20px; padding-bottom:3px">
+                        <span>Dodavanje profila administratora</span>
+                        @using (Html.BeginForm("Snimi", "Administratori"))
+                        {
+                            @Html.HiddenFor(model => model.AdministratorId)
+                            <div>
+                                <span>Ime :</span>
+                                @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Prezime :</span>
+                                @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Datum rođenja :</span>
+                                @Html.TextBoxFor(model => model.DatumRodjenja, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Email :</span>
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Telefon :</span>
+                                @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Adresa :</span>
+                                @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                <span>Grad :</span>
+                                @Html.DropDownListFor(model => model.GradId, Model.gradovi, new { @class = "form-control" })
+                            </div>
+                            <div id="ajaxDiv">
+                                <h4>Pristupni podaci:</h4>
+                                <div>
+                                    <span>Korisničko ime :</span>
+                                    @Html.TextBoxFor(model => model.KorisnickoIme, new { @class = "form-control" })
+                                </div>
+                                <div>
+                                    <span>Password :</span>
+                                    @Html.PasswordFor(model => model.password, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <br />
+                            <input type="submit" value="Snimi" class="btn btn-success" />
+                        }
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+

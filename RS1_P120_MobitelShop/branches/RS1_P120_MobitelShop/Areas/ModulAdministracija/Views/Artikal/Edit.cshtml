@@ -1,0 +1,98 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.ArtikalEditVM
+@{
+    //Layout = null;
+}
+
+<br />
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/ModulAdministracija/AdminHome">Admin home</a>
+            </li>
+            <li class="breadcrumb-item active">Dodavanje novog artikla</li>
+        </ol>
+        <div class="row">
+            <div id="page-wrapper">
+                <div style="margin-left:20px; margin-right:20px; padding-bottom:3px">
+                    @using (Html.BeginForm("Snimi", "Artikal"))
+                    {
+                        @Html.HiddenFor(model => model.ArtikalId)
+                        @Html.HiddenFor(model => model.SpecifikacijeId)
+                        <div>
+                            <span><b>Šifra telefona:</b></span>
+                            @Html.TextBoxFor(model => model.sifraArtikla, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Marka telefona:</b></span>
+                            @Html.TextBoxFor(model => model.marka, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Model telefona:</b></span>
+                            @Html.TextBoxFor(model => model.model, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Slika:</b></span>
+                            @Html.TextBoxFor(model => model.slika, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Datum objave:</b></span>
+                            @Html.TextBoxFor(model => model.datumObjave, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Cijena:</b></span>
+                            @Html.TextBoxFor(model => model.cijena, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Garancija:</b></span>
+                            @Html.TextBoxFor(model => model.garancija, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Operativni sistem:</b></span>
+                            @Html.TextBoxFor(model => model.operativniSistem, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Eksterna memorija:</b></span>
+                            @Html.TextBoxFor(model => model.eksternaMemorija, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Ekran:</b></span>
+                            @Html.TextBoxFor(model => model.ekran, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Rezolucija:</b></span>
+                            @Html.TextBoxFor(model => model.rezolucija, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Vrsta ekrana:</b></span>
+                            @Html.TextBoxFor(model => model.vrstaEkrana, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Jezgre procesora:</b></span>
+                            @Html.TextBoxFor(model => model.jezgreProcesora, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Kamera:</b></span>
+                            @Html.TextBoxFor(model => model.kamera, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>Povezivanje:</b></span>
+                            @Html.TextBoxFor(model => model.povezivanje, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <span><b>RAM:</b></span>
+                            @Html.TextBoxFor(model => model.RAM, new { @class = "form-control" })
+                        </div>
+                        <br />
+                        <input type="submit" value="Snimi" class="btn btn-success" />
+                        @*<div>
+                                <span>Popust telefona:</span>
+                                @Html.TextBoxFor(model => model.marka, new { @class = "form-control" })
+                            </div>*@
+                    }
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
