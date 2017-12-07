@@ -1,7 +1,7 @@
 ﻿@using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
 @model RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.SpecifikacijeList
 @{
-    Layout = null;
+     Layout = null;
 }
 
 <!DOCTYPE html>
@@ -14,96 +14,97 @@
 <body>
     <div>
         @using (Html.BeginForm("IspisiSpecifikacije", "Korpa"))
-        {
+        {  
+            
             for (int i = 0; i < Model.specifikacijeList.Count; i++)
-            {
-                if (Model.specifikacijeList[i].isRam == true) { 
-                @Html.CheckBoxFor(m => Model.specifikacijeList[i].isRamChecked)
-                @Model.specifikacijeList[i].RamNaziv <br />
-                @Html.HiddenFor(m => Model.specifikacijeList[i].RamId)
-                @Html.HiddenFor(m => Model.specifikacijeList[i].RamNaziv) 
+             {
+            if (Model.specifikacijeList[i].isRam == true) {
+            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isRamChecked)
+            @Model.specifikacijeList[i].RamNaziv <br />
+            @Html.HiddenFor(m => Model.specifikacijeList[i].RamId)
+            @Html.HiddenFor(m => Model.specifikacijeList[i].RamNaziv)
                 }
-            }
-            <hr />
+                }
+                        <hr />
             for (int i = 0; i < Model.specifikacijeList.Count; i++)
             {
-                if (Model.specifikacijeList[i].isEksternaMemorija == true) { 
+                if (Model.specifikacijeList[i].isEksternaMemorija == true) {
                 @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEksternaMemorijaChecked)
                 @Model.specifikacijeList[i].EksternaMemorijaNaziv <br />
                 @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaId)
-                @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv) 
+                @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv)
         }
             }
             <hr />
             for (int i = 0; i < Model.specifikacijeList.Count; i++)
             {
-                if (Model.specifikacijeList[i].isOperativniSistem == true) { 
+                if (Model.specifikacijeList[i].isOperativniSistem == true) {
                 @Html.CheckBoxFor(m => Model.specifikacijeList[i].isOperativniSistemChecked)
                 @Model.specifikacijeList[i].OperativniSistemNaziv <br />
                 @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemId)
-                @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv) 
+                @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv)
         }
             }
             <hr />
              for (int i = 0; i < Model.specifikacijeList.Count; i++)
             {
-                if (Model.specifikacijeList[i].isEkran == true) { 
+                if (Model.specifikacijeList[i].isEkran == true) {
                 @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEkranChecked)
                 @Model.specifikacijeList[i].EkranNaziv <br />
                 @Html.HiddenFor(m => Model.specifikacijeList[i].EkranId)
-                @Html.HiddenFor(m => Model.specifikacijeList[i].EkranNaziv) 
+                @Html.HiddenFor(m => Model.specifikacijeList[i].EkranNaziv)
         }
             }
-            
-            
-            
-            
-            
+
+
+
+
+
             @*@using (Html.BeginForm("IspisiSpecifikacije", "Korpa"))
-{
-    for (int i = 0; i < Model.specifikacijeList.Count; i++)
-    {
-        if (Model.specifikacijeList[i].isRam == true)
-        {
-            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
-            @Model.specifikacijeList[i].RamNaziv <br />
-            @Html.HiddenFor(m => Model.specifikacijeList[i].RamId)
-            @Html.HiddenFor(m => Model.specifikacijeList[i].RamNaziv)
-        }
-    }
-    <hr />
-    for (int i = 0; i < Model.specifikacijeList.Count; i++)
-    {
-        if (Model.specifikacijeList[i].isEksternaMemorija == true)
-        {
-            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
-            @Model.specifikacijeList[i].EksternaMemorijaNaziv <br />
-            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaId)
-            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv)
-        }
-    }
-    <hr />
-    for (int i = 0; i < Model.specifikacijeList.Count; i++)
-    {
-        if (Model.specifikacijeList[i].isOperativniSistem == true)
-        {
-            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
-            @Model.specifikacijeList[i].OperativniSistemNaziv <br />
-            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemId)
-            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv)
-        }
-    }
-    <hr />
-    for (int i = 0; i < Model.specifikacijeList.Count; i++)
-    {
-        if (Model.specifikacijeList[i].isEkran == true)
-        {
-            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
-            @Model.specifikacijeList[i].EkranNaziv <br />
-            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranId)
-            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranNaziv)
-        }
-    }*@
+               +{
+               +    for (int i = 0; i < Model.specifikacijeList.Count; i++)
+               +    {
+               +        if (Model.specifikacijeList[i].isRam == true)
+               +        {
+               +            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
+               +            @Model.specifikacijeList[i].RamNaziv <br />
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].RamId)
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].RamNaziv)
+               +        }
+               +    }
+               +    <hr />
+               +    for (int i = 0; i < Model.specifikacijeList.Count; i++)
+               +    {
+               +        if (Model.specifikacijeList[i].isEksternaMemorija == true)
+               +        {
+               +            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
+               +            @Model.specifikacijeList[i].EksternaMemorijaNaziv <br />
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaId)
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv)
+               +        }
+               +    }
+               +    <hr />
+               +    for (int i = 0; i < Model.specifikacijeList.Count; i++)
+               +    {
+               +        if (Model.specifikacijeList[i].isOperativniSistem == true)
+               +        {
+               +            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
+               +            @Model.specifikacijeList[i].OperativniSistemNaziv <br />
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemId)
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv)
+               +        }
+               +    }
+               +    <hr />
+               +    for (int i = 0; i < Model.specifikacijeList.Count; i++)
+               +    {
+               +        if (Model.specifikacijeList[i].isEkran == true)
+               +        {
+               +            @Html.CheckBoxFor(m => Model.specifikacijeList[i].ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA)
+               +            @Model.specifikacijeList[i].EkranNaziv <br />
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranId)
+               +            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranNaziv)
+               +        }
+               +    }*@
 
 
 
@@ -115,38 +116,39 @@
 
 
             @*foreach (var item in Model.specifikacijeList.Where(x => x.isRam == true))
-            {
-                @Html.CheckBoxFor(m => item.isRamChecked)
-                @item.RamNaziv <br />
-                @Html.HiddenFor(m => item.RamId)
-                @Html.HiddenFor(m => item.RamNaziv) 
-            } 
-            <hr />
-            foreach (var item in Model.specifikacijeList.Where(x => x.isEksternaMemorija == true))
-            {
-                @Html.CheckBoxFor(m => item.isEksternaMemorijaChecked)
-                @item.EksternaMemorijaNaziv <br />
-                @Html.HiddenFor(m => item.EksternaMemorijaId)
-                @Html.HiddenFor(m => item.EksternaMemorijaNaziv) 
-            }  
-            <hr />
-            foreach (var item in Model.specifikacijeList.Where(x => x.isOperativniSistem == true))
-            {
-                @Html.CheckBoxFor(m => item.isOperativniSistemChecked)
-                @item.OperativniSistemNaziv <br />
-                @Html.HiddenFor(m => item.OperativniSistemId)
-                @Html.HiddenFor(m => item.OperativniSistemNaziv) 
-            }  
-            <hr /> 
-           foreach (var item in Model.specifikacijeList.Where(x => x.isEkran == true))
-            {
-                @Html.CheckBoxFor(m => item.isEkranChecked)
-                @item.EkranNaziv <br />
-                @Html.HiddenFor(m => item.EkranId)
-                @Html.HiddenFor(m => item.EkranNaziv) 
-            }*@  
+   +            {
+   +                @Html.CheckBoxFor(m => item.isRamChecked)
+   +                @item.RamNaziv <br />
+   +                @Html.HiddenFor(m => item.RamId)
+   +                @Html.HiddenFor(m => item.RamNaziv)
+   +            }
+   +            <hr />
+   +            foreach (var item in Model.specifikacijeList.Where(x => x.isEksternaMemorija == true))
+   +            {
+   +                @Html.CheckBoxFor(m => item.isEksternaMemorijaChecked)
+   +                @item.EksternaMemorijaNaziv <br />
+   +                @Html.HiddenFor(m => item.EksternaMemorijaId)
+   +                @Html.HiddenFor(m => item.EksternaMemorijaNaziv)
+   +            }
+   +            <hr />
+   +            foreach (var item in Model.specifikacijeList.Where(x => x.isOperativniSistem == true))
+   +            {
+   +                @Html.CheckBoxFor(m => item.isOperativniSistemChecked)
+   +                @item.OperativniSistemNaziv <br />
+   +                @Html.HiddenFor(m => item.OperativniSistemId)
+   +                @Html.HiddenFor(m => item.OperativniSistemNaziv)
+   +            }
+   +            <hr />
+   +           foreach (var item in Model.specifikacijeList.Where(x => x.isEkran == true))
+   +            {
+   +                @Html.CheckBoxFor(m => item.isEkranChecked)
+   +                @item.EkranNaziv <br />
+   +                @Html.HiddenFor(m => item.EkranId)
+   +                @Html.HiddenFor(m => item.EkranNaziv)
+   +            }*@
             <input type="submit" value="Prikazi" />
         }
     </div>
+    -    @ViewBag.brojspecifi
 </body>
 </html>

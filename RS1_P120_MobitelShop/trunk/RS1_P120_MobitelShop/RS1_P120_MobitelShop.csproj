@@ -313,6 +313,10 @@
     <Content Include="Areas\ModulAdministracija\Views\Artikal\ModelTelefona.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Popust\Prikazi.cshtml" />
     <Content Include="EmailTemplate\Text.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Korpa\IspisPoFilteru.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Korpa\Specifikacije.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -417,7 +421,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\ModulKlijenti\Models\" />
-    <Folder Include="Areas\ModulKlijenti\Views\Shared\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
