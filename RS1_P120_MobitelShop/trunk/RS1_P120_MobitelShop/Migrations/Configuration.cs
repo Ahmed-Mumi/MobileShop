@@ -10,7 +10,6 @@ namespace RS1_P120_MobitelShop.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "RS1_P120_MobitelShop.DAL.MojContext";
         }
 
         protected override void Seed(RS1_P120_MobitelShop.DAL.MojContext context)

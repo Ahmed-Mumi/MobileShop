@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using RS1_P120_MobitelShop.Models;
 using RS1_P120_MobitelShop.Helper;
 using RS1_P120_MobitelShop.ViewModel;
+using System.Net.Mail;
+using System.Text;
+using System.Web.Hosting;
 
 namespace RS1_P120_MobitelShop.Controllers
 {
@@ -47,7 +50,7 @@ namespace RS1_P120_MobitelShop.Controllers
             //    return Redirect("/PrikazPonude");
             //}
 
-            else if (k.Administrator == null && k.Klijent != null)
+            else if (k.Administrator == null && k.Klijent != null && k.Login.IsValid==true)
             {
                 Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
                 return Redirect("/ModulKlijenti/Korpa/Index");
@@ -92,6 +95,8 @@ namespace RS1_P120_MobitelShop.Controllers
             klijent.Korisnik.Ime = vm.Ime;
             klijent.Korisnik.Login.Username = vm.Username;
             klijent.Korisnik.Login.Password = vm.Password;
+            //ovaj dio dodajem
+            klijent.Korisnik.Login.IsValid = false;
             klijent.Korisnik.Prezime = vm.Prezime;
             klijent.Korisnik.Telefon = vm.Telefon;
             klijent.Korisnik.Adresa = vm.Adresa;
@@ -99,8 +104,81 @@ namespace RS1_P120_MobitelShop.Controllers
             klijent.Korisnik.Email = vm.Email;
             klijent.Korisnik.GradId = vm.GradId;
             ctx.SaveChanges();
+            //ovaj dio dodajem
+            BuildEmailTemplate(klijent.Korisnik.LoginId);
             return Redirect("/Autentifikacija");
         }
 
+        //ovaj dio dodajem
+        public ActionResult Confirm(int loginId)
+        {
+            ViewBag.loginId = loginId;
+            return View();
+        }
+
+        public JsonResult RegisterConfirm(int loginId)
+        {
+            Login Login = ctx.Logini.Where(x => x.Id == loginId).FirstOrDefault();
+            Login.IsValid = true;
+            ctx.SaveChanges();
+            var msg = "Your login is verified";
+            return Json(msg, JsonRequestBehavior.AllowGet);
+        }
+
+        public void BuildEmailTemplate(int loginId)
+        {
+            string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "Text" + ".cshtml");
+            var regInfo = ctx.Korisnici.Where(x => x.LoginId == loginId).FirstOrDefault();
+            var url = "http://localhost:53235/" + "Autentifikacija/Confirm?loginId=" + loginId;
+            body = body.Replace("@ViewBag.ConfirmationLink", url);
+            body = body.ToString();
+            BuildEmailTemplate("Your account is successfully created", body, regInfo.Email);
+        }
+
+        private void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)
+        {
+            string from, to, bcc, cc, subject, body;
+            from = "mobishopcenter@gmail.com";
+            to = sendTo.Trim();
+            bcc = "";
+            cc = "";
+            subject = subjectText;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(bodyText);
+            body = sb.ToString();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(from);
+            mail.To.Add(new MailAddress(to));
+            if (!string.IsNullOrEmpty(bcc))
+            {
+                mail.Bcc.Add(new MailAddress(bcc));
+            }
+            if (!string.IsNullOrEmpty(cc))
+            {
+                mail.CC.Add(new MailAddress(cc));
+            }
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+            SendEmail(mail);
+        }
+        public static void SendEmail(MailMessage mail)
+        {
+            SmtpClient client = new SmtpClient();
+            client.Host = "smtp.gmail.com";
+            client.Port = 587;
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Credentials = new System.Net.NetworkCredential("mobishopcenter@gmail.com", "MobiShopCenter123");
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

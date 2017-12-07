@@ -312,6 +312,7 @@
     <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Areas\ModulAdministracija\Views\Artikal\ModelTelefona.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Popust\Prikazi.cshtml" />
+    <Content Include="EmailTemplate\Text.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -367,9 +368,9 @@
     <Compile Include="Helper\Autentifikacija.cs" />
     <Compile Include="Helper\Autorizacija.cs" />
     <Compile Include="Helper\IEntity.cs" />
-    <Compile Include="Migrations\201710211538116_InitialCreate.cs" />
-    <Compile Include="Migrations\201710211538116_InitialCreate.Designer.cs">
-      <DependentUpon>201710211538116_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201712071844117_InitialMigrations.cs" />
+    <Compile Include="Migrations\201712071844117_InitialMigrations.Designer.cs">
+      <DependentUpon>201712071844117_InitialMigrations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Administrator.cs" />
@@ -405,6 +406,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Autentifikacija\Index.cshtml" />
     <Content Include="Views\Autentifikacija\Registration.cshtml" />
+    <Content Include="Views\Autentifikacija\Confirm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -419,8 +421,8 @@
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710211538116_InitialCreate.resx">
-      <DependentUpon>201710211538116_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712071844117_InitialMigrations.resx">
+      <DependentUpon>201712071844117_InitialMigrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
