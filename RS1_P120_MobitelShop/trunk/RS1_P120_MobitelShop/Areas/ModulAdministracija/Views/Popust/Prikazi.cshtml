@@ -1,0 +1,25 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.PopustPrikaziVM
+           @using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Prikazi</title>
+</head>
+<body>
+    <div> 
+        <p>
+            @foreach(PopustPrikaziVM.PopustInfo x in Model.popustNovi)
+            {
+             <b>Iznos popusta:  </b>   @x.iznosPopusta <b>%</b>
+            }
+           
+        </p>
+    </div>
+</body>
+</html>

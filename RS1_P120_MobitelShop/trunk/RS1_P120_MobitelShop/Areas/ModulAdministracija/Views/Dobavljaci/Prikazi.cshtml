@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="content-wrapper">
@@ -33,7 +34,7 @@
                                 <th>Adresa</th>
                                 <th>Skladište dobavljača</th>
                                 <th>Grad</th>
-                                <th>Akcija</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,20 +50,46 @@
                                     <td>@x.skladista</td>
                                     <td>@x.Grad</td>
                                     <td>
-                                        @Html.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger" })
-                                        @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-info" })
+                                        <div class="btn-group open">
+                                            <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>Izvrši izmjene</a>
+                                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                                @*<span class="fa fa-caret-down" title="Toggle dropdown menu"></span>*@
+                                            </a>
+                                            <ul class="dropdown-menu" style="padding:5px">
+                                                <li style="padding:5px;text-decoration:none">
+                                                    @Ajax.ActionLink(" Uredi", "Uredi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @class = "btn btn-warning fa fa-pencil" })
+
+                                               
+                                                </li>
+                                                <li style="padding:5px">
+                                                    @Ajax.ActionLink(" Obriši", "Obrisi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "obrisi" }, new { @class = "btn btn-danger fa fa-trash-o" })
+
+                                                 
+                                                </li>
+                                                @*<li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-unlock"></i> Make admin</a></li>*@
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             }
                         </tbody>
-
+                       
                     </table>
+                    <div id="uredi" class="table-bordered">
+
+                    </div>
                 </div>
+                
+             
                     @*@Html.ActionLink("Dodaj", "Dodaj", new { @class = "btn btn-info" })*@
             </div>
         </div>
     </div>
-    <div>
-    </div>
+    
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
 </body>
 </html>

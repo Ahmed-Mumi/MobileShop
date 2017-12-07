@@ -8,7 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using PagedList.Mvc;
+using PagedList;
 namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
 {
     [Autorizacija(KorisnickeUloge.Administrator)]
@@ -20,22 +21,62 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
         {
             return View("Index");
         }
-        public ActionResult Prikazi()
+
+        //if (!string.IsNullOrEmpty(model.SearchButton) || model.Page.HasValue)
+        //{
+        //    var entities = new NorthwindEntities();
+        //    var results = entities.Products
+        //        .Where(p=> (p.ProductName.StartsWith(model.ProductName) 
+        //                    || model.ProductName == null)
+        //        && (p.Price > model.Price || model.Price == null))
+        //        .OrderBy(p => p.ProductName);
+
+        //    var pageIndex = model.Page ?? 1;
+        //    model.SearchResults = results.ToPagedList(pageIndex, RecordsPerPage);
+        //}
+        public ActionResult Prikazi(int? ArtikalId, int? page, string trenutniFilter, string searchStringMarka, double CijenaOd = 1, double CijenaDo = 5000)
         {
-            ArtikalPrikaziVM Model = new ArtikalPrikaziVM
+            ArtikalPrikaziVM Model = new ArtikalPrikaziVM();
             {
-                artikal = ctx.Artikli.Select(x => new ArtikalPrikaziVM.ArtikalInfo()
+                if (searchStringMarka != null)
                 {
-                    Id = x.Id,
-                    sifraArtikla = x.Sifra,
-                    slika = x.Slika,
-                    model = x.Model,
-                    marka = x.Marka,
-                    cijena = x.Cijena,
-                    garancija = x.Garancija               
-                }).ToList()                                  
-            };
-            return View("Prikazi", Model);
+                    page = 1;
+                }
+                //else
+                //{
+                //    searchStringMarka = trenutniFilter;
+                //}
+
+                ViewBag.ArtikalId = ArtikalId;
+                ViewBag.CijenaMin = CijenaOd;
+                ViewBag.CijenaMax = CijenaDo;
+                
+                int pageSize = 8;
+                int pageNumber = (page ?? 1);
+          
+                if (ArtikalId.HasValue || String.IsNullOrEmpty(trenutniFilter))
+                {
+                    Model.ArtikalPageList = ctx.Artikli
+                          .Where(x => (!ArtikalId.HasValue || x.Id == ArtikalId)
+                              && (String.IsNullOrEmpty(searchStringMarka)
+                              || x.Model.Contains(searchStringMarka) || x.Marka.Contains(searchStringMarka))
+                              && ((CijenaOd == 0 || CijenaDo == 0) || (CijenaOd <= x.Cijena && CijenaDo >= x.Cijena)))                            
+                        .OrderBy(x => x.Id).
+                    ToPagedList(pageNumber, pageSize);
+                }
+                //    Model.artikal = ctx.Artikli.Select(x => new ArtikalPrikaziVM.ArtikalInfo()
+                //    {
+                //        Id = x.Id,
+                //        sifraArtikla = x.Sifra,
+                //        slika = x.Slika,
+                //        model = x.Model,
+                //        marka = x.Marka,
+                //        cijena = x.Cijena,
+                //        garancija = x.Garancija               
+                //    }).ToList()                       
+                //};
+            }
+            return View("Prikazi",Model);
         }  
         public ActionResult Dodaj()
         {
@@ -51,6 +92,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             ArtikalEditVM Model = new ArtikalEditVM();
             Artikal artikal = ctx.Artikli.Where(y => y.Id == id).FirstOrDefault();
             Model.ArtikalId = artikal.Id;
+            Model.SpecifikacijeId = artikal.SpecifikacijeId;
+            Model.model = artikal.Model;
             Model.operativniSistem = artikal.Specifikacije.OperativniSistem;
             Model.rezolucija = artikal.Specifikacije.Rezolucija;
             Model.vrstaEkrana = artikal.Specifikacije.VrstaEkrana;
@@ -61,6 +104,13 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             Model.RAM = artikal.Specifikacije.RAM;
             Model.povezivanje = artikal.Specifikacije.Povezivanje;
             return View("Detalji", Model);
+        }
+        public ActionResult ModelTelefona(int id)
+        {
+            ArtikalPrikaziVM Model = new ArtikalPrikaziVM();
+            Artikal artikal = ctx.Artikli.Where(y => y.Id == id).FirstOrDefault();
+            Model.model = artikal.Model;
+            return View("ModelTelefona", Model);
         }
         public ActionResult Uredi(int id)
         {

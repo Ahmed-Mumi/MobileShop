@@ -35,7 +35,7 @@
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
                         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-                            <i class="fa fa-fw fa-apple"></i>
+                            <i class="fa fa-cog fa-spin fa-1x fa-fw"></i>
                             <span class="nav-link-text">Upravljanje artiklima</span>
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseExamplePages">
@@ -72,7 +72,7 @@
                             </li>
 
                         </ul>
-                       
+
                         @*<li>
                                 <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Upravljanje klijentima</a>
                                 <ul class="sidenav-third-level collapse" id="collapseMulti2">
@@ -106,54 +106,54 @@
                     </div>
                 </form>
             </li>
-            <li class="nav-item">
-                @*<a class="nav-link" data-toggle="modal" data-target="#exampleModal  style=" float:right">*@
-                    @*<i class="fa fa-fw fa-sign-out"></i>Odjavi se*@
-                <a class="nav-link" href="/Autentifikacija/Logout"><i class="fa fa-fw fa-sign-out"></i> Odjavi se</a>
+            <li class="dropdown">
                 
-            </li>
+                    <a class="nav-link" href="/Autentifikacija/Logout"><i class="fa fa-fw fa-sign-out"></i> Odjavi se</a>
         </ul>
     </nav>
-  
-            @*<div class="navbar navbar-inverse navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                        </div>
-                        <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                            </ul>
-                        </div>
-                    </div>
-                </div>*@
-          
-            @*</div>*@
-                @RenderBody()
-            <footer class="sticky-footer">
-                <div class="container">
-                    <div class="text-center">
-                        <small>Copyright © Mobitel Shop 2017</small>
-                    </div>
+
+
+    @*<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        </a>*@
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
-            </footer>
-            @*<div class="container body-content">*@
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+
+    @*</div>*@
+    @RenderBody()
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright © Mobitel Shop 2017</small>
+            </div>
+        </div>
+    </footer>
+    @*<div class="container body-content">*@
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-   
-                @*<footer>
-                        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-                    </footer>*@
-            @*</div>*@
 
-            @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-            <script src="~/Scripts/bootstrap.min.js"></script>*@
+    @*<footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+    @*</div>*@
+
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>*@
     <script src="~/Areas/ModulAdministracija/Content/vendor/jquery/jquery.min.js"></script>
     <script src="~/Areas/ModulAdministracija/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Areas/ModulAdministracija/Content/vendor/jquery-easing/jquery.easing.min.js"></script>

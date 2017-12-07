@@ -1,0 +1,25 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.ArtikalPrikaziVM
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ModelTelefona</title>
+</head>
+<body>
+    <div> 
+        <table>
+        <tr>
+           
+            <td>
+               @Html.TextBoxFor(model => model.model, new { @class = "form-control", @readonly = true })
+            </td>
+        </tr>
+            </table>
+    </div>
+</body>
+</html>

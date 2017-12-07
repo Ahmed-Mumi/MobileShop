@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using PagedList.Mvc;
+using PagedList;
+using RS1_P120_MobitelShop.Models;
 namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
 {
     public class AdminPrikaziVM
@@ -21,7 +23,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
             public string Grad { get; set; }
             public int GradId { get; set; }
             public int LoginId { get; set; }
-            public int AdministratorId { get; set; }
+            public int AdministratorId { get; set; }            
         }
         public List<AdminInfo> adminStavke { get; set; }
     }

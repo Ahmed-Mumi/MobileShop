@@ -65,7 +65,7 @@
                                                     @Html.ActionLink("Obriši", "Obrisi", new { id = x.AdministratorId }, new { @class = "btn btn-danger" })
                                                 </div>
                                                 <div class="col-md-6">
-                                                    @Html.ActionLink("Uredi", "Uredi", new { id = x.AdministratorId }, new { @class = "btn btn-info" })
+                                                    @Ajax.ActionLink("Uredi", "Uredi", new { id = x.AdministratorId }, new AjaxOptions() { UpdateTargetId = "urediAdmina" }, new { @class = "btn btn-info" })
                                                 </div>
                                             </div>
                                     </td>
@@ -73,12 +73,17 @@
                             }
                         </tbody>
                     </table>
+                    <div id="urediAdmina">
+
+                    </div>
                 </div>
             </div>
             <div>
             </div>
         </div>
     </div>
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </body>
 </html>
 

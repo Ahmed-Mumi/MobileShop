@@ -19,9 +19,9 @@
                 <li class="breadcrumb-item">
                     <a href="/ModulAdministracija/AdminHome">Admin home</a>
                 </li>
-                <li class="breadcrumb-item active">Dodavanje novog administratora</li>
+                <li class="breadcrumb-item active">Dodavanje/uređivanje profila administratora</li>
             </ol>
-            <div class="row">
+            <div class="table-success">
                 <div id="page-wrapper">
                     <div style="margin-left:20px; margin-right:20px; padding-bottom:3px">
                         <span>Dodavanje profila administratora</span>
@@ -56,14 +56,15 @@
                                 <span>Grad :</span>
                                 @Html.DropDownListFor(model => model.GradId, Model.gradovi, new { @class = "form-control" })
                             </div>
-                            <div id="ajaxDiv">
-                                <h4>Pristupni podaci:</h4>
-                                <div>
-                                    <span>Korisničko ime :</span>
+                            <div class="d-xl-table-row" style="margin:5px;padding:10px">
+                                
+                                <h4>Login podaci:</h4>
+                                <div class="alert-heading">
+                                    <span><b>Korisničko ime :</b></span>
                                     @Html.TextBoxFor(model => model.KorisnickoIme, new { @class = "form-control" })
                                 </div>
                                 <div>
-                                    <span>Password :</span>
+                                    <span><b>Password :</b></span>
                                     @Html.PasswordFor(model => model.password, new { @class = "form-control" })
                                 </div>
                             </div>

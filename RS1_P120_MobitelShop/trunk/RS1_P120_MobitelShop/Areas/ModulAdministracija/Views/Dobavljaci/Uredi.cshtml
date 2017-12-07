@@ -18,14 +18,14 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="/ModulAdministracija/AdminHome">Admin home</a>
+                    <a href="/ModulAdministracija/Dobavljaci/Dodaj">Dobavljači</a>
                 </li>
                 <li class="breadcrumb-item active">Upravljanje dobavljačima</li>
             </ol>
-            <div class="row">
+            <div class="table-light">
                 <div id="page-wrapper">
                     <div style="margin-left:20px; margin-right:20px; padding-bottom:3px">
-                        <span>Dodavanje dobavljača</span>
+                  
                         @using (Html.BeginForm("Snimi", "Dobavljaci"))
                         {
                             @Html.HiddenFor(model => model.Id)
