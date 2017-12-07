@@ -49,6 +49,14 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -91,6 +99,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.css" />
+    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.js" />
+    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.min.css" />
+    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.min.js" />
     <Content Include="Areas\ModulAdministracija\Content\css\sb-admin.css" />
     <Content Include="Areas\ModulAdministracija\Content\css\sb-admin.min.css" />
     <Content Include="Areas\ModulAdministracija\Content\js\sb-admin-charts.js" />
@@ -99,6 +111,16 @@
     <Content Include="Areas\ModulAdministracija\Content\js\sb-admin-datatables.min.js" />
     <Content Include="Areas\ModulAdministracija\Content\js\sb-admin.js" />
     <Content Include="Areas\ModulAdministracija\Content\js\sb-admin.min.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\bootstrap.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\bootstrap.min.js" />
+    <None Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\modernizr-2.6.2.js" />
     <Content Include="Areas\ModulAdministracija\Content\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Areas\ModulAdministracija\Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Areas\ModulAdministracija\Content\vendor\bootstrap\css\bootstrap-reboot.css" />
@@ -154,6 +176,7 @@
     <Content Include="Content\js\jquery.backstretch.min.js" />
     <Content Include="Content\js\placeholder.js" />
     <Content Include="Content\js\scripts.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -285,8 +308,10 @@
     <Content Include="Areas\ModulAdministracija\Content\vendor\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Areas\ModulAdministracija\Content\vendor\font-awesome\scss\_stacked.scss" />
     <Content Include="Areas\ModulAdministracija\Content\vendor\font-awesome\scss\_variables.scss" />
-    <Content Include="Areas\ModulKlijenti\Views\Korpa\Specifikacije.cshtml" />
-    <Content Include="Areas\ModulKlijenti\Views\Korpa\IspisPoFilteru.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Areas\ModulAdministracija\Content\Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Areas\ModulAdministracija\Views\Artikal\ModelTelefona.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Popust\Prikazi.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -318,6 +343,7 @@
     <Compile Include="Areas\ModulAdministracija\Controllers\ArtikalController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\DobavljaciController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\KlijentiController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\PopustController.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\AdminEditVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\AdminPrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\ArtikalEditVM.cs" />
@@ -325,6 +351,7 @@
     <Compile Include="Areas\ModulAdministracija\Models\DobavljaciEditVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\DobavljaciPrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiEditVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\PopustPrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\ModulAdministracijaAreaRegistration.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\KorpaController.cs" />
