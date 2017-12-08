@@ -12,6 +12,8 @@ namespace RS1_P120_MobitelShop.Models
         public string Username { get; set; }
         public string Password { get; set; }
 
+
         public bool IsValid { get; set; }
+
     }
 }

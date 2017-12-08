@@ -20,7 +20,8 @@ namespace RS1_P120_MobitelShop.ViewModel
         public string Telefon { get; set; }
         public string Adresa { get; set; }
         public string Email { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DatumRodjenja { get; set; }
         public List<SelectListItem> gradoviStavke { get; set; }
         public int GradId { get; set; }

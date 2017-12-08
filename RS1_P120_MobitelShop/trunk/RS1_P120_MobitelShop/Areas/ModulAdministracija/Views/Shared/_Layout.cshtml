@@ -24,8 +24,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto" style="float:right"></ul>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
+            @*<ul class="navbar-nav ml-auto" style="float:right"></ul>*@
+            @*<div class="collapse navbar-collapse" id="navbarResponsive">*@
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                         <a class="nav-link" href="/ModulAdministracija/AdminHome">
@@ -70,8 +70,9 @@
                                     </li>
                                 </ul>
                             </li>
-
                         </ul>
+                      </li>
+                    </ul>
 
                         @*<li>
                                 <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Upravljanje klijentima</a>
@@ -81,11 +82,10 @@
                                     </li>
                                 </ul>
                             </li>*@
-                </ul>
-            </div>
+        
 
             @*</ul>*@
-        </div>
+                   
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
@@ -105,11 +105,16 @@
                         </span>
                     </div>
                 </form>
-            </li>
-            <li class="dropdown">
-                
+                </ul>
+         
+            </div>
+           <div>
+
                     <a class="nav-link" href="/Autentifikacija/Logout"><i class="fa fa-fw fa-sign-out"></i> Odjavi se</a>
-        </ul>
+
+           </div>
+                
+      
     </nav>
 
 
@@ -161,5 +166,8 @@
     <script src="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="~/Areas/ModulAdministracija/Content/js/sb-admin.min.js"></script>
     <script src="~/Areas/ModulAdministracija/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
 </body>
 </html>

@@ -12,13 +12,13 @@
     <title>Prikazi</title>
 </head>
 <body>
-    <div> 
+    <div id="popust"> 
         <p>
             @foreach(PopustPrikaziVM.PopustInfo x in Model.popustNovi)
-            {
-             <b>Iznos popusta:  </b>   @x.iznosPopusta <b>%</b>
+            {              
+             <b class="btn btn-warning">Artikal na akciji  </b>  <b class="btn btn-danger">@x.iznosPopusta %</b>               
+           @Html.ActionLink(" ", "Obrisi", new { id = x.PopustId }, new { @class = "fa fa-trash" })
             }
-           
         </p>
     </div>
 </body>
