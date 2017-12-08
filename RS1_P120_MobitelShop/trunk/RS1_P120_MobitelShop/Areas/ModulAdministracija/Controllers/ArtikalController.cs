@@ -38,6 +38,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
         {
             ArtikalPrikaziVM Model = new ArtikalPrikaziVM();
             {
+              
                 if (searchStringMarka != null)
                 {
                     page = 1;
@@ -53,17 +54,41 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 
                 int pageSize = 8;
                 int pageNumber = (page ?? 1);
-          
+
                 if (ArtikalId.HasValue || String.IsNullOrEmpty(trenutniFilter))
                 {
+
                     Model.ArtikalPageList = ctx.Artikli
                           .Where(x => (!ArtikalId.HasValue || x.Id == ArtikalId)
                               && (String.IsNullOrEmpty(searchStringMarka)
                               || x.Model.Contains(searchStringMarka) || x.Marka.Contains(searchStringMarka))
-                              && ((CijenaOd == 0 || CijenaDo == 0) || (CijenaOd <= x.Cijena && CijenaDo >= x.Cijena)))                            
-                        .OrderBy(x => x.Id).
-                    ToPagedList(pageNumber, pageSize);
+                              && ((CijenaOd == 0 || CijenaDo == 0) || (CijenaOd <= x.Cijena && CijenaDo >= x.Cijena)))
+                        .OrderBy(x => x.Id)
+                   .ToPagedList(pageNumber, pageSize);
+                  
+
                 }
+
+                   if (ArtikalId.HasValue || String.IsNullOrEmpty(trenutniFilter))
+                   {
+                       List<Artikal> lista = ctx.Artikli
+                           .Where(x => (!ArtikalId.HasValue || x.Id == ArtikalId)
+                             && (String.IsNullOrEmpty(searchStringMarka)
+                             || x.Model.Contains(searchStringMarka) || x.Marka.Contains(searchStringMarka))
+                             && ((CijenaOd == 0 || CijenaDo == 0) || (CijenaOd <= x.Cijena && CijenaDo >= x.Cijena)))
+                       .OrderBy(x => x.Id).ToList();
+                       if (lista.Count == 0)
+                       {
+                           ViewBag.Message = "Nije pronađen artikal";
+                       }
+                       else
+                       {
+                           ViewBag.Message = "";
+                       }
+                   }
+                    
+                
+              
                 //    Model.artikal = ctx.Artikli.Select(x => new ArtikalPrikaziVM.ArtikalInfo()
                 //    {
                 //        Id = x.Id,
@@ -75,8 +100,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 //        garancija = x.Garancija               
                 //    }).ToList()                       
                 //};
-            }
             return View("Prikazi",Model);
+            }
         }  
         public ActionResult Dodaj()
         {
