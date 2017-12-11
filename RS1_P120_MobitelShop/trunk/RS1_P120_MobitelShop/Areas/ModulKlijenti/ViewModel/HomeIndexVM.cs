@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using RS1_P120_MobitelShop.Models;
+using PagedList;
 namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
 {
     public class HomeIndexRow
@@ -15,6 +16,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
     }
     public class HomeIndexVM
     {
-        public List<HomeIndexRow> listaNajnovijihArtikala { get; set; } 
+        public List<HomeIndexRow> listaNajnovijihArtikala { get; set; }
+        public IPagedList<Artikal> listaArtikala { get; set; }
+        public List<string> searchArtikliString { get; set; }
     }
 }

@@ -321,7 +321,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />

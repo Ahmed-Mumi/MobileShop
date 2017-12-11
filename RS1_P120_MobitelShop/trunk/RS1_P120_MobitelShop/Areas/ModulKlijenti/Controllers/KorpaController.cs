@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using RS1_P120_MobitelShop.DAL;
-using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
+using RS1_P120_MobitelShop.DAL; 
 using RS1_P120_MobitelShop.Models;
+using PagedList.Mvc;
+using PagedList;
+using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
 
 namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 {
@@ -15,8 +17,10 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
         // GET: ModulKlijenti/Korpa
         MojContext ctx = new MojContext();
         [Autorizacija(KorisnickeUloge.Klijent)]
-        public ActionResult Index()
+        public ActionResult Index(int? ArtikalId, int? page, string searchTerm="")
         {
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
             HomeIndexVM Model = new HomeIndexVM()
             {
                 listaNajnovijihArtikala = ctx.Artikli.OrderByDescending(x => x.DatumObjave).Select(p => new HomeIndexRow()
@@ -26,10 +30,13 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                     Marka=p.Marka,
                     Cijena=p.Cijena,
                     ArtikalId=p.Id
-                }).Take(2).ToList()
-            };
+                }).Take(2).ToList(),
+                listaArtikala = ctx.Artikli.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize),
+                searchArtikliString=ctx.Artikli.Where(h=>h.Model.StartsWith(searchTerm)).Select(y=>y.Model).ToList()
+            };  
             return View("Index",Model);
         } 
+
         public ActionResult IspisiSpecifikacije()
         { 
             List<SpecifikacijeVM> specifikacijeList = new List<SpecifikacijeVM>();
@@ -86,21 +93,32 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             listaspec.specifikacijeList = specifikacijeList;
             return View("Specifikacije",listaspec);
         }
-        [HttpPost]
-        public ActionResult IspisiSpecifikacije(SpecifikacijeList spec)
-        { 
-            SpecifikacijeList Model = new SpecifikacijeList();
-            Model.listaArtikala = new List<Artikal>();
-            List<Artikal> tempList = new List<Artikal>();
-            foreach (var item in spec.specifikacijeList.ToList())
-            { 
-                if (item.isEkranChecked || item.isEksternaMemorijaChecked || item.isRamChecked && item.isOperativniSistemChecked)
-                {
-                    tempList=ctx.Artikli.Where(x=>x.Specifikacije.RAM==item.RamNaziv).ToList();
-                    Model.listaArtikala.AddRange(tempList);
-                } 
-            } 
-            return View("IspisPoFilteru", Model);
-        }
+        //[HttpPost]
+        //public ActionResult IspisiSpecifikacije(SpecifikacijeList spec)
+        //{ 
+        //    SpecifikacijeList Model = new SpecifikacijeList();
+        //    Model.listaArtikala = new List<Artikal>();
+        //    List<Artikal> tempList = new List<Artikal>();
+        //    foreach (var item in spec.specifikacijeList.ToList())
+        //    { 
+        //        if (item.isEkranChecked || item.isEksternaMemorijaChecked || item.isRamChecked && item.isOperativniSistemChecked)
+        //        {
+        //            tempList=ctx.Artikli.Where(x=>x.Specifikacije.RAM==item.RamNaziv).ToList();
+        //            Model.listaArtikala.AddRange(tempList);
+        //        } 
+        //    } 
+        //    return View("IspisPoFilteru", Model);
+        //}
+
+        //public ActionResult Prikazi(int? ArtikalId, int? page)
+        //{
+        //    HomeIndexVM Model = new HomeIndexVM();
+        //    { 
+        //        int pageSize = 8;
+        //        int pageNumber = (page ?? 1);  
+        //        Model.listaArtikala = ctx.Artikli.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+        //        return View("Index", Model);
+        //    }
+        //}  
     } 
 } 

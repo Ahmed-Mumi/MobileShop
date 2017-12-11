@@ -1,6 +1,14 @@
 ﻿@using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
+@using PagedList.Mvc;
 @model  RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.HomeIndexVM 
 <!DOCTYPE html>
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/css/sb-admin.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/bootstrap-lightbox/bootstrap-lightbox.min.css" rel="stylesheet" />
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <html lang="en">
 <head>
     <title>Bootstrap Example</title>
@@ -9,9 +17,36 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+</head> 
 <body>
-
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">WebSiteName</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>  
+            </ul>
+            <form class="navbar-form navbar-left" action="/action_page.php">
+                <div class="input-group">
+                   @using(Html.BeginForm())
+                   {
+                        @Html.TextBox("searchTerm", null, new { id="txtSearch"})  
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                   }
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:100%;height:400px">
             <!-- Indicators -->
@@ -22,18 +57,15 @@
                 }
             </ol>
             <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-
+            <div class="carousel-inner"> 
                 @foreach (HomeIndexRow hir in Model.listaNajnovijihArtikala)
                 {
                     <div class="@(hir==Model.listaNajnovijihArtikala.FirstOrDefault()?"item active":"item")">
                       
                         <img src="@hir.Slika" alt="@(hir.Marka+" "+hir.Model)" style="width:50%;height:400px">
                     </div>
-                }
-
-            </div>
-
+                } 
+            </div> 
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -45,8 +77,60 @@
             </a>
         </div>
     </div>  
-    <div>
+    @*<div>
         @Html.ActionLink("Filteri", "IspisiSpecifikacije")
+    </div>*@ 
+    <div id="divSearch">
+        <div class="content-wrapper">
+            <div class="container-fluid"> 
+                <div class="row">
+                    <div id="page-wrapper">
+                        <div style="margin-left:40px; padding-bottom:3px"> 
+                            <div class="row"> 
+                                @foreach (RS1_P120_MobitelShop.Models.Artikal x in Model.listaArtikala)
+                                {
+
+                                    <div style="box-shadow: -1px 3px 25px #000; margin-bottom:20px;padding-top:0px;width:250px;padding-bottom:0px;padding:10px;margin-right:9px;background-color:white">
+                                        <br /> 
+                                        <div class="img-fluid">
+                                            <a href="@Url.Content(@x.Slika)" data-toggle="lightbox" data-footer="Slika telefona" data-max-width="500">
+                                                <img src="@Url.Content(@x.Slika)" class="img-fluid" style="width:250px;height:185px" />
+                                            </a>
+                                            <div class="caption"> 
+                                                <p><b>Model telefona:<br /></b>@x.Model</p> 
+                                                <p><b>Garancija: </b>@x.Garancija</p>
+                                                <p><b>Cijena: </b>@x.Cijena KM</p> 
+                                                <p> 
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                } 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="form-group">
+                <div class="col-sm-10">
+                    Stranica @(Model.listaArtikala.PageCount < Model.listaArtikala.PageNumber ? 0 : Model.listaArtikala.PageNumber) od @Model.listaArtikala.PageCount
+                    @Html.PagedListPager(Model.listaArtikala, page => Url.Action("Index", new
+   {
+       page, 
+       tipID = ViewBag.tipID
+   }))
+                </div>
+            </div>
+        </div>
     </div>
+
 </body>
 </html> 
+<script style="font-family:Arial">
+    $(function () {
+        $("#txtSearch").autocomplete({
+            source: '@Url.Action("Index")'
+        });
+    });
+</script>
