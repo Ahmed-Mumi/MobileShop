@@ -14,9 +14,9 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/cupertino/jquery-ui.css" type="text/css" rel="Stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 </head> 
 <body>
     <nav class="navbar navbar-inverse">
@@ -25,21 +25,18 @@
                 <a class="navbar-brand" href="#">WebSiteName</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>  
+                <li class="active"><a href="#">Home</a></li> 
             </ul>
-            <form class="navbar-form navbar-left" action="/action_page.php">
-                <div class="input-group">
-                   @using(Html.BeginForm())
-                   {
-                        @Html.TextBox("searchTerm", null, new { id="txtSearch"})  
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                   }
-                </div>
+            <form class="navbar-form navbar-left" action="/ModulKlijenti/Korpa">  
+    <div class="input-group">
+
+        @Html.TextBox("searchTerm", null, new { id = "txtSearch" })
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div> 
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -87,7 +84,7 @@
                     <div id="page-wrapper">
                         <div style="margin-left:40px; padding-bottom:3px"> 
                             <div class="row"> 
-                                @foreach (RS1_P120_MobitelShop.Models.Artikal x in Model.listaArtikala)
+                                @foreach (RS1_P120_MobitelShop.Models.Artikal x in Model.listaArtikalaPoSearch)
                                 {
 
                                     <div style="box-shadow: -1px 3px 25px #000; margin-bottom:20px;padding-top:0px;width:250px;padding-bottom:0px;padding:10px;margin-right:9px;background-color:white">
@@ -114,8 +111,8 @@
             </div> 
             <div class="form-group">
                 <div class="col-sm-10">
-                    Stranica @(Model.listaArtikala.PageCount < Model.listaArtikala.PageNumber ? 0 : Model.listaArtikala.PageNumber) od @Model.listaArtikala.PageCount
-                    @Html.PagedListPager(Model.listaArtikala, page => Url.Action("Index", new
+                    Stranica @(Model.listaArtikalaPoSearch.PageCount < Model.listaArtikalaPoSearch.PageNumber ? 0 : Model.listaArtikalaPoSearch.PageNumber) od @Model.listaArtikalaPoSearch.PageCount
+                    @Html.PagedListPager(Model.listaArtikalaPoSearch, page => Url.Action("Index", new
    {
        page, 
        tipID = ViewBag.tipID
@@ -127,10 +124,10 @@
 
 </body>
 </html> 
-<script style="font-family:Arial">
+<script style="font-family:Arial" type="text/javascript">
     $(function () {
         $("#txtSearch").autocomplete({
-            source: '@Url.Action("Index")'
+            source: '@Url.Action("GetStudents","Korpa")'
         });
     });
 </script>
