@@ -317,6 +317,7 @@
     <Content Include="Areas\ModulKlijenti\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Korpa\IspisPoFilteru.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Korpa\Specifikacije.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Korpa\Detalji.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -361,6 +362,7 @@
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\KorpaController.cs" />
     <Compile Include="Areas\ModulKlijenti\ModulKlijentiAreaRegistration.cs" />
+    <Compile Include="Areas\ModulKlijenti\ViewModel\ArtikliDetaljiVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\HomeIndexVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\SpecifikacijeVM.cs" />
     <Compile Include="Controllers\AutentifikacijaController.cs" />

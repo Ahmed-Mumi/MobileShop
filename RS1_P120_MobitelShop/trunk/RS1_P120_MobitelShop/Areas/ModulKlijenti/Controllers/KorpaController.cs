@@ -40,7 +40,27 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 Model.listaArtikalaPoSearch = ctx.Artikli.Where(x => x.Model.Contains(searchTerm)).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
             }
             return View("Index",Model);
-        } 
+        }
+
+        public ActionResult Detalji(int artikalId)
+        {
+            ArtikliDetaljiVM Model = new ArtikliDetaljiVM();
+            Artikal artikal = ctx.Artikli.Find(artikalId);
+            Model.Cijena = artikal.Cijena;
+            Model.Ekran = artikal.Specifikacije.Ekran;
+            Model.EksternaMemorija = artikal.Specifikacije.EksternaMemorija;
+            Model.Garancija = artikal.Garancija;
+            Model.JezgreProcesora = artikal.Specifikacije.JezgreProcesora;
+            Model.Model = artikal.Model;
+            Model.OperativniSistem = artikal.Specifikacije.OperativniSistem;
+            Model.Povezivanje = artikal.Specifikacije.Povezivanje;
+            Model.RAM = artikal.Specifikacije.RAM;
+            Model.Kamera = artikal.Specifikacije.Kamera;
+            Model.Rezolucija = artikal.Specifikacije.Rezolucija;
+            Model.Slika = artikal.Slika;
+            Model.VrstaEkrana = artikal.Specifikacije.VrstaEkrana;
+            return View("Detalji", Model);
+        }
         public JsonResult GetStudents(string term)
         {
             Model.searchArtikliString = ctx.Artikli.Where(h => h.Model.Contains(term)).Select(y => y.Model).ToList();
