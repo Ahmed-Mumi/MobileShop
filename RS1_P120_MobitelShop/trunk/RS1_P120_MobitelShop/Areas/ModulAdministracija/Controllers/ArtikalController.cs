@@ -43,11 +43,6 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 {
                     page = 1;
                 }
-                //else
-                //{
-                //    searchStringMarka = trenutniFilter;
-                //}
-
                 ViewBag.ArtikalId = ArtikalId;
                 ViewBag.CijenaMin = CijenaOd;
                 ViewBag.CijenaMax = CijenaDo;
@@ -79,27 +74,23 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                        .OrderBy(x => x.Id).ToList();
                        if (lista.Count == 0)
                        {
-                           ViewBag.Message = "Nije pronađen artikal";
-                       }
-                       else
-                       {
-                           ViewBag.Message = "";
+                           ViewData["opomena"] = "Nije pronađen artikal";
                        }
                    }
-                    
+
                 
-              
-                //    Model.artikal = ctx.Artikli.Select(x => new ArtikalPrikaziVM.ArtikalInfo()
-                //    {
-                //        Id = x.Id,
-                //        sifraArtikla = x.Sifra,
-                //        slika = x.Slika,
-                //        model = x.Model,
-                //        marka = x.Marka,
-                //        cijena = x.Cijena,
-                //        garancija = x.Garancija               
-                //    }).ToList()                       
-                //};
+
+                   //Model.spisakMobitela = ctx.Artikli.Select(x => new ArtikalPrikaziVM.ArtikalInfo()
+                   //{
+                   //    Id = x.Id,
+
+                   //    slika = x.Slika,
+                   //    model = x.Model,
+                   //    marka = x.Marka,
+                   //    cijena = x.Cijena,
+                   //    garancija = x.Garancija,
+                   //}).ToList();               
+                
             return View("Prikazi",Model);
             }
         }  

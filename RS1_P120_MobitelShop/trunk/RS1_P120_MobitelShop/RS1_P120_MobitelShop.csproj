@@ -99,10 +99,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.css" />
-    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.js" />
-    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.min.css" />
-    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\bootstrap-lightbox.min.js" />
+    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\slikaDizajn - Copy.css" />
+    <Content Include="Areas\ModulAdministracija\Content\bootstrap-lightbox\slikaMobitela.js" />
     <Content Include="Areas\ModulAdministracija\Content\css\sb-admin.css" />
     <Content Include="Areas\ModulAdministracija\Content\css\sb-admin.min.css" />
     <Content Include="Areas\ModulAdministracija\Content\js\sb-admin-charts.js" />

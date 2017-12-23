@@ -17,7 +17,7 @@
             @foreach(PopustPrikaziVM.PopustInfo x in Model.popustNovi)
             {              
              <b class="btn btn-warning">Artikal na akciji  </b>                <b class="fa fa-tag btn btn-danger ">@x.iznosPopusta %</b>
-           @Html.ActionLink(" ", "Obrisi", new { id = x.PopustId }, new { @class = "fa fa-trash" })
+             @Html.ActionLink(" ", "Obrisi", new { id = x.PopustId }, new { @class = "fa fa-trash" })
             }
         </p>
     </div>

@@ -4,6 +4,8 @@
 @using PagedList.Mvc;
 @{
     //Layout = null;
+    int broj = 1;
+    string napomena = (string)ViewData["opomena"];
 }
 
 <link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -11,11 +13,9 @@
 <link href="~/Areas/ModulAdministracija/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 <link href="~/Areas/ModulAdministracija/Content/css/sb-admin.css" rel="stylesheet" />
-<link href="~/Areas/ModulAdministracija/Content/bootstrap-lightbox/bootstrap-lightbox.min.css" rel="stylesheet" />
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
-    
-
+<link href="~/Areas/ModulAdministracija/Content/bootstrap-lightbox/slikaDizajn.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/bootstrap-lightbox/slikaDizajn - Copy.css" rel="stylesheet" />
 <div id="divSearch">
     <div class="content-wrapper">
         <div class="container-fluid">
@@ -49,21 +49,25 @@
                       <div class="row">
 
                           <div>
-                              
-                                  @Html.Raw(ViewBag.Message)
+                              @if (napomena != null)
+                              {   
+                                <div class="alert alert-warning" role="alert">
+                                     @napomena
+                                </div>
+                              }
                                   
 </div>
-                            @foreach (RS1_P120_MobitelShop.Models.Artikal x in Model.ArtikalPageList)
+                            @foreach (var x in Model.ArtikalPageList)
                             {
                                
                                 <div style="box-shadow: -1px 3px 25px #000; margin-bottom:20px;padding-top:0px;width:250px;padding-bottom:0px;padding:10px;margin-right:9px;background-color:white">
                                     <br />
                                     @Html.Action("Prikazi", "Popust", new { id = x.Id, @style = "border:1px" })
-
                                     <div class="img-fluid">
-                                        <a href="@Url.Content(@x.Slika)" data-toggle="lightbox" data-footer="Slika telefona" data-max-width="500">
-                                            <img src="@Url.Content(@x.Slika)" class="img-fluid" style="width:250px;height:185px" />
+                                        <a data-max-width="500">
+                                            <img src="@x.Slika" class="img-fluid cursor" onclick="openModal();currentSlide(@broj)" style="width:250px;height:185px" />
                                         </a>
+
                                         <div class="caption">
                                             <p><b>Brend telefona: </b>@x.Marka</p>
                                             <p><b>Model telefona:<br /></b>@x.Model</p>
@@ -92,7 +96,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                { broj = broj + 1; }
                             }
                
                          
@@ -128,6 +132,22 @@
         </div>
     </div>
 </div>
+
+<div id="myModal" class="modal" style="margin-top:56px;width:83%;margin-left:250px;">
+    <span class="close cursor" onclick="closeModal()">
+        &times;
+    </span>
+    <div class="modal-content">
+        @foreach (var x in Model.ArtikalPageList)
+        {
+            <div class="mySlides" style="width:550px;height:550px;">
+                <img src="@x.Slika" style="width:100%; height:100%;"/>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/Areas/ModulAdministracija/Content/bootstrap-lightbox/slikaMobitela.js"></script>
 
 @*<script src="~/Areas/ModulAdministracija/Content/vendor/jquery/jquery.min.js"></script>
 <script src="~/Areas/ModulAdministracija/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -12,17 +12,21 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
     {
         public class ArtikalInfo
         {
-            public string sifraArtikla { get; set; }
+            public int Id { get; set; }
+
+            public string model { get; set; }
             public string slika { get; set; }
             public string marka { get; set; }
             public string garancija { get; set; }
-        
+            public double Cijena { get; set; }
+            public double CijenaSaPopustom { get; set; }
         }
-            public double cijena { get; set; }
-            public string model { get; set; }
+       
+        public double cijena { get; set; }     
+        public string model { get; set; }
         public int Id { get; set; }
         public IPagedList<Artikal> ArtikalPageList { get; set; }
-        public List<ArtikalInfo> artikal { get; set; }
+        public List<ArtikalInfo> spisakMobitela { get; set; }
         public int SpecifikacijeId { get; set; }
         public int ArtikalId { get; set; }
         public string searchString { get; set; }
