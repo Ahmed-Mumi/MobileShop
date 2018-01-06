@@ -34,6 +34,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
         //    var pageIndex = model.Page ?? 1;
         //    model.SearchResults = results.ToPagedList(pageIndex, RecordsPerPage);
         //}
+
         public ActionResult Prikazi(int? ArtikalId, int? page, string trenutniFilter, string searchStringMarka, double CijenaOd = 1, double CijenaDo = 5000)
         {
             ArtikalPrikaziVM Model = new ArtikalPrikaziVM();
