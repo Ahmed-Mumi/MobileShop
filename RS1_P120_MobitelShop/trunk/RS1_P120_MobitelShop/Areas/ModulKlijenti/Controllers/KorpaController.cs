@@ -39,6 +39,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             {
                 Model.listaArtikalaPoSearch = ctx.Artikli.Where(x => x.Model.Contains(searchTerm)).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
             }
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext); 
+            Model.BrojArtikalaUKorpi = ctx.Korpe.Count(x=>x.KlijentId==k.Id);
             return View("Index",Model);
         }
 
@@ -46,6 +48,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
         {
             ArtikliDetaljiVM Model = new ArtikliDetaljiVM();
             Artikal artikal = ctx.Artikli.Find(artikalId);
+            Model.ArtikalId = artikal.Id;
             Model.Cijena = artikal.Cijena;
             Model.Ekran = artikal.Specifikacije.Ekran;
             Model.EksternaMemorija = artikal.Specifikacije.EksternaMemorija;
@@ -59,12 +62,30 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             Model.Rezolucija = artikal.Specifikacije.Rezolucija;
             Model.Slika = artikal.Slika;
             Model.VrstaEkrana = artikal.Specifikacije.VrstaEkrana;
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+            Model.KlijentId = k.Id; 
+            Model.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
             return View("Detalji", Model);
+        }
+
+        public ActionResult Staviukorpi(int ArtikalId, int KlijentId)
+        {
+            Korpa korpa = new Korpa();
+            ctx.Korpe.Add(korpa);
+            korpa.KlijentId = KlijentId;
+            korpa.ArtikalId = ArtikalId;
+            ctx.SaveChanges();
+            return RedirectToAction("Detalji", new { artikalId = ArtikalId });
         }
         public JsonResult GetStudents(string term)
         {
             Model.searchArtikliString = ctx.Artikli.Where(h => h.Model.Contains(term)).Select(y => y.Model).ToList();
             return Json(Model.searchArtikliString, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Proba()
+        {
+            return View("View");
         }
 
         public ActionResult IspisiSpecifikacije()

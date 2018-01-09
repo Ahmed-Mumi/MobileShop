@@ -19,7 +19,7 @@
             </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
@@ -29,19 +29,15 @@
     <div class="col-md-6">
         <!-- Your first column here --> 
         <img src="@Url.Content(@Model.Slika)" width=" 558" alt="@Model.Slika">
-    </div>
+    </div> 
     <div class="col-md-6">
-        <table class="table">
+        <table class="table" style="margin-top:50px">
             <thead>
                 <tr>
                     <th scope="col">Specifikacije</th>
                 </tr>
             </thead>
-            <tbody>
-                    @*public string Slika { get; set; }
-                    public string Model { get; set; }
-                    public double Cijena { get; set; }
-                    public string Garancija { get; set; }*@
+            <tbody> 
                 <tr>
                     <td>Operativni sistem</td>
                     <td>@Model.OperativniSistem</td>
@@ -80,5 +76,10 @@
                 </tr>
             </tbody>
         </table>
+        @using (Html.BeginForm("Staviukorpi", "Korpa",new { ArtikalId= Model.ArtikalId, KlijentId=Model.KlijentId}))
+        {
+        <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+
+        }
     </div>
 </div>

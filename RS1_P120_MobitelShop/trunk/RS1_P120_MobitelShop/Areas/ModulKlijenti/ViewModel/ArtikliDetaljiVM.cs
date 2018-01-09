@@ -21,5 +21,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public string Kamera { get; set; }
         public string Povezivanje { get; set; }
         public string RAM { get; set; }
+        public int ArtikalId { get; set; }
+        public int KlijentId { get; set; }
+        public int BrojArtikalaUKorpi { get; set; }
     }
 }
