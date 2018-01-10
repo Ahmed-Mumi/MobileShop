@@ -1,5 +1,5 @@
-﻿@using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
-@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.NarudzbePrikaziVM
+﻿@model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.DetaljiNarudzbePrikaziVM
+           @using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
 @{
     //Layout = null;
 }
@@ -10,7 +10,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Prikazi</title>
-    <script src="~/Areas/ModulAdministracija/Content/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="content-wrapper">
@@ -28,26 +27,18 @@
                     <table class="table" style="width:99%">
                         <thead>
                             <tr>
-                                <th>Broj narudžbe</th>
-                                <th>Ime klijenta</th>
-                                <th>Datum narudžbe</th>
-                                <th>Status narudžbe</th>
-                                <th>STATUS</th>
-                                <th>Vrsta isporuke</th>
+                                <th>Naziv artikla</th>
+                                <th>Količina</th>                              
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (NarudzbePrikaziVM.NarudzbeInfo x in Model.narudzbeStavke)
+                            @foreach (DetaljiNarudzbePrikaziVM.DetaljiInfo x in Model.detaljiStavke)
                             {
                                 <tr>
                                     <td>
-                                        @x.BrojNarudzbe
+                                        @x.artikalNaziv
                                     </td>
-                                    <td>@x.klijentIme</td>
-                                    <td>@x.DatumNarudzbe</td>
-                                    <td>@x.statusNarudzbe</td>
-                                    <td>@x.Otkazano</td>
-                                    <td>@x.isporukaVrsta</td>
+                                    <td>@x.Kolicina</td>                                 
                                     <td>
                                         <div class="btn-group open">
                                             <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>Izvrši izmjene</a>
@@ -57,12 +48,10 @@
                                             <ul class="dropdown-menu" style="padding:5px">
                                                 <li style="padding:5px;text-decoration:none">
                                                     @Ajax.ActionLink("Promjeni status", "Promjena", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @class = "btn btn-warning fa fa-pencil" })
-
-
                                                 </li>
                                                 <li style="padding:5px">
                                                     @Ajax.ActionLink(" Obriši", "Obrisi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "obrisi" }, new { @class = "btn btn-danger fa fa-trash-o" })
-                                              </li>
+                                                </li>
                                                 @*<li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
                                                     <li class="divider"></li>
                                                     <li><a href="#"><i class="fa fa-unlock"></i> Make admin</a></li>*@
@@ -70,11 +59,13 @@
                                         </div>
                                     </td>
                                     <td>
-                                       @* @Ajax.ActionLink("Prikaži detalje", "Detalji", new { id = x.Id }, new AjaxOptions { UpdateTargetId = "detalji" })*@
+                                      @*  @Ajax.ActionLink("Prikaži detalje", "Prikazi", new { id = x.Id }, new AjaxOptions { UpdateTargetId = "detalji" })*@
+                                        
+                                         @Html.ActionLink("Prikazi detalje", "Prikazi", new { id = x.NarudzbaId})
                                     </td>
-
+                                
                                 </tr>
-                               
+
                             }
                         </tbody>
 
@@ -85,8 +76,5 @@
             </div>
         </div>
     </div>
-    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.min.js"></script>
-    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
-    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </body>
 </html>

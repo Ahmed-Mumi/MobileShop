@@ -21,6 +21,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
             public int KlijentId { get; set; }
             public string isporukaVrsta { get; set; }
             public string klijentIme { get; set; }
+            public double? Ukupno { get; set; }
         }
         public List<NarudzbeInfo> narudzbeStavke { get; set; }
     }

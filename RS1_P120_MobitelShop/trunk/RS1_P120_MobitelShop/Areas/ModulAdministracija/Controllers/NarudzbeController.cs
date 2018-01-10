@@ -24,7 +24,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             {
                 narudzbeStavke = ctx.Narudzbe.Select(x => new NarudzbePrikaziVM.NarudzbeInfo()
                 {
-                    Id = x.Id,
+                   Id = x.Id,
                    BrojNarudzbe = x.BrojNarudzbe,
                    DatumNarudzbe = x.DatumNarudzbe,
                    statusNarudzbe = x.StatusNarudzbe,

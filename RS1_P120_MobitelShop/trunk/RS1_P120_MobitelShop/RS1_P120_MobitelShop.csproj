@@ -319,6 +319,7 @@
     <Content Include="Areas\ModulKlijenti\Views\Korpa\Specifikacije.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Korpa\Detalji.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Narudzbe\Prikazi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\DetaljiNarudzbe\Prikazi.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -347,6 +348,7 @@
     <Compile Include="Areas\ModulAdministracija\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\AdministratoriController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\ArtikalController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\DetaljiNarudzbeController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\DobavljaciController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\KlijentiController.cs" />
     <Compile Include="Areas\ModulAdministracija\Controllers\NarudzbeController.cs" />
@@ -355,6 +357,7 @@
     <Compile Include="Areas\ModulAdministracija\Models\AdminPrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\ArtikalEditVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\ArtikalPrikaziVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\DetaljiNarudzbePrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\DobavljaciEditVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\DobavljaciPrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiEditVM.cs" />
