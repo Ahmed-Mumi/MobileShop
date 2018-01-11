@@ -1,0 +1,140 @@
+﻿@model RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.ArtikliDetaljiVM
+<link href="~/Areas/ModulAdministracija/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/css/sb-admin.css" rel="stylesheet" />
+<link href="~/Areas/ModulAdministracija/Content/bootstrap-lightbox/bootstrap-lightbox.min.css" rel="stylesheet" /> 
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/cupertino/jquery-ui.css" type="text/css" rel="Stylesheet" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<div class="table-responsive">
+    <div class="col-md-6">
+        <!-- Your first column here -->
+        <table class="table" style="margin-top:50px">
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="@Url.Content(@Model.Slika)" width="100" alt="@Model.Slika">
+                    </td>
+                </tr> 
+                <tr>
+                    <td>Operativni sistem</td>
+                    <td>@Model.OperativniSistem</td>
+                </tr>
+                <tr>
+                    <td>Eksterna memorija</td>
+                    <td>@Model.EksternaMemorija</td>
+                </tr>
+                <tr>
+                    <td>Ekran</td>
+                    <td>@Model.Ekran</td>
+                </tr>
+                <tr>
+                    <td>Rezolucija</td>
+                    <td>@Model.Rezolucija</td>
+                </tr>
+                <tr>
+                    <td>Vrsta ekrana</td>
+                    <td>@Model.VrstaEkrana</td>
+                </tr>
+                <tr>
+                    <td>Jezgra procesora</td>
+                    <td>@Model.JezgreProcesora</td>
+                </tr>
+                <tr>
+                    <td>Kamera</td>
+                    <td>@Model.Kamera</td>
+                </tr>
+                <tr>
+                    <td>Povezivanje</td>
+                    <td>@Model.Povezivanje</td>
+                </tr>
+                <tr>
+                    <td>RAM</td>
+                    <td>@Model.RAM</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <!-- Your second column here -->
+        @using (Ajax.BeginForm("Index", "Uporedi",new AjaxOptions() { UpdateTargetId= "zaAjax" }))
+        {
+        <div class="input-group">
+            @Html.HiddenFor(x => Model.ArtikalId)
+            @Html.TextBox("searchTerm2", null, new { id = "txtSearch2" })
+
+            <input type="submit" value="Pronadji" />
+        </div>
+            }
+        @*<form class="navbar-form navbar-left" action="/ModulKlijenti/Uporedi">
+            <div class="input-group">
+                @Html.HiddenFor(x => Model.ArtikalId)
+                @Html.TextBox("searchTerm2", null, new { id = "txtSearch2" })
+                <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                <input type="submit" value="Pronadji" />
+            </div>
+        </form>*@
+        @if (Model.artikalUporedi != null)
+        {
+            <table class="table" style="margin-top:50px">
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="@Url.Content(@Model.artikalUporedi.Slika)" width="100" alt="@Model.artikalUporedi.Slika">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Operativni sistem</td>
+                        <td>@Model.artikalUporedi.Specifikacije.OperativniSistem</td>
+                    </tr>
+                    <tr>
+                        <td>Eksterna memorija</td>
+                        <td>@Model.artikalUporedi.Specifikacije.EksternaMemorija</td>
+                    </tr>
+                    <tr>
+                        <td>Ekran</td>
+                        <td>@Model.artikalUporedi.Specifikacije.Ekran</td>
+                    </tr>
+                    <tr>
+                        <td>Rezolucija</td>
+                        <td>@Model.artikalUporedi.Specifikacije.Rezolucija</td>
+                    </tr>
+                    <tr>
+                        <td>Vrsta ekrana</td>
+                        <td>@Model.artikalUporedi.Specifikacije.VrstaEkrana</td>
+                    </tr>
+                    <tr>
+                        <td>Jezgra procesora</td>
+                        <td>@Model.artikalUporedi.Specifikacije.JezgreProcesora</td>
+                    </tr>
+                    <tr>
+                        <td>Kamera</td>
+                        <td>@Model.artikalUporedi.Specifikacije.Kamera</td>
+                    </tr>
+                    <tr>
+                        <td>Povezivanje</td>
+                        <td>@Model.artikalUporedi.Specifikacije.Povezivanje</td>
+                    </tr>
+                    <tr>
+                        <td>RAM</td>
+                        <td>@Model.artikalUporedi.Specifikacije.RAM</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<script style="font-family:Arial" type="text/javascript">
+    $(function () {
+        $("#txtSearch2").autocomplete({
+            source: '@Url.Action("GetStudents","Korpa")'
+        });
+    });
+</script>

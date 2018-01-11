@@ -11,7 +11,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public string Slika { get; set; }
         public string Model { get; set; }
         public double Cijena { get; set; }
-        public string Garancija { get; set; } 
+        public string Garancija { get; set; }
         public string OperativniSistem { get; set; }
         public string EksternaMemorija { get; set; }
         public string Ekran { get; set; }
@@ -24,5 +24,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public int ArtikalId { get; set; }
         public int KlijentId { get; set; }
         public int BrojArtikalaUKorpi { get; set; }
+        public string pronadjenarijec { get; set; }
+        public Artikal artikalUporedi { get; set; }
     }
 }

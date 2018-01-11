@@ -320,6 +320,7 @@
     <Content Include="Areas\ModulKlijenti\Views\Korpa\Detalji.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Narudzbe\Prikazi.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\DetaljiNarudzbe\Prikazi.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Uporedi\Uporedi.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -334,6 +335,8 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -367,6 +370,7 @@
     <Compile Include="Areas\ModulAdministracija\ModulAdministracijaAreaRegistration.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\KorpaController.cs" />
+    <Compile Include="Areas\ModulKlijenti\Controllers\UporediController.cs" />
     <Compile Include="Areas\ModulKlijenti\ModulKlijentiAreaRegistration.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\ArtikliDetaljiVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\HomeIndexVM.cs" />
