@@ -18,20 +18,20 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
         {
             return View();
         }
-        public ActionResult Prikazi()
+        public ActionResult Prikazi(int id)
         {
             DetaljiNarudzbePrikaziVM Model = new DetaljiNarudzbePrikaziVM
             {
-                detaljiStavke = ctx.DetaljiNarudzbi
+                detaljiStavke = ctx.DetaljiNarudzbi.Where(x=> x.NarudzbaId == id)
                 .Select(x=> new DetaljiNarudzbePrikaziVM.DetaljiInfo()
                 {
                     Id = x.Id,
                     ArtikalId = x.ArtikalId,
                     Kolicina = x.Kolicina,
                     artikalNaziv = x.Artikal.Model,
-                    NarudzbaId = x.NarudzbaId
-                }).ToList()
-                
+                    //NarudzbaId = x.NarudzbaId,
+                }).ToList(),
+                NarudzbaId = id               
         };
             return View("Prikazi",Model);
         }
