@@ -30,13 +30,13 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                     AdministratorId = x.Id,
                     Ime = x.Korisnik.Ime,
                     Prezime = x.Korisnik.Prezime,
-                    DatumRodjenja = x.Korisnik.DatumRodjenja,
+                    DatumRodjenja = x.Korisnik.DatumRodjenja.Value,
                     Email = x.Korisnik.Email,
                     Telefon = x.Korisnik.Telefon,
                     Adresa = x.Korisnik.Adresa,
                     KorisnickoIme = x.Korisnik.Login.Username,
                     Grad = x.Korisnik.Grad.Naziv,
-                    GradId = x.Korisnik.GradId
+                    GradId = x.Korisnik.GradId.Value
                 }).ToList()
             };
             return View("Prikazi", Model);
@@ -62,7 +62,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             {
                 Ime = k.Korisnik.Ime,
                 Prezime = k.Korisnik.Prezime,
-                DatumRodjenja = k.Korisnik.DatumRodjenja,
+                DatumRodjenja = k.Korisnik.DatumRodjenja.Value,
                 Email = k.Korisnik.Email,
                 Telefon = k.Korisnik.Telefon,
                 Adresa = k.Korisnik.Adresa,
@@ -70,7 +70,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 password = k.Korisnik.Login.Password,
                 gradovi = ucitajGradove(),
                 LoginId = k.Korisnik.LoginId,
-                GradId = k.Korisnik.GradId,
+                GradId = k.Korisnik.GradId.Value,
                 AdministratorId = k.Korisnik.Administrator.Id
             };
             return View("Uredi", Model);

@@ -45,28 +45,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             return View("Index", ModelHomeIndex);
         }
 
-        public ActionResult Detalji(int artikalId)
-        {
-            Artikal artikal = ctx.Artikli.Find(artikalId);
-            ModelArtikalDetalji.ArtikalId = artikal.Id;
-            ModelArtikalDetalji.Cijena = artikal.Cijena;
-            ModelArtikalDetalji.Ekran = artikal.Specifikacije.Ekran;
-            ModelArtikalDetalji.EksternaMemorija = artikal.Specifikacije.EksternaMemorija;
-            ModelArtikalDetalji.Garancija = artikal.Garancija;
-            ModelArtikalDetalji.JezgreProcesora = artikal.Specifikacije.JezgreProcesora;
-            ModelArtikalDetalji.Model = artikal.Model;
-            ModelArtikalDetalji.OperativniSistem = artikal.Specifikacije.OperativniSistem;
-            ModelArtikalDetalji.Povezivanje = artikal.Specifikacije.Povezivanje;
-            ModelArtikalDetalji.RAM = artikal.Specifikacije.RAM;
-            ModelArtikalDetalji.Kamera = artikal.Specifikacije.Kamera;
-            ModelArtikalDetalji.Rezolucija = artikal.Specifikacije.Rezolucija;
-            ModelArtikalDetalji.Slika = artikal.Slika;
-            ModelArtikalDetalji.VrstaEkrana = artikal.Specifikacije.VrstaEkrana;
-            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-            ModelArtikalDetalji.KlijentId = k.Id;
-            ModelArtikalDetalji.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
-            return View("Detalji", ModelArtikalDetalji);
-        }
+
 
         //ovo ide u poseban controller koji mora primiti ArtikalId detalja na kojem je i string za pretragu mobitela
         //vraca view koji poredi, taj view je u detaljima u divuk koji je nevidljiv, a ima id         
@@ -76,15 +55,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
         //         ModelArtikalDetalji.artikalUporedi = ctx.Artikli.Where(x => x.Model.Contains(searchTerm2)).FirstOrDefault();
         //     return RedirectToAction("Detalji", new { artikalId = ArtikalId });
         // }
-        public ActionResult Staviukorpi(int ArtikalId, int KlijentId)
-        {
-            Korpa korpa = new Korpa();
-            ctx.Korpe.Add(korpa);
-            korpa.KlijentId = KlijentId;
-            korpa.ArtikalId = ArtikalId;
-            ctx.SaveChanges();
-            return RedirectToAction("Detalji", new { artikalId = ArtikalId });
-        }
+       
         public JsonResult GetStudents(string term)
         {
             ModelHomeIndex.searchArtikliString = ctx.Artikli.Where(h => h.Model.Contains(term)).Select(y => y.Model).ToList();

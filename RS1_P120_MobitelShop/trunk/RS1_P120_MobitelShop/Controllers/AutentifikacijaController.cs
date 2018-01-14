@@ -11,7 +11,9 @@ using RS1_P120_MobitelShop.ViewModel;
 using System.Net.Mail;
 using System.Text;
 using System.Web.Hosting;
-
+using System.Net;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 namespace RS1_P120_MobitelShop.Controllers
 {
     public class AutentifikacijaController : Controller
@@ -73,7 +75,7 @@ namespace RS1_P120_MobitelShop.Controllers
 
             RegistrationVM Model = new RegistrationVM();
             Model.Klijent = klijent;
-            Model.gradoviStavke = ucitajGradove();
+            //Model.gradoviStavke = ucitajGradove();
             return View("Registration",Model);
         }
 
@@ -87,22 +89,34 @@ namespace RS1_P120_MobitelShop.Controllers
 
         public ActionResult Registration(RegistrationVM vm)
         {
+            var response = Request["g-recaptcha-response"];
+            string secretKey = "6LcfskAUAAAAAMQeZJc_3mXI7rtcWZjeNTr5a9j8";//OVDJE SECRET KEY
+            var client = new WebClient();
+            var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+            var obj = JObject.Parse(result);
+            var status = (bool)obj.SelectToken("success");
+            ViewBag.Message = status ? "Google recaptcha validation success" : "Google recaptcha validation failed";
+
+            if (!ModelState.IsValid || !status)
+            {
+                return View("Registration", vm);
+            }
             Klijent klijent = new Klijent();
             klijent.Korisnik = new Korisnik();
             klijent.Korisnik.Login = new Login();
             ctx.Klijenti.Add(klijent);
 
-            klijent.Korisnik.Ime = vm.Ime;
+            //klijent.Korisnik.Ime = vm.Ime;
             klijent.Korisnik.Login.Username = vm.Username;
             klijent.Korisnik.Login.Password = vm.Password;
             //ovaj dio dodajem
             klijent.Korisnik.Login.IsValid = false;
-            klijent.Korisnik.Prezime = vm.Prezime;
-            klijent.Korisnik.Telefon = vm.Telefon;
-            klijent.Korisnik.Adresa = vm.Adresa;
-            klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
+            //klijent.Korisnik.Prezime = vm.Prezime;
+            //klijent.Korisnik.Telefon = vm.Telefon;
+            //klijent.Korisnik.Adresa = vm.Adresa;
+            //klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
             klijent.Korisnik.Email = vm.Email;
-            klijent.Korisnik.GradId = vm.GradId;
+            //klijent.Korisnik.GradId = vm.GradId;
             ctx.SaveChanges();
             //ovaj dio dodajem
             BuildEmailTemplate(klijent.Korisnik.LoginId);

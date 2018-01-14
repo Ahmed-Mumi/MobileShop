@@ -87,7 +87,7 @@
                 </tr>
             </tbody>
         </table>
-        @using (Html.BeginForm("Staviukorpi", "Korpa", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
+        @using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
         {
             <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
         }
@@ -109,11 +109,13 @@
             modal: true,
             buttons: {
                 "Nazad": function () {
-                    $(this).dialog("close");
+                    $(this).dialog("close"); 
                 }
             }
         });
-    } 
+    }
+
+
 </script>
 @*<script style="font-family:Arial" type="text/javascript">
         $(function () {

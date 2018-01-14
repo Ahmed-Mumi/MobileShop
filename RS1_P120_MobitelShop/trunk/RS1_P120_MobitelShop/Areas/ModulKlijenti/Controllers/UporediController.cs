@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using RS1_P120_MobitelShop.DAL;
 using RS1_P120_MobitelShop.Models;
-using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
+using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel; 
+using RS1_P120_MobitelShop.Helper;
 
 namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 {
@@ -35,7 +36,40 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             if (!string.IsNullOrEmpty(searchTerm2))
                 ModelArtikalDetalji.artikalUporedi = ctx.Artikli.Where(x => x.Model.Contains(searchTerm2)).FirstOrDefault();
             return View("Uporedi",ModelArtikalDetalji);
-        } 
+        }
+
+        public ActionResult Staviukorpi(int ArtikalId, int KlijentId)
+        {
+            Korpa korpa = new Korpa();
+            ctx.Korpe.Add(korpa);
+            korpa.KlijentId = KlijentId;
+            korpa.ArtikalId = ArtikalId;
+            ctx.SaveChanges();
+            return RedirectToAction("Detalji", new { artikalId = ArtikalId });
+        }
+
+        public ActionResult Detalji(int artikalId)
+        {
+            Artikal artikal = ctx.Artikli.Find(artikalId);
+            ModelArtikalDetalji.ArtikalId = artikal.Id;
+            ModelArtikalDetalji.Cijena = artikal.Cijena;
+            ModelArtikalDetalji.Ekran = artikal.Specifikacije.Ekran;
+            ModelArtikalDetalji.EksternaMemorija = artikal.Specifikacije.EksternaMemorija;
+            ModelArtikalDetalji.Garancija = artikal.Garancija;
+            ModelArtikalDetalji.JezgreProcesora = artikal.Specifikacije.JezgreProcesora;
+            ModelArtikalDetalji.Model = artikal.Model;
+            ModelArtikalDetalji.OperativniSistem = artikal.Specifikacije.OperativniSistem;
+            ModelArtikalDetalji.Povezivanje = artikal.Specifikacije.Povezivanje;
+            ModelArtikalDetalji.RAM = artikal.Specifikacije.RAM;
+            ModelArtikalDetalji.Kamera = artikal.Specifikacije.Kamera;
+            ModelArtikalDetalji.Rezolucija = artikal.Specifikacije.Rezolucija;
+            ModelArtikalDetalji.Slika = artikal.Slika;
+            ModelArtikalDetalji.VrstaEkrana = artikal.Specifikacije.VrstaEkrana;
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+            ModelArtikalDetalji.KlijentId = k.Id;
+            ModelArtikalDetalji.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
+            return View("Detalji", ModelArtikalDetalji);
+        }
 
         public JsonResult GetStudents(string term)
         {
