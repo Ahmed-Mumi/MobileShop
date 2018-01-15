@@ -325,6 +325,7 @@
     <Content Include="Areas\ModulAdministracija\Views\DetaljiNarudzbe\Prikazi.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Uporedi\Uporedi.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Narudzba\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -374,6 +375,7 @@
     <Compile Include="Areas\ModulAdministracija\ModulAdministracijaAreaRegistration.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\KorpaController.cs" />
+    <Compile Include="Areas\ModulKlijenti\Controllers\NarudzbaController.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\ProfileController.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\UporediController.cs" />
     <Compile Include="Areas\ModulKlijenti\ModulKlijentiAreaRegistration.cs" />

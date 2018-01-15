@@ -42,6 +42,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             }
             Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
             ModelHomeIndex.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
+            ModelHomeIndex.Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
             return View("Index", ModelHomeIndex);
         }
 

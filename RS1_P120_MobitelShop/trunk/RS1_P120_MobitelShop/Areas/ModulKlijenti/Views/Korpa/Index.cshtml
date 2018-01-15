@@ -32,7 +32,14 @@
 </div> 
         </form>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
+            @if (Model.Korisnik.Ime == null)
+        {   
+                <li><a href="/ModulKlijenti/Profile"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
+        }
+        else
+        {
+                <li><a href="/ModulKlijenti/Narudzba"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
+        }
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/ModulKlijenti/Profile"><span class="glyphicon glyphicon-log-in"></span> Moj profil</a></li>

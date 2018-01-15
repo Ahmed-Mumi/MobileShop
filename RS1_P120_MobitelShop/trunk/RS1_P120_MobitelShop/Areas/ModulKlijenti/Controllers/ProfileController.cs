@@ -18,16 +18,18 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
         {
             ProfilPodaciVM Model = new ProfilPodaciVM();
             Korisnik Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-            Model.Korisnik =Korisnik;
+          
+            Model.Korisnik = Korisnik;
             Model.gradoviStavke = ucitajGradove(Korisnik);
             Model.Email = Korisnik.Email;
             Model.Ime = Korisnik.Ime;
             Model.Prezime = Korisnik.Prezime;
             Model.Adresa = Korisnik.Adresa;
             Model.Telefon = Korisnik.Telefon;
-            if(Korisnik.GradId!=null && Korisnik.GradId!=0)
-                 Model.GradNaziv = Korisnik.Grad.Naziv;
-            return View("Index",Model);
+            if (Korisnik.GradId != null && Korisnik.GradId != 0)
+                Model.GradNaziv = Korisnik.Grad.Naziv;
+            return View("Index", Model);
+            
         }
 
         private List<SelectListItem> ucitajGradove(Korisnik Korisnik)
@@ -68,7 +70,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             Korisnik.Prezime = vm.Prezime;
             Korisnik.Telefon = vm.Telefon;
             Korisnik.Adresa = vm.Adresa;
-            Korisnik.GradId = vm.GradId; 
+            Korisnik.GradId = vm.GradId;
             ctx.SaveChanges();
             return RedirectToAction("Index");
         }
