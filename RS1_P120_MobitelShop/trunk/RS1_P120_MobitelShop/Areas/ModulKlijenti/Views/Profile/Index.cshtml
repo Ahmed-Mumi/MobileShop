@@ -1,0 +1,43 @@
+﻿<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@model  RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.ProfilPodaciVM
+
+@using (Html.BeginForm("Snimi", "Profile"))
+{
+    <br />
+    <br />
+    <h1>Mobitel Shop</h1> 
+    <div class="form-group">
+        <label>E-mail</label>
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" , @readonly = "true" })
+    </div> 
+    <div class="form-group">
+        <label>Ime</label>
+        @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model=>model.Ime)
+    </div>
+    <div class="form-group">
+        <label>Prezime</label>
+        @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Prezime) 
+    </div>
+    <div class="form-group">
+        <label>Grad</label>
+        @Html.DropDownListFor(model => model.GradId, Model.gradoviStavke,Model.GradNaziv, new { @class = "form-control" })
+                                                                 
+    </div>
+    <div class="form-group">
+        <label>Telefon</label>
+        @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Telefon)
+    </div>
+
+    <div class="form-group">
+        <label>Adresa</label>
+        @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Adresa)
+    </div> 
+    <br /> 
+    <input type="submit" value="Spremi" class="btn btn-info" />
+
+    <script src="~/Scripts/bootstrap.js"></script>
+}
