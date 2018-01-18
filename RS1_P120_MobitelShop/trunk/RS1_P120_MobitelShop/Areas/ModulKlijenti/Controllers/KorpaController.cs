@@ -18,7 +18,6 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
         MojContext ctx = new MojContext();
         HomeIndexVM ModelHomeIndex = new HomeIndexVM();
         ArtikliDetaljiVM ModelArtikalDetalji = new ArtikliDetaljiVM();
-        [Autorizacija(KorisnickeUloge.Klijent)]
         public ActionResult Index(int? ArtikalId, int? page, string searchTerm)
         {
             int pageSize = 8;
@@ -41,7 +40,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 ModelHomeIndex.listaArtikalaPoSearch = ctx.Artikli.Where(x => x.Model.Contains(searchTerm)).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
             }
             Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-            ModelHomeIndex.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
+            if (k != null)
+                ModelHomeIndex.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
             ModelHomeIndex.Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
             return View("Index", ModelHomeIndex);
         }

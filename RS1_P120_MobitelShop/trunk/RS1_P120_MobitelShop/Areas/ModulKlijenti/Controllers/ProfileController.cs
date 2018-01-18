@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 {
+    [Autorizacija(KorisnickeUloge.Klijent)]
     public class ProfileController : Controller
     {
         MojContext ctx = new MojContext();

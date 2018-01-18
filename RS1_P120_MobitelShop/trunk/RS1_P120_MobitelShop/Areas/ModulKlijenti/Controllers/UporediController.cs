@@ -13,8 +13,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
     public class UporediController : Controller
     {
         MojContext ctx = new MojContext();
-        ArtikliDetaljiVM ModelArtikalDetalji = new ArtikliDetaljiVM();
-
+        ArtikliDetaljiVM ModelArtikalDetalji = new ArtikliDetaljiVM(); 
         public ActionResult Index(int artikalId, string searchTerm2)
         {
             Artikal artikal = ctx.Artikli.Find(artikalId);
@@ -37,19 +36,22 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 ModelArtikalDetalji.artikalUporedi = ctx.Artikli.Where(x => x.Model.Contains(searchTerm2)).FirstOrDefault();
             return View("Uporedi",ModelArtikalDetalji);
         }
-
+        [Autorizacija(KorisnickeUloge.Klijent)]
         public ActionResult Staviukorpi(int ArtikalId, int KlijentId)
         {
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext); 
             Korpa korpa = new Korpa();
             ctx.Korpe.Add(korpa);
             korpa.KlijentId = KlijentId;
             korpa.ArtikalId = ArtikalId;
-            ctx.SaveChanges();
+            if (k != null)
+                ctx.SaveChanges();
             return RedirectToAction("Detalji", new { artikalId = ArtikalId });
         }
 
         public ActionResult Detalji(int artikalId)
         {
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext); 
             Artikal artikal = ctx.Artikli.Find(artikalId);
             ModelArtikalDetalji.ArtikalId = artikal.Id;
             ModelArtikalDetalji.Cijena = artikal.Cijena;
@@ -65,9 +67,12 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             ModelArtikalDetalji.Rezolucija = artikal.Specifikacije.Rezolucija;
             ModelArtikalDetalji.Slika = artikal.Slika;
             ModelArtikalDetalji.VrstaEkrana = artikal.Specifikacije.VrstaEkrana;
-            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-            ModelArtikalDetalji.KlijentId = k.Id;
-            ModelArtikalDetalji.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
+            if (k != null)
+            {
+                ModelArtikalDetalji.KlijentId = k.Id;
+                ModelArtikalDetalji.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
+            }
+                
             return View("Detalji", ModelArtikalDetalji);
         }
 

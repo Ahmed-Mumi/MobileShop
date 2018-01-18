@@ -55,7 +55,7 @@ namespace RS1_P120_MobitelShop.Controllers
             else if (k.Administrator == null && k.Klijent != null && k.Login.IsValid==true)
             {
                 Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
-                return Redirect("/ModulKlijenti/Korpa/Index");
+                return RedirectToAction("Index", "Home"); 
             }
 
             return RedirectToAction("Index","Home");          

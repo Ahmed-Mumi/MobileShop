@@ -1,40 +1,107 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Mobitel shop", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
+﻿        <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />*@
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    </head>
+    <body>
+        @{
+        RS1_P120_MobitelShop.Models.Korisnik korisnik = RS1_P120_MobitelShop.Helper.Autentifikacija.GetLogiraniKorisnik(Context);
+        }
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">WebSiteName</a>
+                </div>
                 <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" action="/Home" name="forma">
+                    <div class="input-group">
+
+                        @Html.TextBox("searchTerm", null, new { id = "txtSearch" })
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" onclick="submitForm()" id="Search">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div> 
+                </form>
+                <script>
+                    function submitForm() {
+                        document.forma.submit(); 
+                        document.forma.reset();
+                    }
+                </script>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (korisnik == null)
+        {
+            <li><a href="Login/Index"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+            @*<li><a href="#"><span class="glyphicon glyphicon-shopping-cart" onclick="loginShowPopUp()"></span></a></li>*@
+
+}
+else if (korisnik != null && korisnik.Ime == null)
+{
+            <li><a href="ModulKlijenti/Profile"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
+}
+else
+{
+            <li><a href="ModulKlijenti/Narudzba"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
+}
+                    @if (korisnik == null)
+        {
+            <li><a href="/Login/Index"><span class="glyphicon glyphicon-log-in"></span> Login/Sign up</a></li>
+}
+else
+{
+            <li><a href="ModulKlijenti/Profile"><span class="glyphicon glyphicon-log-in"></span> Moj profil</a></li>
+            <li><a href="/Autentifikacija/Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+}
+
                 </ul>
             </div>
+        </nav>
+
+        <div class="container body-content">
+            @RenderBody()
+            @*<div id="loginPopUp" style="display:none">
+                @Url.Action("Index", "Login")
+            </div>*@
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
         </div>
-    </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-</body>
-</html>
+        <script style="font-family:Arial" type="text/javascript">
+    $(function () {
+        $("#txtSearch").autocomplete({
+            source: '@Url.Action("GetStudents","Home")'
+        });
+            });
+        </script>
+
+        <script style="font-family:Arial" type="text/javascript">
+        
+            function loginShowPopUp() {
+                $("#loginPopUp").dialog({
+                    height: 650,
+                    width: 800,
+                    modal: true,
+                    buttons: {
+                        "Nazad": function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            }
+        </script>
+    </body>
+    </html> 
