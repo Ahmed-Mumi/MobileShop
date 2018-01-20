@@ -16,7 +16,8 @@ namespace RS1_P120_MobitelShop
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[]{typeof(RS1_P120_MobitelShop.Controllers.HomeController).Namespace }
             );
         }
     }

@@ -5866,6 +5866,13 @@ button.close {
 .modal-open {
   overflow: hidden;
 }
+/*.modal {  
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+}*/
 .modal {
   position: fixed;
   top: 0;
@@ -5901,7 +5908,7 @@ button.close {
   position: relative;
   width: auto;
   margin: 10px;
-}
+} 
 .modal-content {
   position: relative;
   background-color: #fff;

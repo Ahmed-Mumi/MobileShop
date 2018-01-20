@@ -193,7 +193,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Areas\ModulKlijenti\Views\Korpa\Index.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Home\Index.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\_ViewStart.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\AdminHome\UpravljackaPloca.cshtml" />
@@ -318,8 +318,8 @@
     <Content Include="EmailTemplate\Text.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\_ViewStart.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\ModulKlijenti\Views\Korpa\IspisPoFilteru.cshtml" />
-    <Content Include="Areas\ModulKlijenti\Views\Korpa\Specifikacije.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Home\IspisPoFilteru.cshtml" />
+    <Content Include="Areas\ModulKlijenti\Views\Home\Specifikacije.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Uporedi\Detalji.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Narudzbe\Prikazi.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\DetaljiNarudzbe\Prikazi.cshtml" />
@@ -375,7 +375,7 @@
     <Compile Include="Areas\ModulAdministracija\Models\PopustPrikaziVM.cs" />
     <Compile Include="Areas\ModulAdministracija\ModulAdministracijaAreaRegistration.cs" />
     <Compile Include="Areas\ModulAdministracija\Models\KlijentiPrikaziVM.cs" />
-    <Compile Include="Areas\ModulKlijenti\Controllers\KorpaController.cs" />
+    <Compile Include="Areas\ModulKlijenti\Controllers\HomeController.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\NarudzbaController.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\ProfileController.cs" />
     <Compile Include="Areas\ModulKlijenti\Controllers\UporediController.cs" />
@@ -435,7 +435,6 @@
     <Content Include="Views\Autentifikacija\Index.cshtml" />
     <Content Include="Views\Autentifikacija\Registration.cshtml" />
     <Content Include="Views\Autentifikacija\Confirm.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

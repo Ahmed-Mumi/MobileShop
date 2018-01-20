@@ -1,10 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@*<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />*@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
@@ -34,20 +33,20 @@
             <ul class="nav navbar-nav navbar-right">
                 @if (korisnik == null)
                 {
-                    <li><a href="/Login/Index"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                    <li><a href="/Autentifikacija/Index"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 
                 }
                 else if (korisnik != null && korisnik.Ime == null)
                 {
-                    <li><a href="ModulKlijenti/Profile"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
+                    <li><a href="/Profile"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
                 }
                 else
                 {
-                    <li><a href="ModulKlijenti/Narudzba"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
+                    <li><a href="/Narudzba"><span class="glyphicon glyphicon-shopping-cart"></span>@Model.BrojArtikalaUKorpi</a></li>
                 }
                 @if (korisnik == null)
                 {
-                    <li><a href="/Login/Index"><span class="glyphicon glyphicon-log-in"></span> Login/Sign up</a></li>
+                    <li><a href="/Autentifikacija/Index"><span class="glyphicon glyphicon-log-in"></span> Login/Sign up</a></li>
                 }
                 else
                 {
@@ -55,8 +54,7 @@
                     <li><a href="/Autentifikacija/Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                 }
             </ul>
-        </div>
-    </nav>
+        </div> 
 
     <div class="container body-content">
         @RenderBody()
@@ -77,4 +75,4 @@
     });
     </script>
 </body>
-</html> 
+</html>*@ 

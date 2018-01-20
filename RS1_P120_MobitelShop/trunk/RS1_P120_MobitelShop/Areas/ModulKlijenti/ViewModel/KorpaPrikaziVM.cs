@@ -11,9 +11,12 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public double Cijena { get; set; }
         public int KorpaId { get; set; }
         public int ArtikalId { get; set; }
+        public int? Popust { get; set; }
+        public double CijenaSaPopustom { get; set; }
     }
     public class KorpaPrikaziVM
     {
+        public int BrojArtikalaUKorpi { get; set; }
         public List<KorpaPrikaziRow> ListaKorpa { get; set; }
     }
 }

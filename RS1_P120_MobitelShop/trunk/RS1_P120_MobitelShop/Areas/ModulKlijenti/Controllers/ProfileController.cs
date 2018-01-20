@@ -29,6 +29,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             Model.Telefon = Korisnik.Telefon;
             if (Korisnik.GradId != null && Korisnik.GradId != 0)
                 Model.GradNaziv = Korisnik.Grad.Naziv;
+            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+            Model.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
             return View("Index", Model);
             
         }

@@ -29,5 +29,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         //[Required(ErrorMessage = "Unesite grad")]
         public int GradId { get; set; }
         public string GradNaziv { get; set; }
+        public int BrojArtikalaUKorpi { get; set; }
+
     }
 }

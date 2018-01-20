@@ -12,25 +12,46 @@ using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
 
 namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 {
-    public class KorpaController : Controller
+    public class HomeController : Controller
     {
         // GET: ModulKlijenti/Korpa
         MojContext ctx = new MojContext();
         HomeIndexVM ModelHomeIndex = new HomeIndexVM();
-        ArtikliDetaljiVM ModelArtikalDetalji = new ArtikliDetaljiVM();
+
         public ActionResult Index(int? ArtikalId, int? page, string searchTerm)
         {
             int pageSize = 8;
             int pageNumber = (page ?? 1);
 
-            ModelHomeIndex.listaNajnovijihArtikala = ctx.Artikli.OrderByDescending(x => x.DatumObjave).Select(p => new HomeIndexRow()
+            ModelHomeIndex.listaNajnovijihArtikala = ctx.Popusti.OrderByDescending(x => x.Artikal.DatumObjave).Select(p => new HomeIndexRow()
             {
-                Slika = p.Slika,
-                Model = p.Model,
-                Marka = p.Marka,
-                Cijena = p.Cijena,
-                ArtikalId = p.Id
-            }).Take(2).ToList();
+                Slika = p.Artikal.Slika,
+                Model = p.Artikal.Model,
+                Marka = p.Artikal.Marka,
+                Cijena = p.Artikal.Cijena,
+                ArtikalId = p.Artikal.Id,
+                Ekran = p.Artikal.Specifikacije.Ekran,
+                Kamera = p.Artikal.Specifikacije.Kamera,
+                OperativniSistem = p.Artikal.Specifikacije.OperativniSistem,
+                Popust = p.IznosPopusta,
+                VrstaEkrana = p.Artikal.Specifikacije.VrstaEkrana,
+                CijenaSaPopustom = ((100 - p.IznosPopusta) * p.Artikal.Cijena) / 100
+            }).Take(4).ToList();
+
+            //ModelHomeIndex.listaNajnovijihArtikala = ctx.Artikli.OrderByDescending(x => x.DatumObjave).Select(p => new PocetnaIndexRow()
+            //{
+            //    Slika = p.Slika,
+            //    Model = p.Model,
+            //    Marka = p.Marka,
+            //    Cijena = p.Cijena,
+            //    ArtikalId = p.Id,
+            //    Ekran = p.Specifikacije.Ekran,
+            //    Kamera = p.Specifikacije.Kamera,
+            //    OperativniSistem = p.Specifikacije.OperativniSistem,
+            //    Popust = ctx.Popusti.Where(x => x.ArtikalId == p.Id).Select(pop => pop.IznosPopusta).FirstOrDefault(),
+            //    VrstaEkrana=p.Specifikacije.VrstaEkrana,
+            //    CijenaSaPopustom=p.Cijena-(p.Cijena*(ctx.Popusti.Where(x => x.ArtikalId == p.Id).Select(pop => pop.IznosPopusta).FirstOrDefault()/100))
+            //}).Take(4).ToList();
             if (string.IsNullOrEmpty(searchTerm))
             {
                 ModelHomeIndex.listaArtikalaPoSearch = ctx.Artikli.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
@@ -48,6 +69,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 
 
 
+
         //ovo ide u poseban controller koji mora primiti ArtikalId detalja na kojem je i string za pretragu mobitela
         //vraca view koji poredi, taj view je u detaljima u divuk koji je nevidljiv, a ima id         
         //public ActionResult Uporedi(int ArtikalId, string searchTerm2)
@@ -56,7 +78,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
         //         ModelArtikalDetalji.artikalUporedi = ctx.Artikli.Where(x => x.Model.Contains(searchTerm2)).FirstOrDefault();
         //     return RedirectToAction("Detalji", new { artikalId = ArtikalId });
         // }
-       
+
         public JsonResult GetStudents(string term)
         {
             ModelHomeIndex.searchArtikliString = ctx.Artikli.Where(h => h.Model.Contains(term)).Select(y => y.Model).ToList();

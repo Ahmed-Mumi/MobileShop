@@ -13,6 +13,13 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public string Model { get; set; }
         public double Cijena { get; set; }
         public double ArtikalId { get; set; }
+        public string Ekran { get; set; }
+        public string VrstaEkrana { get; set; }
+        public string Kamera { get; set; }
+        public string OperativniSistem { get; set; }
+        public int? Popust { get; set; }
+        public double CijenaSaPopustom { get; set; }
+
     }
     public class HomeIndexVM
     {

@@ -27,6 +27,8 @@ namespace RS1_P120_MobitelShop.ViewModel
         //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         //public DateTime DatumRodjenja { get; set; }
         public List<SelectListItem> gradoviStavke { get; set; }
+        public int BrojArtikalaUKorpi { get; set; }
+
         public int GradId { get; set; }
     }
 }

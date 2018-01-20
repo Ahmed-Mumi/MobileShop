@@ -1,29 +1,31 @@
-﻿<link href="~/Content/bootstrap.css" rel="stylesheet" />
+﻿@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
 @model  RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.ProfilPodaciVM
-
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @using (Html.BeginForm("Snimi", "Profile"))
 {
     <br />
     <br />
-    <h1>Mobitel Shop</h1> 
     <div class="form-group">
         <label>E-mail</label>
-        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" , @readonly = "true" })
-    </div> 
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "true" })
+    </div>
     <div class="form-group">
         <label>Ime</label>
         @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model=>model.Ime)
+        @Html.ValidationMessageFor(model => model.Ime)
     </div>
     <div class="form-group">
         <label>Prezime</label>
         @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Prezime) 
+        @Html.ValidationMessageFor(model => model.Prezime)
     </div>
     <div class="form-group">
         <label>Grad</label>
-        @Html.DropDownListFor(model => model.GradId, Model.gradoviStavke,Model.GradNaziv, new { @class = "form-control" })
-                                                                 
+        @Html.DropDownListFor(model => model.GradId, Model.gradoviStavke, Model.GradNaziv, new { @class = "form-control" })
+
     </div>
     <div class="form-group">
         <label>Telefon</label>
@@ -35,8 +37,8 @@
         <label>Adresa</label>
         @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Adresa)
-    </div> 
-    <br /> 
+    </div>
+    <br />
     <input type="submit" value="Spremi" class="btn btn-info" />
 
     <script src="~/Scripts/bootstrap.js"></script>
