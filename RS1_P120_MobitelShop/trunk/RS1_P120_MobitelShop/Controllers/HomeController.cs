@@ -37,21 +37,6 @@ namespace RS1_P120_MobitelShop.Controllers
                 VrstaEkrana = p.Artikal.Specifikacije.VrstaEkrana,
                 CijenaSaPopustom = ((100-p.IznosPopusta)*p.Artikal.Cijena)/100
             }).Take(4).ToList();
-
-            //ModelHomeIndex.listaNajnovijihArtikala = ctx.Artikli.OrderByDescending(x => x.DatumObjave).Select(p => new PocetnaIndexRow()
-            //{
-            //    Slika = p.Slika,
-            //    Model = p.Model,
-            //    Marka = p.Marka,
-            //    Cijena = p.Cijena,
-            //    ArtikalId = p.Id,
-            //    Ekran = p.Specifikacije.Ekran,
-            //    Kamera = p.Specifikacije.Kamera,
-            //    OperativniSistem = p.Specifikacije.OperativniSistem,
-            //    Popust = ctx.Popusti.Where(x => x.ArtikalId == p.Id).Select(pop => pop.IznosPopusta).FirstOrDefault(),
-            //    VrstaEkrana=p.Specifikacije.VrstaEkrana,
-            //    CijenaSaPopustom=p.Cijena-(p.Cijena*(ctx.Popusti.Where(x => x.ArtikalId == p.Id).Select(pop => pop.IznosPopusta).FirstOrDefault()/100))
-            //}).Take(4).ToList();
             if (string.IsNullOrEmpty(searchTerm))
             {
                 ModelHomeIndex.listaArtikalaPoSearch = ctx.Artikli.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);

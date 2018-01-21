@@ -5,8 +5,11 @@ using RS1_P120_MobitelShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.Remoting.Contexts;
+using System.Text;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
@@ -15,11 +18,18 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
     public class ProfileController : Controller
     {
         MojContext ctx = new MojContext();
-        public ActionResult Index()
+
+        public ActionResult Index(int? Artikalid,int? KorpaId)
         {
             ProfilPodaciVM Model = new ProfilPodaciVM();
+            Model.kojije = false;
+            if(Artikalid!=0 && Artikalid.HasValue)
+            {
+                Model.ArtikalId = Artikalid.Value;
+                Model.KorpaId = KorpaId.Value;
+                Model.kojije = true;
+            }
             Korisnik Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-          
             Model.Korisnik = Korisnik;
             Model.gradoviStavke = ucitajGradove(Korisnik);
             Model.Email = Korisnik.Email;
@@ -28,13 +38,14 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             Model.Adresa = Korisnik.Adresa;
             Model.Telefon = Korisnik.Telefon;
             if (Korisnik.GradId != null && Korisnik.GradId != 0)
+            {
                 Model.GradNaziv = Korisnik.Grad.Naziv;
-            Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-            Model.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
+                Model.GradId = Korisnik.GradId.Value;
+            }
+            Model.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == Korisnik.Klijent.Id);
             return View("Index", Model);
-            
-        }
-
+        } 
+        
         private List<SelectListItem> ucitajGradove(Korisnik Korisnik)
         {
             var gradovi = new List<SelectListItem>();

@@ -30,6 +30,9 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public int GradId { get; set; }
         public string GradNaziv { get; set; }
         public int BrojArtikalaUKorpi { get; set; }
+        public bool kojije { get; set; }
+        public int ArtikalId { get; set; }
+        public int KorpaId { get; set; }
 
     }
 }

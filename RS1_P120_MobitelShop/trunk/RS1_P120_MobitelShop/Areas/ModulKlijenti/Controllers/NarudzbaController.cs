@@ -39,21 +39,28 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             return View("Index",Model);
         }
 
-        public ActionResult Ukloni(int id)
+        public ActionResult Snimi(ProfilPodaciVM vm)
         {
-            Korpa Korpa = ctx.Korpe.Where(x => x.Id == id).FirstOrDefault();
-            ctx.Korpe.Remove(Korpa);
+            if (!ModelState.IsValid)
+            {
+                Korisnik k = ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);
+                vm.gradoviStavke = ucitajGradove(k);
+                vm.GradNaziv = k.Grad.Naziv;
+                return View("~/Areas/ModulKlijenti/Views/Profile/Index.cshtml", vm);
+            }
+            Korisnik Korisnik = ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);
+            Korisnik.Ime = vm.Ime;
+            Korisnik.Prezime = vm.Prezime;
+            Korisnik.Telefon = vm.Telefon;
+            Korisnik.Adresa = vm.Adresa;
+            Korisnik.GradId = vm.GradId;
             ctx.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        public ActionResult Naruci(int Artikalid,int KorpaId)
-        {
-            Korpa Korpa = ctx.Korpe.Where(x => x.Id == KorpaId).FirstOrDefault();
+            Korpa Korpa = ctx.Korpe.Where(x => x.Id == vm.KorpaId).FirstOrDefault();
             int KlijentId = Korpa.KlijentId;
             ctx.Korpe.Remove(Korpa);
             DetaljiNarudzbe DetaljiNarudzbe = new DetaljiNarudzbe();
             DetaljiNarudzbe.Narudzba = new Narudzba();
-            Artikal Artikal = ctx.Artikli.Where(x => x.Id == Artikalid).FirstOrDefault();
+            Artikal Artikal = ctx.Artikli.Where(x => x.Id == vm.ArtikalId).FirstOrDefault();
             DetaljiNarudzbe.Artikal = new Artikal();
             DetaljiNarudzbe.Artikal.Id = Artikal.Id;
             DetaljiNarudzbe.Artikal.Specifikacije = new Specifikacije();
@@ -64,24 +71,85 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             DetaljiNarudzbe.Artikal.Model = Artikal.Model;
             DetaljiNarudzbe.Narudzba.Isporuka = new Isporuka();
             DetaljiNarudzbe.Narudzba.Klijent = new Klijent();
-            DetaljiNarudzbe.Narudzba.Klijent.Korisnik = new Korisnik();
-            DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login = new Login();
-            DetaljiNarudzbe.Narudzba.Klijent.Id = KlijentId;
-            Korisnik korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-            DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Id = korisnik.Id;
-            DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login.Id = korisnik.Login.Id;
+            DetaljiNarudzbe.Narudzba.Klijent = ctx.Klijenti.Where(x => x.Id == KlijentId).FirstOrDefault();
+            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik = new Korisnik();
+            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login = new Login();
+            //DetaljiNarudzbe.Narudzba.Klijent.Id = KlijentId; 
+            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Id = Korisnik.Id;
+            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login.Id = Korisnik.Login.Id;
             ctx.DetaljiNarudzbi.Add(DetaljiNarudzbe);
             ctx.SaveChanges();
-            BuildEmailTemplate(korisnik.Id,DetaljiNarudzbe.NarudzbaId); 
+            BuildEmailTemplate(Korisnik.Id, DetaljiNarudzbe.NarudzbaId);
             return RedirectToAction("Index");
         }
 
-        public void BuildEmailTemplate(int korisnikId,int narudzbaId)
+        private List<SelectListItem> ucitajGradove(Korisnik Korisnik)
+        {
+            var gradovi = new List<SelectListItem>();
+            if (Korisnik.GradId == 0 || Korisnik.GradId == null)
+            {
+                gradovi.Add(new SelectListItem { Value = null, Text = "Izaberite grad" });
+                gradovi.AddRange(ctx.Gradovi.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Naziv
+                }));
+            }
+            else
+            {
+                gradovi.AddRange(ctx.Gradovi.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Naziv,
+                    Selected = x.Id == Korisnik.GradId ? true : false
+                }));
+            }
+            return gradovi;
+        }
+
+        public ActionResult Ukloni(int id)
+        {
+            Korpa Korpa = ctx.Korpe.Where(x => x.Id == id).FirstOrDefault();
+            ctx.Korpe.Remove(Korpa);
+            ctx.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        //public ActionResult Naruci(int Artikalid, int KorpaId)
+        //{
+        //    Korpa Korpa = ctx.Korpe.Where(x => x.Id == KorpaId).FirstOrDefault();
+        //    int KlijentId = Korpa.KlijentId;
+        //    ctx.Korpe.Remove(Korpa);
+        //    DetaljiNarudzbe DetaljiNarudzbe = new DetaljiNarudzbe();
+        //    DetaljiNarudzbe.Narudzba = new Narudzba();
+        //    Artikal Artikal = ctx.Artikli.Where(x => x.Id == Artikalid).FirstOrDefault();
+        //    DetaljiNarudzbe.Artikal = new Artikal();
+        //    DetaljiNarudzbe.Artikal.Id = Artikal.Id;
+        //    DetaljiNarudzbe.Artikal.Specifikacije = new Specifikacije();
+        //    DetaljiNarudzbe.Artikal.Specifikacije.Id = Artikal.Specifikacije.Id;
+        //    DetaljiNarudzbe.Artikal.DatumObjave = Artikal.DatumObjave;
+        //    DetaljiNarudzbe.Narudzba.DatumNarudzbe = DateTime.Now;
+        //    DetaljiNarudzbe.Artikal.Cijena = Artikal.Cijena;
+        //    DetaljiNarudzbe.Artikal.Model = Artikal.Model;
+        //    DetaljiNarudzbe.Narudzba.Isporuka = new Isporuka();
+        //    DetaljiNarudzbe.Narudzba.Klijent = new Klijent();
+        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik = new Korisnik();
+        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login = new Login();
+        //    DetaljiNarudzbe.Narudzba.Klijent.Id = KlijentId;
+        //    Korisnik korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Id = korisnik.Id;
+        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login.Id = korisnik.Login.Id;
+        //    ctx.DetaljiNarudzbi.Add(DetaljiNarudzbe);
+        //    ctx.SaveChanges();
+        //    BuildEmailTemplate(korisnik.Id, DetaljiNarudzbe.NarudzbaId);
+        //    return RedirectToAction("Index");
+        //}
+
+        public void BuildEmailTemplate(int korisnikId, int narudzbaId)
         {
             string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/Areas/ModulKlijenti/Views/Narudzba/") + "Text2" + ".cshtml");
-            var regInfo = ctx.Korisnici.Where(x => x.Id == korisnikId).FirstOrDefault();  
+            var regInfo = ctx.Korisnici.Where(x => x.Id == korisnikId).FirstOrDefault();
             body = body.ToString();
-            body = body.Replace("@ViewBag.KorisnickoIme", regInfo.Ime+" "+regInfo.Prezime);
+            body = body.Replace("@ViewBag.KorisnickoIme", regInfo.Ime + " " + regInfo.Prezime);
             body = body.Replace("@ViewBag.KorisnickoAdresa", regInfo.Adresa);
             body = body.Replace("@ViewBag.KorisnickiGrad", regInfo.Grad.Naziv);
             var narudzba = ctx.DetaljiNarudzbi.Where(x => x.NarudzbaId == narudzbaId).FirstOrDefault();
