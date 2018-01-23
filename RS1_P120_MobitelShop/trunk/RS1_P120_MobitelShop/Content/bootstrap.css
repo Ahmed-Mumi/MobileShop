@@ -12,6 +12,36 @@ html {
 body {
   margin: 0;
 }
+.bodyreport {
+    margin: 0;
+    padding: 0;
+}
+
+.headerreport {
+    width: 100%;
+    height: 65px;
+    position: fixed;
+    z-index: 100;
+    background-color: #DCDCDC;
+    border: 2px solid black
+}
+
+.headerfooter {
+    width: 100%;
+    height: 65px;
+    position: fixed;
+    bottom: 0;
+    background-color: #DCDCDC;
+    border: 2px solid black
+}
+
+.headercontent {
+    background-color: #DCDCDC;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 2px solid black
+}
 article,
 aside,
 details,

@@ -14,10 +14,12 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
     {
         MojContext ctx = new MojContext();
         ArtikliDetaljiVM ModelArtikalDetalji = new ArtikliDetaljiVM(); 
-        public ActionResult Index(int artikalId, string searchTerm2)
+        public ActionResult Index(int artikalId,int? klijentId, string searchTerm2)
         {
             Artikal artikal = ctx.Artikli.Find(artikalId);
             ModelArtikalDetalji.ArtikalId = artikal.Id;
+            if(klijentId!=null)
+                ModelArtikalDetalji.KlijentId = klijentId.Value; 
             ModelArtikalDetalji.Cijena = artikal.Cijena;
             ModelArtikalDetalji.Ekran = artikal.Specifikacije.Ekran;
             ModelArtikalDetalji.EksternaMemorija = artikal.Specifikacije.EksternaMemorija;
@@ -36,13 +38,13 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 ModelArtikalDetalji.artikalUporedi = ctx.Artikli.Where(x => x.Model.Contains(searchTerm2)).FirstOrDefault();
             return View("Uporedi",ModelArtikalDetalji);
         }
-        [Autorizacija(KorisnickeUloge.Klijent)]
+        [Autorizacija(KorisnickeUloge.Klijent)] 
         public ActionResult Staviukorpi(int ArtikalId, int KlijentId)
         {
             Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext); 
             Korpa korpa = new Korpa();
             ctx.Korpe.Add(korpa);
-            korpa.KlijentId = KlijentId;
+            korpa.KlijentId = k.Klijent.Id;
             korpa.ArtikalId = ArtikalId;
             if (k != null)
                 ctx.SaveChanges();

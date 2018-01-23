@@ -17,19 +17,26 @@ using Newtonsoft.Json;
 namespace RS1_P120_MobitelShop.Controllers
 {
     public class AutentifikacijaController : Controller
-    {
-        // GET: Autentifikacija
+    { 
         MojContext ctx = new MojContext();
-        public ActionResult Index()
+        bool Poruka = false;
+
+        public ActionResult Index(string poruka)
         {
+            if (Poruka)
+            {
+                ViewData["Confirm"] = "Confirm";
+                Poruka = false;
+            }
+
             return View();
         }
-        public ActionResult Provjera(string username,string password,string zapamti)
+        public ActionResult Provjera(string email, string password,string zapamti)
         {
             Korisnik korisnik = ctx.Korisnici
                 .Include(x => x.Administrator)
                 .Include(x => x.Klijent)
-                .SingleOrDefault(x => x.Login.Username == username && x.Login.Password == password);
+                .SingleOrDefault(x => x.Email == email && x.Login.Password == password);
 
                 if(korisnik == null)
                 {
@@ -44,26 +51,27 @@ namespace RS1_P120_MobitelShop.Controllers
             {
                 Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
                 return Redirect("/ModulAdministracija/AdminHome");
-            }
-
-            //else if (k.Administrator == null && k.Klijent == null)
-            //{
-            //    Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
-            //    return Redirect("/PrikazPonude");
-            //}
-
-            else if (k.Administrator == null && k.Klijent != null && k.Login.IsValid==true)
+            } 
+            else if (k.Administrator == null && k.Klijent != null)
             {
-                Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
-                return RedirectToAction("Index", "Home"); 
-            }
+                Logout(); 
+                if (k.Login.IsValid == true)
+                {
+                    Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("Index"); 
+                } 
+            } 
+            return RedirectToAction("Index", "Home");
+        } 
 
-            return RedirectToAction("Index","Home");          
-        }
         public ActionResult Logout()
         {
             Autentifikacija.PokreniNovuSesiju(null, HttpContext, true);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
 
         public ActionResult Dodaj()
@@ -94,32 +102,41 @@ namespace RS1_P120_MobitelShop.Controllers
             var client = new WebClient();
             var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
             var obj = JObject.Parse(result);
-            var status = (bool)obj.SelectToken("success");
-            ViewBag.Message = status ? "Google recaptcha validation success" : "Google recaptcha validation failed";
+            var status = (bool)obj.SelectToken("success"); 
 
             if (!ModelState.IsValid || !status)
             {
                 return View("Registration", vm);
             }
-            Klijent klijent = new Klijent();
-            klijent.Korisnik = new Korisnik();
-            klijent.Korisnik.Login = new Login();
-            ctx.Klijenti.Add(klijent);
 
-            //klijent.Korisnik.Ime = vm.Ime;
-            klijent.Korisnik.Login.Username = vm.Username;
-            klijent.Korisnik.Login.Password = vm.Password;
-            //ovaj dio dodajem
-            klijent.Korisnik.Login.IsValid = false;
-            //klijent.Korisnik.Prezime = vm.Prezime;
-            //klijent.Korisnik.Telefon = vm.Telefon;
-            //klijent.Korisnik.Adresa = vm.Adresa;
-            //klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
-            klijent.Korisnik.Email = vm.Email;
-            //klijent.Korisnik.GradId = vm.GradId;
-            ctx.SaveChanges();
-            //ovaj dio dodajem
-            BuildEmailTemplate(klijent.Korisnik.LoginId);
+            Korisnik korisnik = ctx.Korisnici.Where(x => x.Email == vm.Email).FirstOrDefault();
+            if (korisnik == null) {
+                Klijent klijent = new Klijent();
+                klijent.Korisnik = new Korisnik();
+                klijent.Korisnik.Login = new Login();
+                ctx.Klijenti.Add(klijent);  
+                //klijent.Korisnik.Ime = vm.Ime;
+                klijent.Korisnik.Login.Username = vm.Username;
+                klijent.Korisnik.Login.Password = vm.Password;
+                //ovaj dio dodajem
+                klijent.Korisnik.Login.IsValid = false;
+                //klijent.Korisnik.Prezime = vm.Prezime;
+                //klijent.Korisnik.Telefon = vm.Telefon;
+                //klijent.Korisnik.Adresa = vm.Adresa;
+                //klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
+                klijent.Korisnik.Email = vm.Email;
+                //klijent.Korisnik.GradId = vm.GradId;
+                ctx.SaveChanges();
+                //ovaj dio dodajem
+                BuildEmailTemplate(klijent.Korisnik.LoginId);
+                Poruka = true;
+            }
+            else
+            {
+                ViewData["Message"] = "Success";
+                return View("Registration", vm);
+            }
+
             return Redirect("/Autentifikacija");
         }
 

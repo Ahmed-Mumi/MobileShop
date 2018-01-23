@@ -58,6 +58,14 @@
                     <td>RAM</td>
                     <td>@Model.RAM</td>
                 </tr>
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
+    {
+                    <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -128,6 +136,14 @@
                     <tr>
                         <td>RAM</td>
                         <td>@Model.artikalUporedi.Specifikacije.RAM</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.artikalUporedi.Id, KlijentId = Model.KlijentId }))
+            {
+                <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+}
+                        </td>
                     </tr>
                 </tbody>
             </table>

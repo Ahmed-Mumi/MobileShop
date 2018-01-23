@@ -1,13 +1,76 @@
-﻿<div>
-    Podaci o naruciocu:<br />
-    <span style="display:inline-block; width:100px;">
-        @ViewBag.KorisnickoIme
-        @ViewBag.KorisnickoAdresa
-        @ViewBag.KorisnickiGrad
-    </span>
-    Podaci o narudzbi:<br />
-    <span style="display:inline-block; width:100px;">
-        @ViewBag.NarudzbaModel
-        @ViewBag.NarudzbaCijena 
-    </span>
-</div>
+﻿<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    body {
+        font-family: Raleway,Arial;
+    }
+
+    .a1 {
+        height: 120px;
+    }
+
+    .a11 {
+        height: 100px;
+        margin-left: 50%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td, th {
+        text-align: left;
+    }
+</style>
+<div class="container" style="border:1px solid black">
+    <table>
+        <tr style="border:1px solid black">
+            <b>
+                <font size="5px">Podaci o naručiocu</font>
+            </b>
+            <br>
+            <br />
+            <br />
+        </tr>
+        <tr style="border:1px solid black">
+            <p style="text-align:right;">
+                Ime naručioca : <b>@ViewBag.KorisnickoIme</b>  <br>
+                Adresa naručioca: <b>@ViewBag.KorisnickoAdresa</b><br>
+                Grad naručioca: <b>@ViewBag.KorisnickiGrad</b><br>
+            </p>
+            <br>
+            <br />
+        </tr>
+        <hr />
+        <tr style="border:1px solid black">
+            <b>
+                <font size="5px">Podaci o narudžbi</font>
+            </b>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Model mobitela</th>
+                        <th scope="col">Cijena mobitela</th>
+                        <th scope="col">Popust</th>
+                        <th scope="col">Cijena mobitela sa popustom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@ViewBag.NarudzbaModel</td>
+                        <td>@ViewBag.NarudzbaCijena KM</td>
+                        <td>@ViewBag.NarudzbaPopust %</td>
+                        <td>@ViewBag.SaPopustom KM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tr>
+    </table>
+</div> 

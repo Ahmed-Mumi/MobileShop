@@ -38,7 +38,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 
             return View("Index",Model);
         }
-
+        [Autorizacija(KorisnickeUloge.Klijent)] 
         public ActionResult Snimi(ProfilPodaciVM vm)
         {
             if (!ModelState.IsValid)
@@ -60,23 +60,10 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             ctx.Korpe.Remove(Korpa);
             DetaljiNarudzbe DetaljiNarudzbe = new DetaljiNarudzbe();
             DetaljiNarudzbe.Narudzba = new Narudzba();
-            Artikal Artikal = ctx.Artikli.Where(x => x.Id == vm.ArtikalId).FirstOrDefault();
-            DetaljiNarudzbe.Artikal = new Artikal();
-            DetaljiNarudzbe.Artikal.Id = Artikal.Id;
-            DetaljiNarudzbe.Artikal.Specifikacije = new Specifikacije();
-            DetaljiNarudzbe.Artikal.Specifikacije.Id = Artikal.Specifikacije.Id;
-            DetaljiNarudzbe.Artikal.DatumObjave = Artikal.DatumObjave;
-            DetaljiNarudzbe.Narudzba.DatumNarudzbe = DateTime.Now;
-            DetaljiNarudzbe.Artikal.Cijena = Artikal.Cijena;
-            DetaljiNarudzbe.Artikal.Model = Artikal.Model;
-            DetaljiNarudzbe.Narudzba.Isporuka = new Isporuka();
-            DetaljiNarudzbe.Narudzba.Klijent = new Klijent();
+            DetaljiNarudzbe.Artikal = ctx.Artikli.Where(x => x.Id == vm.ArtikalId).FirstOrDefault();  
+            DetaljiNarudzbe.Narudzba.DatumNarudzbe = DateTime.Now; 
+            DetaljiNarudzbe.Narudzba.Isporuka = new Isporuka(); 
             DetaljiNarudzbe.Narudzba.Klijent = ctx.Klijenti.Where(x => x.Id == KlijentId).FirstOrDefault();
-            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik = new Korisnik();
-            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login = new Login();
-            //DetaljiNarudzbe.Narudzba.Klijent.Id = KlijentId; 
-            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Id = Korisnik.Id;
-            //DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login.Id = Korisnik.Login.Id;
             ctx.DetaljiNarudzbi.Add(DetaljiNarudzbe);
             ctx.SaveChanges();
             BuildEmailTemplate(Korisnik.Id, DetaljiNarudzbe.NarudzbaId);
@@ -106,7 +93,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             }
             return gradovi;
         }
-
+        [Autorizacija(KorisnickeUloge.Klijent)] 
         public ActionResult Ukloni(int id)
         {
             Korpa Korpa = ctx.Korpe.Where(x => x.Id == id).FirstOrDefault();
@@ -155,6 +142,18 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             var narudzba = ctx.DetaljiNarudzbi.Where(x => x.NarudzbaId == narudzbaId).FirstOrDefault();
             body = body.Replace("@ViewBag.NarudzbaModel", narudzba.Artikal.Marka + " " + narudzba.Artikal.Model);
             body = body.Replace("@ViewBag.NarudzbaCijena", narudzba.Artikal.Cijena.ToString());
+            var popust = ctx.Popusti.Where(x => x.ArtikalId == narudzba.ArtikalId).FirstOrDefault();
+            if (popust != null)
+            {
+                body = body.Replace("@ViewBag.NarudzbaPopust", popust.IznosPopusta.ToString());
+                double cijenasapopustom = ((100 - popust.IznosPopusta) * narudzba.Artikal.Cijena) / 100;
+                body = body.Replace("@ViewBag.SaPopustom", cijenasapopustom.ToString());
+            }
+            else
+            {
+                body = body.Replace("@ViewBag.NarudzbaPopust", "---"); 
+                body = body.Replace("@ViewBag.SaPopustom", narudzba.Artikal.Cijena.ToString());
+            }
             BuildEmailTemplate("Your order has been successfully processed", body, regInfo.Email);
         }
 

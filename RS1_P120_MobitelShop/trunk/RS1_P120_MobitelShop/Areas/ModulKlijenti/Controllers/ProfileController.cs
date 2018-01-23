@@ -69,7 +69,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             }
             return gradovi;
         }
-
+        [Autorizacija(KorisnickeUloge.Klijent)] 
         public ActionResult Snimi(ProfilPodaciVM vm)
         {  
             if (!ModelState.IsValid)
