@@ -1,0 +1,33 @@
+﻿@using RS1_P120_MobitelShop.Models
+@model RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.SpecifikacijeList
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IspisPoFilteru</title>
+</head>
+<body>
+    <div>
+        @foreach (Artikal x in Model.listaArtikala)
+    {
+        <span>@x.Model</span>
+        <span>@x.Specifikacije.RAM</span>
+        <span>@x.Specifikacije.EksternaMemorija</span>
+        <span>@x.Specifikacije.Ekran</span>
+        <span>@x.Specifikacije.OperativniSistem</span>
+        <br />
+}
+
+        @ViewData["isEkranChecked"]
+        @ViewData["isEksternaMemorijaChecked"]
+        @ViewData["isRamChecked"]
+        @ViewData["isOperativniSistemChecked"]
+        @ViewData["templist"]
+    </div>
+</body>
+</html>

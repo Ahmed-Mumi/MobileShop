@@ -318,8 +318,8 @@
     <Content Include="EmailTemplate\Text.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\_ViewStart.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\ModulKlijenti\Views\Home\IspisPoFilteru.cshtml" />
-    <Content Include="Areas\ModulKlijenti\Views\Home\Specifikacije.cshtml" />
+    <Content Include="Views\Home\IspisPoFilteru.cshtml" />
+    <Content Include="Views\Home\Specifikacije.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Uporedi\Detalji.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Narudzbe\Prikazi.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\DetaljiNarudzbe\Prikazi.cshtml" />
@@ -384,7 +384,7 @@
     <Compile Include="Areas\ModulKlijenti\ViewModel\HomeIndexVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\KorpaPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\ProfilPodaciVM.cs" />
-    <Compile Include="Areas\ModulKlijenti\ViewModel\SpecifikacijeVM.cs" />
+    <Compile Include="ViewModel\SpecifikacijeVM.cs" />
     <Compile Include="Controllers\AutentifikacijaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

@@ -8,9 +8,6 @@
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/cupertino/jquery-ui.css" type="text/css" rel="Stylesheet" />
     *@
 
-
-
-
     @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>*@
 
@@ -18,9 +15,6 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
@@ -43,8 +37,11 @@
                 <a class="navbar-brand" href="#">Mobitel shop</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-            </ul>
+                <li class="active">
+                    <a href="~/Home/Index">
+                        <i class="glyphicon glyphicon-home"></i> Home
+                    </a>
+</ul>
             <form class="navbar-form navbar-left" action="/Home/Index">
                 <div class="input-group">
 
@@ -63,7 +60,7 @@
                     <div class="bs-example">
                         <!-- Button HTML (to Trigger Modal) -->
 
-                        <a href="#myModal" class="btn btn-light" data-toggle="modal" style="margin-left:230px">Login/Sign up</a>
+                        <a href="#myModal" class="btn btn-light" data-toggle="modal" style="margin-left:230px"><i class="glyphicon glyphicon-log-in"></i>   Login/Sign up</a>
 
                         <!-- Modal HTML -->
                         <div id="myModal" class="modal fade">
@@ -87,19 +84,14 @@
                                             <div style="margin-bottom: 25px" class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="korisničko mail" style="width:100%" required autofocus />
-                                                @*<input type="text" class="form-control" name="username" id="username" placeholder="korisničko ime" style="width:100%" required autofocus />*@
-
+                                                <input type="text" class="form-control" name="email" id="email" placeholder="korisničko mail" style="width:100%" required autofocus />                                            
                                             </div>
 
                                             <div style="margin-bottom: 25px" class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 
                                                 <input type="password" class="form-control" id="password" name="password" placeholder="lozinka" style="width:100%" required />
-
-                                            </div>
-
-
+                                            </div> 
                                             <div class="input-group">
                                                 <div class="checkbox">
                                                     <label>
@@ -151,18 +143,20 @@
                     @if (korisnik == null)
                     {
                         @*<li><a href="/Autentifikacija/Index"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>*@
-                        <li>
-                            @*<a href="#" data-toggle="modal" data-target="#popup">Radil</a>*@
-                            @*<div class="modal fade" id="popup">
-                                  <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div id="zaAjaxRegistraciju">
-                                             @Html.Action("Index", "Autentifikacija");
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
-                        </li>
+                    <li>
+                        @*<a href="#" data-toggle="modal" data-target="#popup">Radil</a>*@
+                        @*<div class="modal fade" id="popup">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div id="zaAjaxRegistraciju">
+                             @Html.Action("Index", "Autentifikacija");
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                        <a href="@Url.Action("IspisiSpecifikacije", "Home")">Provjeri specifikacije 
+                        </a>
+                    </li>
 
                     }
 
