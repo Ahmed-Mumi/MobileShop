@@ -14,13 +14,14 @@ using System.Web.Hosting;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 namespace RS1_P120_MobitelShop.Controllers
 {
     public class AutentifikacijaController : Controller
     { 
         MojContext ctx = new MojContext();
         bool Poruka = false;
-
+        [HttpGet]
         public ActionResult Index(string poruka)
         {
             if (Poruka)
@@ -31,6 +32,7 @@ namespace RS1_P120_MobitelShop.Controllers
 
             return View();
         }
+       
         public ActionResult Provjera(string email, string password,string zapamti)
         {
             Korisnik korisnik = ctx.Korisnici
@@ -59,13 +61,19 @@ namespace RS1_P120_MobitelShop.Controllers
                 {
                     Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
                     return RedirectToAction("Index", "Home");
+                  
+
                 }
-                else
+                else if(!k.Login.IsValid)
                 {
-                    return RedirectToAction("Index"); 
+                    return View();
+           
                 } 
-            } 
+            }
             return RedirectToAction("Index", "Home");
+       
+
+           
         } 
 
         public ActionResult Logout()
