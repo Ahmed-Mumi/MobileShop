@@ -10,8 +10,6 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
 
     public class SpecifikacijeVM
     {
-        public bool ISCHECKEDUAAAAAAAAAAAAAAAAAAAAA { get; set; }
-
         public int RamId { get; set; }
         public string RamNaziv { get; set; }
         public bool isRamChecked { get; set; }

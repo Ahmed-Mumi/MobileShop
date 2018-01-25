@@ -19,11 +19,32 @@ namespace RS1_P120_MobitelShop.ViewModel
         public string OperativniSistem { get; set; } 
         public int? Popust { get; set; }
         public double CijenaSaPopustom { get; set; }
+
+    }
+    public class SpecVM
+    {
+        public int RamId { get; set; }
+        public string RamNaziv { get; set; }
+        public bool isRamChecked { get; set; }
+        public bool isRam { get; set; }
+        public int EksternaMemorijaId { get; set; }
+        public string EksternaMemorijaNaziv { get; set; }
+        public bool isEksternaMemorijaChecked { get; set; }
+        public bool isEksternaMemorija { get; set; }
+        public int OperativniSistemId { get; set; }
+        public string OperativniSistemNaziv { get; set; }
+        public bool isOperativniSistemChecked { get; set; }
+        public bool isOperativniSistem { get; set; }
+        public int EkranId { get; set; }
+        public string EkranNaziv { get; set; }
+        public bool isEkranChecked { get; set; }
+        public bool isEkran { get; set; }
     }
     public class PocetnaIndexVM
     {
         public List<PocetnaIndexRow> listaNajnovijihArtikala { get; set; }
         public IPagedList<Artikal> listaArtikala { get; set; }
+        public List<SpecVM> specifikacijeList { get; set; }
         public List<string> searchArtikliString { get; set; }
         public IPagedList<Artikal> listaArtikalaPoSearch { get; set; }
         public int BrojArtikalaUKorpi { get; set; }
