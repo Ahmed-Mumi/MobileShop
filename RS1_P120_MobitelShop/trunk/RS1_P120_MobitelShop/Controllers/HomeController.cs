@@ -19,7 +19,7 @@ namespace RS1_P120_MobitelShop.Controllers
         MojContext ctx = new MojContext();
         PocetnaIndexVM ModelHomeIndex = new PocetnaIndexVM();
         ArtikliSpecifikacijeVM ModelArtikalDetalji = new ArtikliSpecifikacijeVM();
-        public ActionResult Index(int? ArtikalId, int? page, string searchTerm)
+        public ActionResult Index(int? ArtikalId, int? page, string searchTerm, PocetnaIndexVM spec)
         {
             int pageSize = 8;
             int pageNumber = (page ?? 1);
@@ -38,7 +38,12 @@ namespace RS1_P120_MobitelShop.Controllers
                 VrstaEkrana = p.Artikal.Specifikacije.VrstaEkrana,
                 CijenaSaPopustom = ((100-p.IznosPopusta)*p.Artikal.Cijena)/100
             }).Take(4).ToList();
-            if (string.IsNullOrEmpty(searchTerm))
+            if (spec.specifikacijeList != null)
+            {
+                List<Artikal> temp = RezultatiFiltera(spec);
+                ModelHomeIndex.listaArtikalaPoSearch = temp.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+            }
+            else if (string.IsNullOrEmpty(searchTerm))
             {
                 ModelHomeIndex.listaArtikalaPoSearch = ctx.Artikli.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
             }
@@ -50,6 +55,7 @@ namespace RS1_P120_MobitelShop.Controllers
             if(k!=null)
                 ModelHomeIndex.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
             ModelHomeIndex.Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+            ModelHomeIndex.specifikacijeList = IspisiSpecifikacije();
             return View("Index", ModelHomeIndex);
         }
 
@@ -58,7 +64,7 @@ namespace RS1_P120_MobitelShop.Controllers
             ModelHomeIndex.searchArtikliString = ctx.Artikli.Where(h => h.Model.Contains(term)).Select(y => y.Model).ToList();
             return Json(ModelHomeIndex.searchArtikliString, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult IspisiSpecifikacije()
+        public List<SpecVM> IspisiSpecifikacije()
         {
             List<SpecVM> specifikacijeList = new List<SpecVM>();
             foreach (var x in ctx.Artikli)
@@ -94,55 +100,108 @@ namespace RS1_P120_MobitelShop.Controllers
                         specifikacijeList.Add(new SpecVM { EkranId = x.Id, EkranNaziv = x.Specifikacije.Ekran, isEkranChecked = false, isEkran = true });
                 }
             }
-            PocetnaIndexVM listaspec = new PocetnaIndexVM();
-            listaspec.specifikacijeList = specifikacijeList;
-            return View("Specifikacije", listaspec);
+            return specifikacijeList;
         }
         [HttpPost]
-        public ActionResult IspisiSpecifikacije(PocetnaIndexVM spec, int? page)
+        public List<Artikal> RezultatiFiltera(PocetnaIndexVM spec)
         {
             List<Artikal> tempList = new List<Artikal>();
-            tempList = null;
-
-            int pageSize = 8;
-            int pageNumber = (page ?? 1);
-
+            List<Artikal> tempList2 = new List<Artikal>();
+            List<Artikal> tempList3 = new List<Artikal>();
+            tempList3 = ctx.Artikli.ToList();
+            tempList = ctx.Artikli.ToList();
+            string ram = null, memorija = null, ekran = null, os = null;
             foreach (var x in spec.specifikacijeList.ToList())
             {
+                //Temp2 - ukoliko postoje dva izbora iz iste podkategorije Iphone, Samsung
+                //Temp3 - tempList2 se mora ponovo incijalizovati prilikom svake petlje, a to znaci i pristup bazi u svakom krugu petlje, uz temp3
+                //        pristupa bazi samo jednom i dodjeljuju temp2 kad je to potrebno
+                tempList2 = tempList3;
                 if (x.isRamChecked)
                 {
-                    if (tempList == null) 
-                        tempList = ctx.Artikli.Where(p => p.Specifikacije.RAM == x.RamNaziv).ToList();   
+                    if (ram == null)
+                    {
+                        tempList = tempList.Where(p => p.Specifikacije.RAM == x.RamNaziv).ToList();
+                        ram = "ram";
+                    }
                     else
-                        tempList = tempList.Where(p => p.Specifikacije.RAM == x.RamNaziv).ToList();  
+                    {
+                        tempList2 = tempList2.Where(p => p.Specifikacije.RAM == x.RamNaziv).ToList();
+                        tempList2.AddRange(tempList);
+                        tempList = VisestrukaPodKategorija(tempList2, spec, ram);
+                    }
                 }
                 else if (x.isEksternaMemorijaChecked)
                 {
-                    if (tempList == null) 
-                        tempList = ctx.Artikli.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();  
-                    else 
-                        tempList = tempList.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();  
+                    if (memorija==null)
+                    {
+                        tempList = tempList.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
+                        memorija = "eksternamemorija";
+                    }
+                    else
+                    {
+                        tempList2 = tempList2.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
+                        tempList2.AddRange(tempList);
+                        tempList = VisestrukaPodKategorija(tempList2, spec, memorija); 
+                    }
                 }
                 else if (x.isEkranChecked)
                 {
-                    if (tempList == null) 
-                        tempList = ctx.Artikli.Where(p => p.Specifikacije.Ekran == x.EkranNaziv).ToList();   
-                    else 
-                        tempList = tempList.Where(p => p.Specifikacije.Ekran == x.EkranNaziv).ToList();  
+                    if (ekran == null)
+                    {
+                        tempList = tempList.Where(p => p.Specifikacije.Ekran == x.EkranNaziv).ToList();
+                        ekran = "ekran";
+                    }
+                    else
+                    {
+                        tempList2 = tempList2.Where(p => p.Specifikacije.Ekran == x.EkranNaziv).ToList();
+                        tempList2.AddRange(tempList);
+                        tempList=VisestrukaPodKategorija(tempList2, spec, ekran);
+                    }
                 }
                 else if (x.isOperativniSistemChecked)
                 {
-                    if (tempList == null) 
-                        tempList = ctx.Artikli.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();   
-                    else 
-                        tempList = tempList.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();  
+                    if (os == null)
+                    {
+                        tempList = tempList.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();
+                        os = "operativnisistem";
+                    }
+                    else
+                    {
+                        tempList2 = tempList2.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();
+                        tempList2.AddRange(tempList);
+                        tempList = VisestrukaPodKategorija(tempList2, spec, os);
+                    }
                 } 
             }
-            if (tempList == null)
-                ModelHomeIndex.listaArtikalaPoSearch = ctx.Artikli.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
-            else
-                 ModelHomeIndex.listaArtikalaPoSearch= tempList.OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
-            return View("IspisPoFilteru", ModelHomeIndex);
+            return tempList;
+        }
+
+        public List<Artikal> VisestrukaPodKategorija(List<Artikal> tempList2, PocetnaIndexVM spec, string specifikacija)
+        {
+            foreach(var x in spec.specifikacijeList.ToList())
+            {
+                if (x.isRamChecked)
+                {
+                    if (specifikacija != "ram")
+                        tempList2 = tempList2.Where(p => p.Specifikacije.RAM == x.RamNaziv).ToList();
+                }
+                else if(x.isEksternaMemorijaChecked){
+                    if (specifikacija != "eksternamemorija")
+                        tempList2 = tempList2.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
+                }
+                else if (x.isEkranChecked)
+                {
+                    if (specifikacija != "ekran")
+                        tempList2 = tempList2.Where(p => p.Specifikacije.Ekran == x.EkranNaziv).ToList();
+                }
+                else if (x.isOperativniSistemChecked)
+                {
+                    if (specifikacija != "operativnisistem")
+                        tempList2 = tempList2.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();
+                }
+            }
+            return tempList2;
         }
     }
 

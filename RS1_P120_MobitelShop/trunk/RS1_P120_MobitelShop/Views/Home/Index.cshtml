@@ -4,19 +4,15 @@
 @{
 
     //Layout = null;
-}
-
+} 
 <!DOCTYPE html>
-<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-@*ti ne ides nigdje*@ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-@*bez ovog ne ide courasel*@@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="@Url.Content("~/Content/Scripts/jquery-1.8.3.min.js")"
         type="text/javascript"></script>
 <script src="@Url.Content("~/Content/Scripts/bootstrap.min.js")"
-        type="text/javascript"></script>
-
+        type="text/javascript"></script> 
 @{
     RS1_P120_MobitelShop.Models.Korisnik korisnik = RS1_P120_MobitelShop.Helper.Autentifikacija.GetLogiraniKorisnik(Context);
 }
@@ -38,17 +34,11 @@
 
                 <input type="text" class="form-control" name="email" id="email" placeholder="korisničko mail" style="width:100%" required autofocus />
                 @*<input type="text" class="form-control" name="username" id="username" placeholder="korisničko ime" style="width:100%" required autofocus />*@
-
-            </div>
-
+            </div> 
             <div style="margin-bottom: 25px" class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-
-                <input type="password" class="form-control" id="password" name="password" placeholder="lozinka" style="width:100%" required />
-
-            </div>
-
-
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
+                <input type="password" class="form-control" id="password" name="password" placeholder="lozinka" style="width:100%" required /> 
+            </div> 
             <div class="input-group">
                 <div class="checkbox">
                     <label>
@@ -66,10 +56,8 @@
                 </div>
             </div>
             <br />
-        }
-
-    </div>
-
+        } 
+    </div> 
     <br />
     <div class="form-group">
         <div class="col-md-12 control">
@@ -79,8 +67,7 @@
             </div>
         </div>
     </div>
-</div>
-
+</div> 
 <div class="modal fade" id="article-editor">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
@@ -93,12 +80,10 @@
         <a href="#" class="btn" data-dismiss="modal">Close</a>
         <a href="#" class="btn btn-primary">Save Changes</a>
     </div>
-</div>
-
+</div> 
 <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:125%;height:450px;margin-left:-12%;margin-top:-1.5%">
-        <!-- Indicators -->
-
+        <!-- Indicators --> 
         <ol class="carousel-indicators">
             @foreach (PocetnaIndexRow hir in Model.listaNajnovijihArtikala)
             {
@@ -121,7 +106,7 @@
                                 <p>Ekran: @hir.VrstaEkrana  @hir.Ekran ''</p>
                                 <p>Kamera: @hir.Kamera</p>
                                 <del><p>@hir.Cijena KM</p></del>
-                                <p>@hir.CijenaSaPopustom KM</p> 
+                                <p>@hir.CijenaSaPopustom KM</p>
                             </div>
                         </div>
                     </a>
@@ -140,59 +125,126 @@
         </a>
     </div>
 </div>
-<h2 style="text-align:center">MOBITELI</h2>
-<div id="divSearch">
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div id="page-wrapper">
-                    <div style="margin-left:10%; padding-bottom:3px;padding-top:10px">
-                        <div class="row">
-                            @foreach (RS1_P120_MobitelShop.Models.Artikal x in Model.listaArtikalaPoSearch)
-                            {
+<h2 style="text-align:center">MOBITELI</h2> 
+<div class="row">
+    <div class="col-sm-1" style="margin-left:-100px;border:1px solid">
+        <button data-toggle="collapse" class="btn btn-info" data-target="#demo">Pretraži po filteru</button> 
+        <div id="demo" class="collapse" style="margin-top:35px;">
+            @using (Html.BeginForm("Index", "Home"))
+    { 
+        for (int i = 0; i < Model.specifikacijeList.Count; i++)
+        {
+            if (Model.specifikacijeList[i].isRam == true)
+            {
+                <div class="checkbox">
 
-                                <div style="box-shadow: -1px 3px 25px #000; margin-bottom:20px;padding-top:0px;width:220px;padding-bottom:0px;padding:10px;margin-right:5px;background-color:white">
-                                    <br />
-                                    <div class="img-fluid">
-                                        <a href="/ModulKlijenti/Uporedi/Detalji?artikalId=@x.Id" data-toggle="lightbox" data-footer="Slika telefona" data-max-width="500">
-                                            <img src="@Url.Content(@x.Slika)" class="img-fluid" style="width:200px;height:185px" />
-                                        </a>
-                                        <div class="caption">
-                                            <p><b>Model telefona:<br /></b>@x.Model</p>
-                                            <p><b>Garancija: </b>@x.Garancija</p>
-                                            <p><b>Cijena: </b>@x.Cijena KM</p>
-                                            <p>
-                                                @if (korisnik != null)
-    {
-                                            using (Html.BeginForm("Staviukorpi", "Uporedi", new { area = "ModulKlijenti", ArtikalId = x.Id, KlijentId = korisnik.Klijent.Id }))
+                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isRamChecked, new { @class = "checkbox" })
+                    @Model.specifikacijeList[i].RamNaziv <br />
+                    @Html.HiddenFor(m => Model.specifikacijeList[i].RamId)
+                    @Html.HiddenFor(m => Model.specifikacijeList[i].RamNaziv)
+                </div> 
+    }
+}
+        <hr />
+for (int i = 0; i < Model.specifikacijeList.Count; i++)
 {
-                                            <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
-}
-}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+    if (Model.specifikacijeList[i].isEksternaMemorija == true)
+    {
+        <div class="checkbox">
 
-                            }
+            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEksternaMemorijaChecked, new { @class = "checkbox" })
+            @Model.specifikacijeList[i].EksternaMemorijaNaziv <br />
+            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaId)
+            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv)
+        </div>
+
+}
+}
+        <hr />
+for (int i = 0; i < Model.specifikacijeList.Count; i++)
+{
+    if (Model.specifikacijeList[i].isOperativniSistem == true)
+    {
+        <div class="checkbox">
+            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isOperativniSistemChecked, new { @class = "checkbox" })
+            @Model.specifikacijeList[i].OperativniSistemNaziv <br />
+            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemId)
+            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv)
+        </div>
+}
+}
+        <hr />
+for (int i = 0; i < Model.specifikacijeList.Count; i++)
+{
+    if (Model.specifikacijeList[i].isEkran == true)
+    {
+        <div class="checkbox">
+
+            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEkranChecked, new { @class = "checkbox" })
+            @Model.specifikacijeList[i].EkranNaziv <br />
+            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranId)
+            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranNaziv)
+        </div>
+
+}
+}
+        <input type="submit" value="Prikazi" />
+}
+        </div> 
+            </div>
+    <div class="col-sm-10" style="border:1px solid;margin-right:5px;"> 
+        <div id="divSearch">
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div id="page-wrapper">
+                            <div style="margin-left:10%; padding-bottom:3px;padding-top:10px">
+                                <div class="row">
+                                    @foreach (RS1_P120_MobitelShop.Models.Artikal x in Model.listaArtikalaPoSearch)
+                                    { 
+                                        <div style="box-shadow: -1px 3px 25px #000; margin-bottom:20px;padding-top:0px;width:220px;padding-bottom:0px;padding:10px;margin-right:5px;background-color:white">
+                                            <br />
+                                            <div class="img-fluid">
+                                                <a href="/ModulKlijenti/Uporedi/Detalji?artikalId=@x.Id" data-toggle="lightbox" data-footer="Slika telefona" data-max-width="500">
+                                                    <img src="@Url.Content(@x.Slika)" class="img-fluid" style="width:200px;height:185px" />
+                                                </a>
+                                                <div class="caption">
+                                                    <p><b>Model telefona:<br /></b>@x.Model</p>
+                                                    <p><b>Garancija: </b>@x.Garancija</p>
+                                                    <p><b>Cijena: </b>@x.Cijena KM</p>
+                                                    <p>
+                                                        @if (korisnik != null)
+                                                        {
+                                                            using (Html.BeginForm("Staviukorpi", "Uporedi", new { area = "ModulKlijenti", ArtikalId = x.Id, KlijentId = korisnik.Klijent.Id }))
+                                                            {
+                                                                <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+                                                            }
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-2"">
+                        Stranica @(Model.listaArtikalaPoSearch.PageCount < Model.listaArtikalaPoSearch.PageNumber ? 0 : Model.listaArtikalaPoSearch.PageNumber) od @Model.listaArtikalaPoSearch.PageCount
+                        @Html.PagedListPager(Model.listaArtikalaPoSearch, page => Url.Action("Index", new
+                        {
+                            page,
+                            tipID = ViewBag.tipID
+                        }))
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-10">
-                Stranica @(Model.listaArtikalaPoSearch.PageCount < Model.listaArtikalaPoSearch.PageNumber ? 0 : Model.listaArtikalaPoSearch.PageNumber) od @Model.listaArtikalaPoSearch.PageCount
-                @Html.PagedListPager(Model.listaArtikalaPoSearch, page => Url.Action("Index", new
-                {
-                    page,
-                    tipID = ViewBag.tipID
-                }))
-            </div>
-        </div>
+        </div> 
     </div>
-</div>
-
+    <div class="col-sm-1" style="margin-right:-100px;border:1px solid">.col-sm-3</div>
+</div>  
 <style>
     #container .modal.fade {
         left: -25%;

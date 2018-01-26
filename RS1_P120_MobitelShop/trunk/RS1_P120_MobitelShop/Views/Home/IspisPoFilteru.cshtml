@@ -14,13 +14,13 @@
 <body>
     <div>
         @foreach (Artikal x in Model.listaArtikalaPoSearch)
-        {
+    {
         <span>@x.Model</span>
         <span>@x.Specifikacije.RAM</span>
         <span>@x.Specifikacije.EksternaMemorija</span>
         <span>@x.Specifikacije.Ekran</span>
         <span>@x.Specifikacije.OperativniSistem</span><br />
-        
+
 }
 
         @ViewData["isEkranChecked"]
@@ -28,6 +28,9 @@
         @ViewData["isRamChecked"]
         @ViewData["isOperativniSistemChecked"]
         @ViewData["templist"]
+
+        @ViewData["ukupno"]
+
     </div>
 </body>
 </html>
