@@ -22,15 +22,9 @@ namespace RS1_P120_MobitelShop.Controllers
         MojContext ctx = new MojContext();
         bool Poruka = false;
         [HttpGet]
-        public ActionResult Index(string poruka)
+        public ActionResult Index()
         {
-            if (Poruka)
-            {
-                ViewData["Confirm"] = "Confirm";
-                Poruka = false;
-            }
-
-            return View();
+             return View();
         }
        
         public ActionResult Provjera(string email, string password,string zapamti)
@@ -66,14 +60,12 @@ namespace RS1_P120_MobitelShop.Controllers
                 }
                 else if(!k.Login.IsValid)
                 {
-                    return View();
+                    return RedirectToAction("Index");
            
                 } 
             }
             return RedirectToAction("Index", "Home");
-       
 
-           
         } 
 
         public ActionResult Logout()
@@ -91,7 +83,6 @@ namespace RS1_P120_MobitelShop.Controllers
 
             RegistrationVM Model = new RegistrationVM();
             Model.Klijent = klijent;
-            //Model.gradoviStavke = ucitajGradove();
             return View("Registration",Model);
         }
 
@@ -123,19 +114,11 @@ namespace RS1_P120_MobitelShop.Controllers
                 klijent.Korisnik = new Korisnik();
                 klijent.Korisnik.Login = new Login();
                 ctx.Klijenti.Add(klijent);  
-                //klijent.Korisnik.Ime = vm.Ime;
-                klijent.Korisnik.Login.Username = vm.Username;
+                klijent.Korisnik.Login.Username = vm.Username;  
                 klijent.Korisnik.Login.Password = vm.Password;
-                //ovaj dio dodajem
                 klijent.Korisnik.Login.IsValid = false;
-                //klijent.Korisnik.Prezime = vm.Prezime;
-                //klijent.Korisnik.Telefon = vm.Telefon;
-                //klijent.Korisnik.Adresa = vm.Adresa;
-                //klijent.Korisnik.DatumRodjenja = Convert.ToDateTime(vm.DatumRodjenja);
                 klijent.Korisnik.Email = vm.Email;
-                //klijent.Korisnik.GradId = vm.GradId;
                 ctx.SaveChanges();
-                //ovaj dio dodajem
                 BuildEmailTemplate(klijent.Korisnik.LoginId);
                 Poruka = true;
             }
@@ -144,8 +127,8 @@ namespace RS1_P120_MobitelShop.Controllers
                 ViewData["Message"] = "Success";
                 return View("Registration", vm);
             }
-
-            return Redirect("/Autentifikacija");
+            KorisnikVM Kor = new KorisnikVM() { Korisnik = korisnik };
+            return View("Index",Kor);
         }
 
         //ovaj dio dodajem

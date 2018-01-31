@@ -385,6 +385,7 @@
     <Compile Include="Areas\ModulKlijenti\ViewModel\KorpaPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\ProfilPodaciVM.cs" />
     <Compile Include="Models\Obavijest.cs" />
+    <Compile Include="ViewModel\KorisnikVM.cs" />
     <Compile Include="ViewModel\SpecifikacijeVM.cs" />
     <Compile Include="Controllers\AutentifikacijaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -437,6 +438,7 @@
     <Content Include="Views\Autentifikacija\Registration.cshtml" />
     <Content Include="Views\Autentifikacija\Confirm.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Autentifikacija\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

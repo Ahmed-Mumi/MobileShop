@@ -17,11 +17,15 @@
 
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
-<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script> 
+<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+
+@{
+    RS1_P120_MobitelShop.Models.Korisnik korisnik = RS1_P120_MobitelShop.Helper.Autentifikacija.GetLogiraniKorisnik(Context);
+}
 <div class="modal-body row">
     <div class="col-md-6">
         <!-- Your first column here -->
@@ -73,15 +77,18 @@
                 </tr>
             </tbody>
         </table>
-        @using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
-        {
-            <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
-        }
+        @if (korisnik != null)
+    {
+        using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
+    {
+        <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+}
+}
         <input type="button" onclick="showPopUp()" value="Uporedi" class="btn btn-primary btn-lg" />
         @*ovo je div u kojeg smijestamo akciju Uporedi po ovom Id-u radimo ajax na klik pretrazi i isto ga koristimo za modal*@
         <div id="uporediPopUp" style="display:none">
             <div id="zaAjax">
-                @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId =Model.KlijentId})
+                @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
             </div>
         </div>
     </div>
@@ -92,7 +99,7 @@
             height: 650,
             width: 800,
             modal: true,
-            buttons: {  
+            buttons: {
             }
         });
     }
