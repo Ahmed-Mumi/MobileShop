@@ -1,35 +1,99 @@
-﻿@model RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.ArtikliDetaljiVM
+﻿@using RS1_P120_MobitelShop.Models
+@model RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.ArtikliDetaljiVM
 
-@*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/cupertino/jquery-ui.css" type="text/css" rel="Stylesheet" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>*@
-@*<link href="~/Areas/ModulAdministracija/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Areas/ModulAdministracija/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />*@
-@*<link href="~/Areas/ModulAdministracija/Content/css/sb-admin.css" rel="stylesheet" />*@
-
-@*<link href="~/Areas/ModulAdministracija/Content/bootstrap-lightbox/bootstrap-lightbox.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
-    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
 <link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
-<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@*<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
+<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    .hide-bullets {
+        list-style: none;
+        margin-left: -130px;
+        margin-top: 20px;
+    }
+</style>
+<script>
+    jQuery(document).ready(function ($) {
 
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+        $('#myCarousel').carousel({
+            interval: 5000
+        });
 
+        $('#carousel-text').html($('#slide-content-0').html());
+
+        //Handles the carousel thumbnails
+        $('[id^=carousel-selector-]').click(function () {
+            var id = this.id.substr(this.id.lastIndexOf("-") + 1);
+            var id = parseInt(id);
+            $('#myCarousel').carousel(id);
+        });
+
+
+        // When the carousel slides, auto update the text
+        $('#myCarousel').on('slid.bs.carousel', function (e) {
+            var id = $('.item.active').data('slide-number');
+            $('#carousel-text').html($('#slide-content-' + id).html());
+        });
+         
+    });
+
+</script>
 @{
     RS1_P120_MobitelShop.Models.Korisnik korisnik = RS1_P120_MobitelShop.Helper.Autentifikacija.GetLogiraniKorisnik(Context);
 }
 <div class="modal-body row">
     <div class="col-md-6">
         <!-- Your first column here -->
-        <img src="@Url.Content(@Model.Slika)" width=" 558" alt="@Model.Slika">
+        @*<img src="@Url.Content(@Model.Slika)" width=" 558" alt="@Model.Slika">*@
+
+        <div class="container">
+            <div id="main_area">
+                <!-- Slider -->
+                <div class="row">
+                    <div id="slider">
+                        <!-- Top part of the slider -->
+                        <div class="row">
+                            <div class="col-sm-8" id="carousel-bounding-box">
+                                <div class="carousel slide" id="myCarousel" style="margin-left:-80px">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner" style="height:500px">
+                                        <div class="active item" data-slide-number="0">
+                                            <img src="@Url.Content(@Model.Slika)" alt="@Model.Slika" class="active item">
+                                        </div>
+                                        @foreach (Galerija x in Model.GalerijaSlika)
+    {
+                                    <div class="item" data-slide-number="@x.Id">
+                                        <img src="@x.Slika">
+                                    </div>
+} 
+                                    </div><!-- Carousel nav -->
+                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/Slider-->
+                <div class="row hidden-xs" id="slider-thumbs">
+                    <!-- Bottom switcher of slider -->
+                    <ul class="hide-bullets">
+                        @foreach (Galerija x in Model.GalerijaSlika)
+    {
+                    <li class="col-sm-2">
+                        <a class="thumbnail" id="carousel-selector-@x.Id.ToString()"><img src="@x.Slika"></a>
+                    </li>
+} 
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="col-md-6">
         <table class="table" style="margin-top:50px">
@@ -80,19 +144,51 @@
         @if (korisnik != null)
     {
         using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
-    {
-        <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+        {
+            <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+    }
 }
-}
-        <input type="button" onclick="showPopUp()" value="Uporedi" class="btn btn-primary btn-lg" />
-        @*ovo je div u kojeg smijestamo akciju Uporedi po ovom Id-u radimo ajax na klik pretrazi i isto ga koristimo za modal*@
-        <div id="uporediPopUp" style="display:none">
-            <div id="zaAjax">
-                @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
+    @*<input type="button" onclick="showPopUp()" value="Uporedi" class="btn btn-primary btn-lg" />
+    <div id="uporediPopUp" style="display:none">
+        <div id="zaAjax">
+            @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
+        </div>
+    </div>*@
+        <div class="bs-example">
+            <!-- Button HTML (to Trigger Modal) -->
+
+            <a href="#myModall" class="btn btn-light" data-toggle="modal"><i class="glyphicon glyphicon-log-in"></i>   Login/Sign up</a>
+
+            <!-- Modal HTML -->
+            <div id="myModall" class="modal fade">
+                <div class="modal-dialog modal-lg">
+
+                    <div class="modal-content">
+                        <div id="zaAjax">
+
+                            <div class="modal-header"> 
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                            </div>
+
+                            <div class="modal-body">
+                                @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
+
+                            </div>
+                            <div style="margin-top:10px" class="form-group">
+                                <!-- Button -->
+                                <div class="col-sm-12 controls">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer"> 
+                                <button  onclick="@("window.location.href='" + @Url.Action("Detalji", "Uporedi",new { artikalId=Model.ArtikalId}) + "'");" type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    </div> 
 <script type="text/javascript">
     function showPopUp() {
         $("#uporediPopUp").dialog({

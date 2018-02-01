@@ -74,7 +74,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 ModelArtikalDetalji.KlijentId = k.Id;
                 ModelArtikalDetalji.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
             }
-                
+            ModelArtikalDetalji.GalerijaSlika = ctx.Galerije.Where(x => x.ArtikalId == artikalId).ToList();
             return View("Detalji", ModelArtikalDetalji);
         }
 

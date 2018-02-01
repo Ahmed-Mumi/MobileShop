@@ -46,6 +46,7 @@ namespace RS1_P120_MobitelShop.DAL
         public DbSet<TipServisa> TipoviServisa { get; set; }
         public DbSet<UlazRobeDetalji> UlaziRobeDetalji { get; set; }
         public DbSet<Obavijest> Obavijesti { get; set; }
+        public DbSet<Galerija> Galerije { get; set; }
 
 
     }

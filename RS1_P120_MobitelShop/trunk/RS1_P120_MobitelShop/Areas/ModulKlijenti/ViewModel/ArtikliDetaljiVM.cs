@@ -26,5 +26,6 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public int BrojArtikalaUKorpi { get; set; }
         public string pronadjenarijec { get; set; }
         public Artikal artikalUporedi { get; set; }
+        public List<Galerija> GalerijaSlika { get; set; }
     }
 }
