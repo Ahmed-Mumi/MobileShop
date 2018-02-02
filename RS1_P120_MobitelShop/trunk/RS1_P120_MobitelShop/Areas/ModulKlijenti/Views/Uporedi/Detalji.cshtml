@@ -48,51 +48,58 @@
         <!-- Your first column here -->
         @*<img src="@Url.Content(@Model.Slika)" width=" 558" alt="@Model.Slika">*@
 
-        <div class="container">
-            <div id="main_area">
-                <!-- Slider -->
-                <div class="row">
-                    <div id="slider">
-                        <!-- Top part of the slider -->
-                        <div class="row">
-                            <div class="col-sm-8" id="carousel-bounding-box">
-                                <div class="carousel slide" id="myCarousel" style="margin-left:-80px">
-                                    <!-- Carousel items -->
-                                    <div class="carousel-inner" style="height:500px">
-                                        <div class="active item" data-slide-number="0">
-                                            <img src="@Url.Content(@Model.Slika)" alt="@Model.Slika" class="active item">
-                                        </div>
-                                        @foreach (Galerija x in Model.GalerijaSlika)
+        @if (Model.GalerijaSlika.ToList() == null)
     {
+        <img src="@Url.Content(@Model.Slika)" width=" 558" alt="@Model.Slika">
+}
+else
+{
+    <div class="container">
+        <div id="main_area">
+            <!-- Slider -->
+            <div class="row">
+                <div id="slider">
+                    <!-- Top part of the slider -->
+                    <div class="row">
+                        <div class="col-sm-8" id="carousel-bounding-box">
+                            <div class="carousel slide" id="myCarousel" style="margin-left:-80px">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner" style="height:500px">
+                                    <div class="active item" data-slide-number="0">
+                                        <img src="@Url.Content(@Model.Slika)" alt="@Model.Slika" class="active item">
+                                    </div>
+                                    @foreach (Galerija x in Model.GalerijaSlika)
+                                {
                                     <div class="item" data-slide-number="@x.Id">
                                         <img src="@x.Slika">
                                     </div>
-} 
-                                    </div><!-- Carousel nav -->
-                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                        <span class="glyphicon glyphicon-chevron-left"></span>
-                                    </a>
-                                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                        <span class="glyphicon glyphicon-chevron-right"></span>
-                                    </a>
-                                </div>
+                            }
+                                </div><!-- Carousel nav -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div><!--/Slider-->
-                <div class="row hidden-xs" id="slider-thumbs">
-                    <!-- Bottom switcher of slider -->
-                    <ul class="hide-bullets">
-                        @foreach (Galerija x in Model.GalerijaSlika)
-    {
+                </div>
+            </div><!--/Slider-->
+            <div class="row hidden-xs" id="slider-thumbs">
+                <!-- Bottom switcher of slider -->
+                <ul class="hide-bullets">
+                    @foreach (Galerija x in Model.GalerijaSlika)
+                {
                     <li class="col-sm-2">
                         <a class="thumbnail" id="carousel-selector-@x.Id.ToString()"><img src="@x.Slika"></a>
                     </li>
-} 
-                    </ul>
-                </div>
+            }
+                </ul>
             </div>
         </div>
+    </div>
+}
 
     </div>
     <div class="col-md-6">
@@ -157,7 +164,7 @@
         <div class="bs-example">
             <!-- Button HTML (to Trigger Modal) -->
 
-            <a href="#myModall" class="btn btn-light" data-toggle="modal"><i class="glyphicon glyphicon-log-in"></i>   Login/Sign up</a>
+            <a href="#myModall" class="btn btn-primary" data-toggle="modal">  Uporedi</a>
 
             <!-- Modal HTML -->
             <div id="myModall" class="modal fade">

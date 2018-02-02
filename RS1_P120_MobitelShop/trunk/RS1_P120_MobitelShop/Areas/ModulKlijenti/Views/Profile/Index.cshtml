@@ -57,9 +57,13 @@ else
 {
     using (Html.BeginForm("Snimi", "Profile"))
     {
-        <br /> 
         <br />
-        <span>Dobrodošli @Model.Korisnik.Ime  @Model.Korisnik.Prezime</span>
+        <br />
+        <span style="font-size:25px;">
+            <b>Dobrodošli @Model.Korisnik.Ime  @Model.Korisnik.Prezime</b>
+        </span>
+        <br />
+        <br />
         <div class="form-group">
             <label>E-mail</label>
             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "true" })

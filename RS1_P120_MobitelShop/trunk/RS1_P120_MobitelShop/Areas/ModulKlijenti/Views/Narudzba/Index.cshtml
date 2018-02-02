@@ -46,8 +46,7 @@ else
             <td>@kp.CijenaSaPopustom KM</td>
 
             <td>
-                @Html.ActionLink("Naruči", "Index","Profile", new { Artikalid = kp.ArtikalId, KorpaId = kp.KorpaId }, new { @class = "btn btn-success" })
-                @*@Html.ActionLink("Naruči", "Naruci", new { Artikalid = kp.ArtikalId, KorpaId = kp.KorpaId }, new { @class = "btn btn-success" })*@
+                @Html.ActionLink("Naruči", "Index","Profile", new { Artikalid = kp.ArtikalId, KorpaId = kp.KorpaId, korisnikId = kp.KorisnikId }, new { @class = "btn btn-success" })
             </td>
         </tr>
            }

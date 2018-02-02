@@ -29,9 +29,10 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                     KorpaId=p.Id,
                     ArtikalId=p.ArtikalId,
                     Popust= ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault(),
-                    CijenaSaPopustom = ((100 - ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault()) * p.Artikal.Cijena) / 100
+                    CijenaSaPopustom = ((100 - ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault()) * p.Artikal.Cijena) / 100,
+                    KorisnikId=p.Klijent.Korisnik.Id
 
-                }).ToList(), 
+                }).ToList()
         };
             Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext); 
             Model.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
@@ -101,35 +102,6 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             ctx.SaveChanges();
             return RedirectToAction("Index");
         }
-        //public ActionResult Naruci(int Artikalid, int KorpaId)
-        //{
-        //    Korpa Korpa = ctx.Korpe.Where(x => x.Id == KorpaId).FirstOrDefault();
-        //    int KlijentId = Korpa.KlijentId;
-        //    ctx.Korpe.Remove(Korpa);
-        //    DetaljiNarudzbe DetaljiNarudzbe = new DetaljiNarudzbe();
-        //    DetaljiNarudzbe.Narudzba = new Narudzba();
-        //    Artikal Artikal = ctx.Artikli.Where(x => x.Id == Artikalid).FirstOrDefault();
-        //    DetaljiNarudzbe.Artikal = new Artikal();
-        //    DetaljiNarudzbe.Artikal.Id = Artikal.Id;
-        //    DetaljiNarudzbe.Artikal.Specifikacije = new Specifikacije();
-        //    DetaljiNarudzbe.Artikal.Specifikacije.Id = Artikal.Specifikacije.Id;
-        //    DetaljiNarudzbe.Artikal.DatumObjave = Artikal.DatumObjave;
-        //    DetaljiNarudzbe.Narudzba.DatumNarudzbe = DateTime.Now;
-        //    DetaljiNarudzbe.Artikal.Cijena = Artikal.Cijena;
-        //    DetaljiNarudzbe.Artikal.Model = Artikal.Model;
-        //    DetaljiNarudzbe.Narudzba.Isporuka = new Isporuka();
-        //    DetaljiNarudzbe.Narudzba.Klijent = new Klijent();
-        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik = new Korisnik();
-        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login = new Login();
-        //    DetaljiNarudzbe.Narudzba.Klijent.Id = KlijentId;
-        //    Korisnik korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Id = korisnik.Id;
-        //    DetaljiNarudzbe.Narudzba.Klijent.Korisnik.Login.Id = korisnik.Login.Id;
-        //    ctx.DetaljiNarudzbi.Add(DetaljiNarudzbe);
-        //    ctx.SaveChanges();
-        //    BuildEmailTemplate(korisnik.Id, DetaljiNarudzbe.NarudzbaId);
-        //    return RedirectToAction("Index");
-        //}
 
         public void BuildEmailTemplate(int korisnikId, int narudzbaId)
         {

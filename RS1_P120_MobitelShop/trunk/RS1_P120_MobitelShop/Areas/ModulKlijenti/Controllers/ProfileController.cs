@@ -19,7 +19,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
     {
         MojContext ctx = new MojContext();
 
-        public ActionResult Index(int? Artikalid,int? KorpaId)
+        public ActionResult Index(int? Artikalid,int? KorpaId, int korisnikId)
         {
             ProfilPodaciVM Model = new ProfilPodaciVM();
             Model.kojije = false;
@@ -29,7 +29,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 Model.KorpaId = KorpaId.Value;
                 Model.kojije = true;
             }
-            Korisnik Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
+            Korisnik Korisnik = ctx.Korisnici.Find(korisnikId);
             Model.Korisnik = Korisnik;
             Model.gradoviStavke = ucitajGradove(Korisnik);
             Model.Email = Korisnik.Email;
@@ -69,7 +69,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             }
             return gradovi;
         }
-        [Autorizacija(KorisnickeUloge.Klijent)] 
+
         public ActionResult Snimi(ProfilPodaciVM vm)
         {  
             if (!ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             Korisnik.Adresa = vm.Adresa;
             Korisnik.GradId = vm.GradId;
             ctx.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { korisnikId = Korisnik.Id });
         }
     }
 }

@@ -15,7 +15,16 @@
     <script src="~/Scripts/jquery-3.1.1.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
-
+    <style>
+        .footer {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     @{
@@ -37,7 +46,7 @@
                 <li>
                     <form class="navbar-form" action="/Home/Index">
                         <div class="input-group">
-                            @Html.TextBox("searchTerm", null, new { id = "txtSearch", @class = "form-control", placeholder = "Search..." })
+                            @Html.TextBox("searchTerm", null, new { id = "txtSearch", @class = "form-control", placeholder = "Search..." , style="width:400px"})
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -130,7 +139,7 @@
                 @if (korisnik != null && korisnik.Ime == null)
                 {
                     <li>
-                        <a href="@Url.Action("Index", "Profile", new { Area = "ModulKlijenti" })">
+                        <a href="@Url.Action("Index", "Profile", new { Area = "ModulKlijenti",korisnikId=korisnik.Id })">
                             @Model.BrojArtikalaUKorpi <i class="glyphicon glyphicon-shopping-cart"></i>
                         </a>
                     </li>
@@ -147,7 +156,7 @@
                 @if (korisnik != null)
                 {
                     <li>
-                        <a href="@Url.Action("Index", "Profile", new { Area = "ModulKlijenti" })">
+                        <a href="@Url.Action("Index", "Profile", new { Area = "ModulKlijenti",korisnikId=korisnik.Id })">
                             <i class="glyphicon glyphicon-user"></i> Moj profil
                         </a>
                     </li>
@@ -166,28 +175,28 @@
         </div>
     </div>
 
-    <footer class="container-fluid text-left" style=" background-image: url(https://www.rnrfonline.com/wp-content/uploads/2016/03/footer-background.jpg); color:white; font-size:13px;width:100% ">
-        <div class="row center-block">
+    <footer id="footer" class="footer" style=" background-image: url(https://www.rnrfonline.com/wp-content/uploads/2016/03/footer-background.jpg); color:white; font-size:13px;width:100%;">
+        
+
+        <div class="row">
+            <div class="col-sm-2"></div>
 
             <div class="col-sm-4" style="">
                 <br />
                 Informacije: <hr>
 
                 <ul>
-                    <li><i class="icon-home"></i><strong>Adresa:</strong> SMA N 1 Penebel</li>
-                    <li><i class="icon-phone"></i><strong>Telefon:</strong> +387 32-111-111</li>
-                    <li><i class="icon-envelope"></i><strong>Email:</strong> mobishopcenter@gmail.com</li>
+                    <li><i class="glyphicon glyphicon-home"></i>   <strong>Adresa:</strong> SMA N 1 Penebel</li>
+                    <li><i class="glyphicon glyphicon-earphone"></i>   <strong>Telefon:</strong> +387 32-111-111</li>
+                    <li><i class="glyphicon glyphicon-envelope"></i>   <strong>Email:</strong> mobishopcenter@gmail.com</li>
                 </ul>
                 <br><br>
             </div>
-            <div class="col-sm-4"></div>
-
             <div class="col-sm-4">
                 <br />
                 Mapa<hr>
                 <div>
-                    <ul class="arrow">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15786.919818414823!2d115.13604322508151!3d-8.428158753023983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd22472c26fb23d%3A0x4158e54c55bfd62f!2sSMA+N+1+Penebel!5e0!3m2!1shr!2sba!4v1517509905294" width="200" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15786.919818414823!2d115.13604322508151!3d-8.428158753023983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd22472c26fb23d%3A0x4158e54c55bfd62f!2sSMA+N+1+Penebel!5e0!3m2!1shr!2sba!4v1517509905294" width="300" height="100" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
                 <br>
             </div>

@@ -49,5 +49,6 @@ namespace RS1_P120_MobitelShop.ViewModel
         public IPagedList<Artikal> listaArtikalaPoSearch { get; set; }
         public int BrojArtikalaUKorpi { get; set; }
         public Korisnik Korisnik { get; set; }
+        public List<Obavijest> Obavijesti { get; set; }
     }
 }

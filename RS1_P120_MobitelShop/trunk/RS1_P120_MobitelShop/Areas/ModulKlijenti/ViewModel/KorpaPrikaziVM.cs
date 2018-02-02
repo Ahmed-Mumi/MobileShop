@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RS1_P120_MobitelShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public int ArtikalId { get; set; }
         public int? Popust { get; set; }
         public double CijenaSaPopustom { get; set; }
+        public int KorisnikId { get; set; }
+
     }
     public class KorpaPrikaziVM
     {

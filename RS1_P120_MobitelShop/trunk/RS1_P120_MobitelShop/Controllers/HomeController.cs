@@ -56,6 +56,8 @@ namespace RS1_P120_MobitelShop.Controllers
                 ModelHomeIndex.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
             ModelHomeIndex.Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
             ModelHomeIndex.specifikacijeList = IspisiSpecifikacije();
+
+            ModelHomeIndex.Obavijesti = ctx.Obavijesti.OrderByDescending(x => x.DatumObavijesti).Take(5).ToList();
             return View("Index", ModelHomeIndex);
         }
 
