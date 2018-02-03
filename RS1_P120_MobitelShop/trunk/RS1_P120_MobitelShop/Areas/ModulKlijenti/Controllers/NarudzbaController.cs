@@ -47,6 +47,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 Korisnik k = ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);
                 vm.gradoviStavke = ucitajGradove(k);
                 vm.GradNaziv = k.Grad.Naziv;
+                vm.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Klijent.Id);
                 return View("~/Areas/ModulKlijenti/Views/Profile/Index.cshtml", vm);
             }
             Korisnik Korisnik = ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);

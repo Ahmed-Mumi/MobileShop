@@ -72,13 +72,14 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
 
         public ActionResult Snimi(ProfilPodaciVM vm)
         {  
-            if (!ModelState.IsValid)
-            {
-                Korisnik korisnik= ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);
-                vm.gradoviStavke = ucitajGradove(korisnik);
-                vm.GradNaziv = korisnik.Grad.Naziv;
-                return View("Index", vm);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    Korisnik korisnik= ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);
+            //    vm.gradoviStavke = ucitajGradove(korisnik);
+            //    vm.GradNaziv = korisnik.Grad.Naziv;
+            //    vm.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == korisnik.Klijent.Id);
+            //    return View("Index", vm);
+            //}
             Korisnik Korisnik = ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);
             Korisnik.Ime = vm.Ime; 
             Korisnik.Prezime = vm.Prezime;

@@ -14,14 +14,20 @@ namespace RS1_P120_MobitelShop.ViewModel
         public Klijent Klijent { get; set; }
         public string Ime { get; set; }
         public string Username { get; set; }
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Zaboravili ste unijeti lozinku")]
+        [StringLength(255, MinimumLength = 8,ErrorMessage ="Lozinka mora imati minimalno osam karaktera!")]
+        //[RegularExpression("(?!^[0-9]*$)(?!^[a-zA-Z]*$)$", ErrorMessage = "Lozinka mora sadržavati brojeve i slova")]
         public string Password { get; set; }
-        //dodano
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Lozinka nije ista. Pokušajte ponovo!")]
         public string PasswordConfirm { get; set; }
         public string Prezime { get; set; }
         public string Spol { get; set; }
         public string Telefon { get; set; }
         public string Adresa { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Neispravan format.")]
+        [Required(ErrorMessage = "Zaboravili ste unijeti email adresu")]
         public string Email { get; set; }
         //[DataType(DataType.Date)]
         //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

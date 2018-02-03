@@ -113,8 +113,7 @@ namespace RS1_P120_MobitelShop.Controllers
                 Klijent klijent = new Klijent();
                 klijent.Korisnik = new Korisnik();
                 klijent.Korisnik.Login = new Login();
-                ctx.Klijenti.Add(klijent);  
-                klijent.Korisnik.Login.Username = vm.Username;  
+                ctx.Klijenti.Add(klijent);   
                 klijent.Korisnik.Login.Password = vm.Password;
                 klijent.Korisnik.Login.IsValid = false;
                 klijent.Korisnik.Email = vm.Email;
