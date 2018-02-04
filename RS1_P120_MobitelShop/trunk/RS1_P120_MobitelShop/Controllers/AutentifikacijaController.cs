@@ -54,8 +54,8 @@ namespace RS1_P120_MobitelShop.Controllers
                 if (k.Login.IsValid == true)
                 {
                     Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
-                    return RedirectToAction("Index", "Home");
-                  
+                    //return RedirectToAction("Index", "Home",new{ area="" }); 
+                    return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
 
                 }
                 else if(!k.Login.IsValid)
@@ -64,7 +64,7 @@ namespace RS1_P120_MobitelShop.Controllers
            
                 } 
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
 
         } 
 
@@ -72,8 +72,7 @@ namespace RS1_P120_MobitelShop.Controllers
         {
             Autentifikacija.PokreniNovuSesiju(null, HttpContext, true);
             return RedirectToAction("Index","Home");
-        }
-
+        } 
         public ActionResult Dodaj()
         {
             Klijent klijent;
@@ -84,16 +83,14 @@ namespace RS1_P120_MobitelShop.Controllers
             RegistrationVM Model = new RegistrationVM();
             Model.Klijent = klijent;
             return View("Registration",Model);
-        }
-
+        } 
         private List<SelectListItem> ucitajGradove()
         {
             var gradovi = new List<SelectListItem>();
             gradovi.Add(new SelectListItem { Value = null, Text = "Izaberite grad" });
             gradovi.AddRange(ctx.Gradovi.Select(x=> new SelectListItem{Value = x.Id.ToString(),Text = x.Naziv}));
             return gradovi;
-        }
-
+        } 
         public ActionResult Registration(RegistrationVM vm)
         {
             var response = Request["g-recaptcha-response"];
@@ -101,13 +98,11 @@ namespace RS1_P120_MobitelShop.Controllers
             var client = new WebClient();
             var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
             var obj = JObject.Parse(result);
-            var status = (bool)obj.SelectToken("success"); 
-
+            var status = (bool)obj.SelectToken("success");  
             if (!ModelState.IsValid || !status)
             {
                 return View("Registration", vm);
-            }
-
+            } 
             Korisnik korisnik = ctx.Korisnici.Where(x => x.Email == vm.Email).FirstOrDefault();
             if (korisnik == null) {
                 Klijent klijent = new Klijent();
@@ -128,15 +123,12 @@ namespace RS1_P120_MobitelShop.Controllers
             }
             KorisnikVM Kor = new KorisnikVM() { Korisnik = korisnik };
             return View("Index",Kor);
-        }
-
-        //ovaj dio dodajem
+        } 
         public ActionResult Confirm(int loginId)
         {
             ViewBag.loginId = loginId;
             return View();
-        }
-
+        } 
         public JsonResult RegisterConfirm(int loginId)
         {
             Login Login = ctx.Logini.Where(x => x.Id == loginId).FirstOrDefault();
@@ -144,8 +136,7 @@ namespace RS1_P120_MobitelShop.Controllers
             ctx.SaveChanges();
             var msg = "Your login is verified";
             return Json(msg, JsonRequestBehavior.AllowGet);
-        }
-
+        } 
         public void BuildEmailTemplate(int loginId)
         {
             string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "Text" + ".cshtml");

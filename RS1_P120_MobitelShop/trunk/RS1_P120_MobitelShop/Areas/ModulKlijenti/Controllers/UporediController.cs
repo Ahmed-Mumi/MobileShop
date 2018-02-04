@@ -48,7 +48,9 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             korpa.ArtikalId = ArtikalId;
             if (k != null)
                 ctx.SaveChanges();
-            return RedirectToAction("Detalji", new { artikalId = ArtikalId });
+            //return RedirectToAction("Detalji", new { artikalId = ArtikalId });
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+
         }
 
         public ActionResult Detalji(int artikalId)
@@ -84,7 +86,5 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             ModelHomeIndex.searchArtikliString = ctx.Artikli.Where(h => h.Model.Contains(term)).Select(y => y.Model).ToList();
             return Json(ModelHomeIndex.searchArtikliString, JsonRequestBehavior.AllowGet);
         }
-
-
     } 
 }

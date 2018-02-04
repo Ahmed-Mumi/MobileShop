@@ -42,13 +42,30 @@
 
     });
 
+
 </script>
 <style>
+    .animacija {
+        animation:type 2s steps(21);
+        overflow:hidden;
+        white-space:nowrap;
+        border-right:4px solid black;
+        width:21ch;
+    }
+    @@keyframes type{
+        0% {
+              width:0ch;
+          }
+        100% {
+            width:21ch;
+        }
+    }
+
     .box {
         margin: 3em auto;
         padding: 2em;
         width: 15em;
-        height: 10em;
+        height: 20em;
         position: relative;
         overflow: hidden;
         top: 1em;
@@ -63,6 +80,8 @@
     .slika {
         float: left;
         margin: 0 20px 20px 0;
+        width:100px;
+        height:100px
     }
 
     .obavijest {
@@ -118,8 +137,7 @@
     <br />
     <div class="form-group">
         <div class="col-md-12 control">
-            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                @*<span style="font-size:15px">Nemate profil</span> @Html.ActionLink("Registruj se", "Dodaj")*@
+            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%"> 
                 <span style="font-size:15px">Nemate profil</span> @Ajax.ActionLink("Registruj se", "Dodaj", new AjaxOptions() { UpdateTargetId = "zaAjaxRegistraciju" })
             </div>
         </div>
@@ -166,8 +184,16 @@
                                             <p>Operativni sistem: @hir.OperativniSistem</p>
                                             <p>Ekran: @hir.VrstaEkrana  @hir.Ekran ''</p>
                                             <p>Kamera: @hir.Kamera</p>
+                                            <p class="animacija">Iskoristite popust od @hir.Popust %</p>
                                             <del style="color:red;"><p style="color:black;">&nbsp; @hir.Cijena KM &nbsp;</p></del>
                                             <p style="color:orangered;font-size:40px"> <b>@hir.CijenaSaPopustom KM</b></p>
+                                            @if (korisnik != null)
+    {
+        using (Html.BeginForm("Staviukorpi", "Uporedi", new { area = "ModulKlijenti", ArtikalId = hir.ArtikalId, KlijentId = korisnik.Klijent.Id }))
+        {
+                                        <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
+}
+}
                                         </div>
                                     </div>
                                 </div>
@@ -225,8 +251,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="height:50px;padding-top:15px;cursor:pointer" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija">
-                        <div style="cursor:pointer;width:200px;">
+                    <td style="height:50px;padding-top:15px;cursor:pointer">
+                        <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija">
                             Eksterna memorija
                             <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija"></i>
                         </div>
@@ -253,8 +279,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="height:50px;padding-top:15px;cursor:pointer;" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem">
-                        <div style="cursor:pointer;width:200px;">
+                    <td style="height:50px;padding-top:15px;cursor:pointer;" >
+                        <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem">
                             Operativni sistem
                             <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem"></i>
                         </div>
@@ -280,8 +306,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="height:50px;padding-top:15px;cursor:pointer;" data-toggle="collapse" href="#collapseEkran" aria-expanded="false" aria-controls="collapseEkran">
-                        <div style="cursor:pointer;width:200px;">
+                    <td style="height:50px;padding-top:15px;cursor:pointer;" >
+                        <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseEkran" aria-expanded="false" aria-controls="collapseEkran">
                             Ekran <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseEkran" aria-expanded="false" aria-controls="collapseEkran"></i>
                         </div>
                         <div class="collapse" id="collapseEkran">
@@ -313,37 +339,37 @@
         }
 
 
-            <div class="wrapper">
-                <!-- Main Container -->
-                <div class="box">
-                    <!-- Div that will hold the UL -->
-                    <marquee behavior="scroll" direction="down" height="100" width="350" scrollamount="2" onmouseover="stop();" onmouseout="start();">
-
-                        <div class="scroll">
-
+            <div class="wrapper"> 
+                <div class="box"> 
+                    <marquee behavior="scroll" direction="down" height="300px" width="350" scrollamount="2" onmouseover="stop();" onmouseout="start();" loop="true">
+                        <div class="scroll" style="width:100%;height:50px">
                             @foreach (Obavijest o in Model.Obavijesti)
-                {
-
-                            <div style="width:80px;height:80px">
+                { 
+                            <div>
                                 @if (o.Slika != null)
-                                {
-                                <img class="slika" src="@Url.Content(@o.Slika)" style="width:10px;height:10px">
+    {
+                            @*<img class="slika" src="@Url.Content(@o.Slika)" style="width:45px;height:45px">*@
+                            <p>
+                                <img src="@Url.Content(@o.Slika)" alt="Pineapple" style="width:45px;height:45px;margin-right:20px;float:left;padding-bottom:5px;">
+                                @o.NaslovObavijesti.Substring(0, 18)
+                            </p>
 
-                                }
-                                <h4>
-                                    @o.NaslovObavijesti
-                                </h4>
-                                <p class="obavijest">
-                                    @o.TekstObavijesti
-                                </p>
-                            </div>
+}
+else
+{
+                            <p>
+                                @o.NaslovObavijesti.Substring(0, 18)
+                            </p>
+}
 
+
+                                <hr />
+                            </div>  
     }
                         </div>  
                 </marquee>
-
-            </div><!-- End Box -->
-            </div><!-- End Main Container -->
+            </div>
+            </div>
         </div>
         <div class="col-sm-10">
             <div id="divSearch" style="margin-left:10px">
@@ -370,7 +396,7 @@
                                                             {
                                                                 using (Html.BeginForm("Staviukorpi", "Uporedi", new { area = "ModulKlijenti", ArtikalId = x.Id, KlijentId = korisnik.Klijent.Id }))
                                                                 {
-                                                                    <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+                                                                    <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
                                                                 }
                                                             }
                                                         </p>
@@ -395,8 +421,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div> 
         <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 
     </div>

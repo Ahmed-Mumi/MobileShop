@@ -46,14 +46,14 @@
 
         <div class="container-fluid ">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Mobitel shop</a>
+                <a href="~/Home/Index">
+                    <img src="http://www.awsbosnia.com/img/logo-FIT.png" style="width:100px;height:50px" /> 
+                </a>
+                <a class="navbar-brand" href="~/Home/Index">
+                    Mobitel shop
+                </a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="~/Home/Index">
-                        <i class="glyphicon glyphicon-home"></i> Home
-                    </a>
-                </li>
+            <ul class="nav navbar-nav"> 
                 <li>
                     <form class="navbar-form" action="/Home/Index">
                         <div class="input-group">
@@ -96,7 +96,7 @@
 
                                     <div class="modal-body">
 
-                                        @using (Html.BeginForm("Provjera", "Autentifikacija", FormMethod.Get))
+                                        @using (Html.BeginForm("Provjera", "Autentifikacija",new { area="" }, FormMethod.Get))
                                         {
                                             if (ViewData["Confirm"] != null)
                                             {
@@ -147,15 +147,7 @@
             }
             <ul class="nav navbar-nav navbar-right">
 
-                @if (korisnik != null && korisnik.Ime == null)
-                {
-                    <li>
-                        <a href="@Url.Action("Index", "Profile", new { Area = "ModulKlijenti",korisnikId=korisnik.Id })">
-                            @Model.BrojArtikalaUKorpi <i class="glyphicon glyphicon-shopping-cart"></i>
-                        </a>
-                    </li>
-                }
-                else if (korisnik != null && korisnik.Ime != null)
+             @if (korisnik != null)
                 {
                     <li>
                         <a href="@Url.Action("Index", "Narudzba", new { Area = "ModulKlijenti" })">

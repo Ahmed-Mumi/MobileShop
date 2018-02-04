@@ -17,7 +17,7 @@ namespace RS1_P120_MobitelShop.ViewModel
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Zaboravili ste unijeti lozinku")]
         [StringLength(255, MinimumLength = 8,ErrorMessage ="Lozinka mora imati minimalno osam karaktera!")]
-        //[RegularExpression("(?!^[0-9]*$)(?!^[a-zA-Z]*$)$", ErrorMessage = "Lozinka mora sadržavati brojeve i slova")]
+        [RegularExpression("^[A-Za-z]+\\d+.*$", ErrorMessage = "Lozinka mora sadržavati brojeve i slova")]
         public string Password { get; set; }
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Lozinka nije ista. Pokušajte ponovo!")]
         public string PasswordConfirm { get; set; }

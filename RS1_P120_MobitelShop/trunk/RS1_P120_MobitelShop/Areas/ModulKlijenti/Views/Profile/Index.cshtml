@@ -1,10 +1,7 @@
-﻿@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
-@model  RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.ProfilPodaciVM
+﻿@model  RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel.ProfilPodaciVM
 <link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 @if (Model.kojije == true)
 {
     using (Html.BeginForm("Snimi", "Narudzba"))
@@ -13,10 +10,11 @@
         @Html.HiddenFor(x => x.KorpaId)
         @Html.HiddenFor(x => Model.kojije)
         <br />
-        <br />
-        <span>Da li želite da narudzba bude poslana na ove podatke?</span>
-
-        <div class="form-group">
+        <br /> 
+        <span style="font-size:20px;">
+            <b>Ukoliko želite možete promijeniti Vaše podatke vezane za narudžbu.</b>
+        </span>
+        <div class="form-group" style="margin-top:18px">
             <label>E-mail</label>
             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "true" })
         </div>
@@ -33,6 +31,7 @@
         <div class="form-group">
             <label>Grad</label>
             @Html.DropDownListFor(model => model.GradId, Model.gradoviStavke, Model.GradNaziv, new { @class = "form-control", style = "height: 35px;" })
+            @*@Html.ValidationMessageFor(model => model.GradId)*@
         </div>
         <div class="form-group">
             <label>Telefon</label>
@@ -60,7 +59,7 @@ else
         <br />
         <br />
         <span style="font-size:25px;">
-            <b>Dobrodošli @(Model.Korisnik!=null ? Model.Korisnik.Ime+" "+Model.Korisnik.Prezime : " ")</b>
+            <b>Dobrodošli @(Model.Korisnik != null ? Model.Korisnik.Ime + " " + Model.Korisnik.Prezime : " ")</b>
         </span>
         <br />
         <br />
@@ -70,11 +69,11 @@ else
         </div>
         <div class="form-group">
             <label>Ime</label>
-            @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" }) 
+            @Html.TextBoxFor(model => model.Ime, new { @class = "form-control" })
         </div>
         <div class="form-group">
             <label>Prezime</label>
-            @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" }) 
+            @Html.TextBoxFor(model => model.Prezime, new { @class = "form-control" })
         </div>
         <div class="form-group">
             <label>Grad</label>
@@ -82,12 +81,12 @@ else
         </div>
         <div class="form-group">
             <label>Telefon</label>
-            @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" }) 
+            @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
         </div>
 
         <div class="form-group">
             <label>Adresa</label>
-            @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" }) 
+            @Html.TextBoxFor(model => model.Adresa, new { @class = "form-control" })
         </div>
         <br />
         @Html.HiddenFor(x => x.GradId)

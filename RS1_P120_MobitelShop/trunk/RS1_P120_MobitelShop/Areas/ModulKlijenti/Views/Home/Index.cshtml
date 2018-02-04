@@ -1,32 +1,16 @@
 ﻿@using PagedList.Mvc;
 @using RS1_P120_MobitelShop.ViewModel
-@model  RS1_P120_MobitelShop.ViewModel.PocetnaIndexVM
-@{
-
-    //Layout = null;
-}
-
+@model  RS1_P120_MobitelShop.ViewModel.PocetnaIndexVM 
 <!DOCTYPE html>
-<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-
-
-@*ti ne ides nigdje*@ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
-
-
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
 <div class="container">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:125%;height:450px;margin-left:-12%;margin-top:-1.5%">
-        <!-- Indicators -->
-
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:125%;height:450px;margin-left:-12%;margin-top:-1.5%"> 
         <ol class="carousel-indicators">
             @foreach (PocetnaIndexRow hir in Model.listaNajnovijihArtikala)
             {
                 <li data-target="#myCarousel" data-slide-to="@hir.ArtikalId" class="@(hir==Model.listaNajnovijihArtikala.FirstOrDefault() ?"active":"")"></li>
             }
-        </ol>
-        <!-- Wrapper for slides -->
+        </ol> 
         <div class="carousel-inner">
             @foreach (PocetnaIndexRow hir in Model.listaNajnovijihArtikala)
             {
@@ -49,8 +33,7 @@
 
                 </div>
             }
-        </div>
-        <!-- Left and right controls -->
+        </div> 
         <a class="left carousel-control" href="#myCarousel" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
             <span class="sr-only">Previous</span>
@@ -70,8 +53,7 @@
                     <div style="margin-left:10%; padding-bottom:3px;padding-top:10px">
                         <div class="row">
                             @foreach (RS1_P120_MobitelShop.Models.Artikal x in Model.listaArtikalaPoSearch)
-                            {
-
+                            { 
                                 <div style="box-shadow: -1px 3px 25px #000; margin-bottom:20px;padding-top:0px;width:220px;padding-bottom:0px;padding:10px;margin-right:5px;background-color:white">
                                     <br />
                                     <div class="img-fluid">

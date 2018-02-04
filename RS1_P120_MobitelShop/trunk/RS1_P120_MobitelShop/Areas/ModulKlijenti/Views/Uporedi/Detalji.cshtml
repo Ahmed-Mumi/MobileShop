@@ -15,66 +15,54 @@
     }
 </style>
 <script>
-    jQuery(document).ready(function ($) {
-
+    jQuery(document).ready(function ($) { 
         $('#myCarousel').carousel({
             interval: 5000
-        });
-
-        $('#carousel-text').html($('#slide-content-0').html());
-
+        }); 
+        $('#carousel-text').html($('#slide-content-0').html()); 
         //Handles the carousel thumbnails
         $('[id^=carousel-selector-]').click(function () {
             var id = this.id.substr(this.id.lastIndexOf("-") + 1);
             var id = parseInt(id);
             $('#myCarousel').carousel(id);
-        });
-
-
+        }); 
         // When the carousel slides, auto update the text
         $('#myCarousel').on('slid.bs.carousel', function (e) {
             var id = $('.item.active').data('slide-number');
             $('#carousel-text').html($('#slide-content-' + id).html());
-        });
-         
-    });
-
+        }); 
+    }); 
 </script>
 @{
     RS1_P120_MobitelShop.Models.Korisnik korisnik = RS1_P120_MobitelShop.Helper.Autentifikacija.GetLogiraniKorisnik(Context);
 }
 <div class="modal-body row">
-    <div class="col-md-6">
-        <!-- Your first column here -->
-        @*<img src="@Url.Content(@Model.Slika)" width=" 558" alt="@Model.Slika">*@
+    <div class="col-md-6"> 
 
-        @if (Model.GalerijaSlika.ToList() == null)
+        @if (Model.GalerijaSlika.Count == 0)
     {
-        <img src="@Url.Content(@Model.Slika)" width=" 558" alt="@Model.Slika">
+        <img src="@Url.Content(@Model.Slika)" style="margin-left:-80px;height:500px;width:500px" alt="@Model.Slika">
 }
 else
 {
     <div class="container">
-        <div id="main_area">
-            <!-- Slider -->
+        <div id="main_area"> 
             <div class="row">
-                <div id="slider">
-                    <!-- Top part of the slider -->
+                <div id="slider"> 
                     <div class="row">
                         <div class="col-sm-8" id="carousel-bounding-box">
-                            <div class="carousel slide" id="myCarousel" style="margin-left:-80px">
-                                <!-- Carousel items -->
-                                <div class="carousel-inner" style="height:500px">
+                            <div class="carousel slide" id="myCarousel" style="margin-left:-80px;height:500px;width:500px"> 
+                                <div class="carousel-inner" >
                                     <div class="active item" data-slide-number="0">
-                                        <img src="@Url.Content(@Model.Slika)" alt="@Model.Slika" class="active item">
+                                        <img src="@Url.Content(@Model.Slika)" alt="@Model.Slika" class="active item" style="height:500px;width:400px">
                                     </div>
                                     @foreach (Galerija x in Model.GalerijaSlika)
                                 {
-                                    <div class="item" data-slide-number="@x.Id">
+                                    <div class="item" data-slide-number="@x.Id" style="height:500px;width:400px">
                                         <img src="@x.Slika">
                                     </div>
                             }
-                                </div><!-- Carousel nav -->
+                                </div>
                                 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                 </a>
@@ -85,9 +73,8 @@ else
                         </div>
                     </div>
                 </div>
-            </div><!--/Slider-->
-            <div class="row hidden-xs" id="slider-thumbs">
-                <!-- Bottom switcher of slider -->
+            </div>
+            <div class="row hidden-xs" id="slider-thumbs"> 
                 <ul class="hide-bullets">
                     @foreach (Galerija x in Model.GalerijaSlika)
                 {
@@ -99,8 +86,7 @@ else
             </div>
         </div>
     </div>
-}
-
+} 
     </div>
     <div class="col-md-6">
         <table class="table" style="margin-top:50px">
@@ -146,27 +132,21 @@ else
                     <td>RAM</td>
                     <td>@Model.RAM</td>
                 </tr>
+                <tr>
+                    <td>Garancija</td>
+                    <td>@Model.Garancija</td>
+                </tr>
             </tbody>
         </table>
         @if (korisnik != null)
     {
         using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
         {
-            <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+            <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
     }
-}
-    @*<input type="button" onclick="showPopUp()" value="Uporedi" class="btn btn-primary btn-lg" />
-    <div id="uporediPopUp" style="display:none">
-        <div id="zaAjax">
-            @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
-        </div>
-    </div>*@
-        <div class="bs-example">
-            <!-- Button HTML (to Trigger Modal) -->
-
-            <a href="#myModall" class="btn btn-primary" data-toggle="modal">  Uporedi</a>
-
-            <!-- Modal HTML -->
+} 
+        <div class="bs-example"> 
+            <a href="#myModall" class="btn btn-primary" data-toggle="modal">  Uporedi</a> 
             <div id="myModall" class="modal fade">
                 <div class="modal-dialog modal-lg">
 
@@ -181,8 +161,7 @@ else
                                 @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
 
                             </div>
-                            <div style="margin-top:10px" class="form-group">
-                                <!-- Button -->
+                            <div style="margin-top:10px" class="form-group"> 
                                 <div class="col-sm-12 controls">
                                 </div>
                             </div>
@@ -206,11 +185,4 @@ else
             }
         });
     }
-</script>
-@*<script style="font-family:Arial" type="text/javascript">
-        $(function () {
-            $("#txtSearch2").autocomplete({
-                source: '@Url.Action("GetStudents","Korpa")'
-            });
-        });
-    </script>*@
+</script> 

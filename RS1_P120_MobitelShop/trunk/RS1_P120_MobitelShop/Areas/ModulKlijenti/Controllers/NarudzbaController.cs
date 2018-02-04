@@ -31,7 +31,6 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                     Popust= ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault(),
                     CijenaSaPopustom = ((100 - ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault()) * p.Artikal.Cijena) / 100,
                     KorisnikId=p.Klijent.Korisnik.Id
-
                 }).ToList()
         };
             Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext); 
@@ -46,7 +45,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             {
                 Korisnik k = ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);
                 vm.gradoviStavke = ucitajGradove(k);
-                vm.GradNaziv = k.Grad.Naziv;
+                if(vm.GradId!=null)
+                    vm.GradNaziv = k.Grad.Naziv;
                 vm.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Klijent.Id);
                 return View("~/Areas/ModulKlijenti/Views/Profile/Index.cshtml", vm);
             }

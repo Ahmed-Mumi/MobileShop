@@ -16,8 +16,7 @@
     RS1_P120_MobitelShop.Models.Korisnik korisnik = RS1_P120_MobitelShop.Helper.Autentifikacija.GetLogiraniKorisnik(Context);
 }
 <div class="table-responsive" style="padding-top:5px">
-    <div class="col-md-6" style="margin-top:50px">
-        <!-- Your first column here -->
+    <div class="col-md-6" style="margin-top:50px"> 
         <table class="table" style="margin-top:27px">
             <tbody>
                 <tr>
@@ -67,7 +66,7 @@
                 <td>
                     @using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
         {
-            <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+            <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
 }
                 </td>
             </tr>
@@ -75,15 +74,13 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-6">
-        <!-- Your second column here -->
+    <div class="col-md-6"> 
         @using (Ajax.BeginForm("Index", "Uporedi", new AjaxOptions() { UpdateTargetId = "zaAjax" }))
         {
             <div class="input-group">
                 @Html.HiddenFor(x => Model.ArtikalId)
                 @Html.TextBox("searchTerm2", null, new { id = "txtSearch2", placeholder = "Search..." })
-                <input type="submit" value="Pronadji" />
-
+                <input type="submit" value="Pronadji" /> 
             </div>
         } 
         @if (Model.artikalUporedi != null)
@@ -137,7 +134,7 @@
                     <td>
                         @using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.artikalUporedi.Id, KlijentId = Model.KlijentId }))
         {
-                <button type="submit" class="btn btn-primary btn-lg">Stavi u korpu</button>
+                <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
 }
                     </td>
                 </tr>
@@ -146,8 +143,7 @@
             </table>
         }
     </div>
-</div>
-
+</div> 
 <script style="font-family:Arial" type="text/javascript">
     $(function () {
         $("#txtSearch2").autocomplete({

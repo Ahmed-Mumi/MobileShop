@@ -14,16 +14,14 @@ using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
 namespace RS1_P120_MobitelShop.Controllers
 {
     public class HomeController : Controller
-    {
-
+    { 
         MojContext ctx = new MojContext();
         PocetnaIndexVM ModelHomeIndex = new PocetnaIndexVM();
         ArtikliSpecifikacijeVM ModelArtikalDetalji = new ArtikliSpecifikacijeVM();
         public ActionResult Index(int? ArtikalId, int? page, string searchTerm, PocetnaIndexVM spec)
         {
             int pageSize = 8;
-            int pageNumber = (page ?? 1);
-
+            int pageNumber = (page ?? 1); 
             ModelHomeIndex.listaNajnovijihArtikala=ctx.Popusti.OrderByDescending(x=>x.Artikal.DatumObjave).Select(p => new PocetnaIndexRow()
             {
                 Slika = p.Artikal.Slika,
@@ -50,6 +48,11 @@ namespace RS1_P120_MobitelShop.Controllers
             else
             {
                 ModelHomeIndex.listaArtikalaPoSearch = ctx.Artikli.Where(x => x.Model.Contains(searchTerm)).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+            }
+            //ovo dodo samo nista vise
+            if (ModelHomeIndex.listaArtikalaPoSearch.Count == 1)
+            {
+                return RedirectToAction("Detalji","Uporedi", new {area="ModulKlijenti", artikalId = ModelHomeIndex.listaArtikalaPoSearch.FirstOrDefault().Id });     
             }
             Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
             if(k!=null)
@@ -114,10 +117,7 @@ namespace RS1_P120_MobitelShop.Controllers
             tempList = ctx.Artikli.ToList();
             string ram = null, memorija = null, ekran = null, os = null;
             foreach (var x in spec.specifikacijeList.ToList())
-            {
-                //Temp2 - ukoliko postoje dva izbora iz iste podkategorije Iphone, Samsung
-                //Temp3 - tempList2 se mora ponovo incijalizovati prilikom svake petlje, a to znaci i pristup bazi u svakom krugu petlje, uz temp3
-                //        pristupa bazi samo jednom i dodjeljuju temp2 kad je to potrebno
+            { 
                 tempList2 = tempList3;
                 if (x.isRamChecked)
                 {
