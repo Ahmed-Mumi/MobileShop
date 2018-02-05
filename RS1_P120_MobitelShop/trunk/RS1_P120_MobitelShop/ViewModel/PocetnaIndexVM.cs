@@ -51,4 +51,5 @@ namespace RS1_P120_MobitelShop.ViewModel
         public Korisnik Korisnik { get; set; }
         public List<Obavijest> Obavijesti { get; set; }
     }
+  
 }

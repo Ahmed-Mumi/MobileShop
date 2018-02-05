@@ -10,6 +10,8 @@ using RS1_P120_MobitelShop.Models;
 using RS1_P120_MobitelShop.ViewModel;
 using PagedList;
 using RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel;
+using PagedList.Mvc;
+
 
 namespace RS1_P120_MobitelShop.Controllers
 {
@@ -205,6 +207,6 @@ namespace RS1_P120_MobitelShop.Controllers
             }
             return tempList2;
         }
+  
     }
-
 }

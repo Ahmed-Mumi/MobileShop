@@ -38,30 +38,39 @@
                                     <td>
                                         @x.artikalNaziv
                                     </td>
-                                    <td>@x.Kolicina</td>                                 
+                                    <td>@x.Kolicina</td>    
+                                    <td>
+                                        <div id="detalji">
+                                        </div>
+                                    </td>                             
                                     <td>
                                         <div class="btn-group open">
                                             <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>Izvrši izmjene</a>
                                             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                                                 @*<span class="fa fa-caret-down" title="Toggle dropdown menu"></span>*@
                                             </a>
-                                            <ul class="dropdown-menu" style="padding:5px">
+                                            @*<ul class="dropdown-menu" style="padding:5px">
                                                 <li style="padding:5px;text-decoration:none">
                                                     @Ajax.ActionLink("Promjeni status", "Promjena", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @class = "btn btn-warning fa fa-pencil" })
                                                 </li>
                                                 <li style="padding:5px">
                                                     @Ajax.ActionLink(" Obriši", "Obrisi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "obrisi" }, new { @class = "btn btn-danger fa fa-trash-o" })
                                                 </li>
+                                                <li style="padding:5px">
+                                                    @Ajax.ActionLink("Prikaži detalje", "Detalji", new { id = x.Id }, new AjaxOptions { UpdateTargetId = "detalji" })
+
+                                                </li>
                                                 @*<li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
                                                     <li class="divider"></li>
                                                     <li><a href="#"><i class="fa fa-unlock"></i> Make admin</a></li>*@
-                                            </ul>
+                                            </ul>*@
                                         </div>
                                     </td>
+                                   
                                     <td>
                                       @*  @Ajax.ActionLink("Prikaži detalje", "Prikazi", new { id = x.Id }, new AjaxOptions { UpdateTargetId = "detalji" })*@
                                         
-                                         @Html.ActionLink("Prikazi detalje", "Prikazi", new { id = x.NarudzbaId})
+                                         @*@Html.ActionLink("Prikazi detalje", "Prikazi", new { id = x.NarudzbaId})*@
                                     </td>
                                 
                                 </tr>
@@ -70,8 +79,7 @@
                         </tbody>
 
                     </table>
-                    <div id="detalji">
-                    </div>
+                   
                 </div>
             </div>
         </div>

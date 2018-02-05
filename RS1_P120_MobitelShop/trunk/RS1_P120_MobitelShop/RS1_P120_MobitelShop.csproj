@@ -328,6 +328,7 @@
     <Content Include="Areas\ModulKlijenti\Views\Profile\Index.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Narudzba\Index.cshtml" />
     <Content Include="Areas\ModulKlijenti\Views\Narudzba\Text2.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Narudzbe\Detalji.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

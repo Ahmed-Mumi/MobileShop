@@ -14,8 +14,11 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
             public int ArtikalId { get; set; }
             public string artikalNaziv { get; set; }
             public double? Ukupno { get; set; }
+            public double? CijenaArtikla { get; set; }
             public int NarudzbaId { get; set; }
-
+          
+            public double? CijenaSaPopustom { get; set; }
+         
         }
         public List<DetaljiInfo> detaljiStavke { get; set; }
         public int NarudzbaId { get; set; }

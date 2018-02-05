@@ -37,5 +37,26 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             };
             return View("Prikazi",Model);
         }
+        public ActionResult Detalji(int id)
+        {
+            DetaljiNarudzbePrikaziVM Model = new DetaljiNarudzbePrikaziVM
+            {
+                detaljiStavke = ctx.DetaljiNarudzbi.Where(x => x.NarudzbaId == id)
+                .Select(x => new DetaljiNarudzbePrikaziVM.DetaljiInfo()
+                {
+                    Id = x.Id,
+                    ArtikalId = x.ArtikalId,
+                    Kolicina = x.Kolicina,
+                    artikalNaziv = x.Artikal.Model,
+                    CijenaArtikla = x.Artikal.Cijena,
+                    Ukupno = x.Artikal.Cijena * x.Kolicina,
+                   
+                    //NarudzbaId = x.NarudzbaId,
+                }).ToList(),
+                NarudzbaId = id
+            };
+            return View("Detalji", Model);
+        }
+        
     }
 }
