@@ -142,11 +142,11 @@ else
     {
         using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
         {
-            <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
+            <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu <i class="glyphicon glyphicon-shopping-cart"></i></button>
     }
 } 
         <div class="bs-example"> 
-            <a href="#myModall" class="btn btn-primary" data-toggle="modal">  Uporedi</a> 
+            <a href="#myModall" class="btn btn-primary" style="margin-top:15px" data-toggle="modal">  Uporedi mobitel &nbsp;</a> 
             <div id="myModall" class="modal fade">
                 <div class="modal-dialog modal-lg">
 

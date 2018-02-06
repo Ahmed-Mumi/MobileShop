@@ -29,9 +29,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.ViewModel
         public string Adresa { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        public List<SelectListItem> gradoviStavke { get; set; }
-        //dodao ovo
-        //[Required(ErrorMessage = "Please select at least one option")]
+        public List<SelectListItem> gradoviStavke { get; set; } 
         public int? GradId { get; set; }
         public string GradNaziv { get; set; }
         public int BrojArtikalaUKorpi { get; set; }

@@ -115,6 +115,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             var narudzba = ctx.DetaljiNarudzbi.Where(x => x.NarudzbaId == narudzbaId).FirstOrDefault();
             body = body.Replace("@ViewBag.NarudzbaModel", narudzba.Artikal.Marka + " " + narudzba.Artikal.Model);
             body = body.Replace("@ViewBag.NarudzbaCijena", narudzba.Artikal.Cijena.ToString());
+            body = body.Replace("@ViewBag.DatumNarudbe", narudzba.Narudzba.DatumNarudzbe.ToShortDateString());
             var popust = ctx.Popusti.Where(x => x.ArtikalId == narudzba.ArtikalId).FirstOrDefault();
             if (popust != null)
             {
@@ -127,53 +128,53 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                 body = body.Replace("@ViewBag.NarudzbaPopust", "---"); 
                 body = body.Replace("@ViewBag.SaPopustom", narudzba.Artikal.Cijena.ToString());
             }
-            BuildEmailTemplate("Your order has been successfully processed", body, regInfo.Email);
+            PosaljiEmail.BuildEmailTemplate("Your order has been successfully processed", body, regInfo.Email);
         }
-
-        private void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)
-        {
-            string from, to, bcc, cc, subject, body;
-            from = "mobishopcenter@gmail.com";
-            to = sendTo.Trim();
-            bcc = "";
-            cc = "";
-            subject = subjectText;
-            StringBuilder sb = new StringBuilder();
-            sb.Append(bodyText);
-            body = sb.ToString();
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(from);
-            mail.To.Add(new MailAddress(to));
-            if (!string.IsNullOrEmpty(bcc))
-            {
-                mail.Bcc.Add(new MailAddress(bcc));
-            }
-            if (!string.IsNullOrEmpty(cc))
-            {
-                mail.CC.Add(new MailAddress(cc));
-            }
-            mail.Subject = subject;
-            mail.Body = body;
-            mail.IsBodyHtml = true;
-            SendEmail(mail);
-        }
-        public static void SendEmail(MailMessage mail)
-        {
-            SmtpClient client = new SmtpClient();
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new System.Net.NetworkCredential("mobishopcenter@gmail.com", "MobiShopCenter123");
-            try
-            {
-                client.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        // u helper
+        //private void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)
+        //{
+        //    string from, to, bcc, cc, subject, body;
+        //    from = "mobishopcenter@gmail.com";
+        //    to = sendTo.Trim();
+        //    bcc = "";
+        //    cc = "";
+        //    subject = subjectText;
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append(bodyText);
+        //    body = sb.ToString();
+        //    MailMessage mail = new MailMessage();
+        //    mail.From = new MailAddress(from);
+        //    mail.To.Add(new MailAddress(to));
+        //    if (!string.IsNullOrEmpty(bcc))
+        //    {
+        //        mail.Bcc.Add(new MailAddress(bcc));
+        //    }
+        //    if (!string.IsNullOrEmpty(cc))
+        //    {
+        //        mail.CC.Add(new MailAddress(cc));
+        //    }
+        //    mail.Subject = subject;
+        //    mail.Body = body;
+        //    mail.IsBodyHtml = true;
+        //    SendEmail(mail);
+        //}
+        //public static void SendEmail(MailMessage mail)
+        //{
+        //    SmtpClient client = new SmtpClient();
+        //    client.Host = "smtp.gmail.com";
+        //    client.Port = 587;
+        //    client.EnableSsl = true;
+        //    client.UseDefaultCredentials = false;
+        //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+        //    client.Credentials = new System.Net.NetworkCredential("mobishopcenter@gmail.com", "MobiShopCenter123");
+        //    try
+        //    {
+        //        client.Send(mail);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 }

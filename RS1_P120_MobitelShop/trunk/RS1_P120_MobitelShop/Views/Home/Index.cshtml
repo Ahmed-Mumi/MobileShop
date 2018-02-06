@@ -145,7 +145,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="article-editor">
+@*<div class="modal fade" id="article-editor">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
         <h3>Title of the form</h3>
@@ -157,7 +157,7 @@
         <a href="#" class="btn" data-dismiss="modal">Close</a>
         <a href="#" class="btn btn-primary">Save Changes</a>
     </div>
-</div>
+</div>*@
 <div class="container">
     <div class="col-sm-12">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:104%;height:450px;margin-left:-4%;margin-top:-1.5%" data-interval="5000">
@@ -177,23 +177,23 @@
                         <a href="/ModulKlijenti/Uporedi/Detalji?artikalId=@hir.ArtikalId">
                             <img src="https://gnomes.co.nz/images/banner-sale.png" style="width:200px;height:200px;" />
                             <div style="margin-left:180px">
-                                <img src="@hir.Slika" alt="@(hir.Marka+" "+hir.Model)" style="width:50%;height:400px;margin-top:-180px">
+                                <img src="@hir.Slika" alt="@(hir.Marka+" "+hir.Model)" style="width:50%;height:400px;margin-top:-180px;">
 
                                 <div class="carousel-caption" style="color:black;">
                                     <div class="float-right">
-                                        <div class="text-left" style="font-family:Georgia,serif;font-size:25px;">
+                                        <div class="text-left" style="font-family:Georgia,serif;font-size:20px;">
                                             <h1>@hir.Model</h1>
                                             <p>Operativni sistem: @hir.OperativniSistem</p>
                                             <p>Ekran: @hir.VrstaEkrana  @hir.Ekran ''</p>
                                             <p>Kamera: @hir.Kamera</p>
-                                            <p class="animacija">Iskoristite popust od @hir.Popust %</p>
+                                            <p class="animacija">Iskoristite popust od <span style="color:red">@hir.Popust %</span></p>
                                             <del style="color:red;"><p style="color:black;">&nbsp; @hir.Cijena KM &nbsp;</p></del>
                                             <p style="color:orangered;font-size:40px"> <b>@hir.CijenaSaPopustom KM</b></p>
                                             @if (korisnik != null)
     {
         using (Html.BeginForm("Staviukorpi", "Uporedi", new { area = "ModulKlijenti", ArtikalId = hir.ArtikalId, KlijentId = korisnik.Klijent.Id }))
         {
-                                        <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
+                                        <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu <i class="glyphicon glyphicon-shopping-cart"></i></button>
 }
 }
                                         </div>
@@ -451,7 +451,7 @@ else
                                                             {
                                                                 using (Html.BeginForm("Staviukorpi", "Uporedi", new { area = "ModulKlijenti", ArtikalId = x.Id, KlijentId = korisnik.Klijent.Id }))
                                                                 {
-                                                                    <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu</button>
+                                                                    <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu <i class="glyphicon glyphicon-shopping-cart"></i></button>
                                                                 }
                                                             }
                                                         </p>

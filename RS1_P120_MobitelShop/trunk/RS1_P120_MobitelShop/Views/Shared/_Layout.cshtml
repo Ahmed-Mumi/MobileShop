@@ -47,20 +47,18 @@
     }
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+        <div class="container-fluid ">
 
-        <div class="navbar-header">
-            @*<a class="navbar-brand" href="~/Home/Index">
-                Mobitel shop
-            </a>*@
-            <a href="~/Home/Index">
-                <img src="https://www.cybrosys.com/images/mobileshop.png" style="width:150px;height:60px" />
-            </a>
+            <div class="navbar-header" > 
+                <a href="~/Home/Index">
+                    <img src="https://www.cybrosys.com/images/mobileshop.png" style="width:150px;height:60px" />
+                </a>
 
-        </div>
-            <ul class="nav navbar-nav"> 
+            </div>
+            <ul class="nav navbar-nav">
                 <li>
                     <form class="navbar-form" action="/Home/Index">
-                        <div class="input-group" style="margin-left:70%">
+                        <div class="input-group" style="margin-left:10%">
                             @Html.TextBox("searchTerm", null, new { id = "txtSearch", @class = "form-control", placeholder = "Unesite naziv modela...", style = "width:400px" })
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
@@ -75,101 +73,101 @@
 
 
             @if (korisnik == null)
-            {
-                <div class="bs-example" style="margin-left:43%">
+        {
+            <div class="bs-example" style="margin-left:43%">
 
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#myModal" data-toggle="modal"><i class="glyphicon glyphicon-log-in"></i>   Login/Sign up</a>
-                        </li>
-                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#myModal" data-toggle="modal"><i class="glyphicon glyphicon-log-in"></i>   Login/Sign up</a>
+                    </li>
+                </ul>
 
-                    <div id="myModal" class="modal fade">
-                        <div class="modal-dialog">
+                <div id="myModal" class="modal fade">
+                    <div class="modal-dialog">
 
-                            <div class="modal-content">
-                                <div id="zaAjaxRegistraciju">
+                        <div class="modal-content">
+                            <div id="zaAjaxRegistraciju">
 
-                                    <div class="modal-header">
-                                        <h4>Login</h4>
+                                <div class="modal-header">
+                                    <h4>Login</h4>
 
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
+                                </div>
+
+                                <div class="modal-body">
+
+                                    @using (Html.BeginForm("Provjera", "Autentifikacija", new { area = "" }, FormMethod.Get))
+                                {
+                                    if (ViewData["Confirm"] != null)
+                                    {
+                                        <div>Poruka konfirmacije je poslana na Vaš mail. Molimo provjerite i potvrdite kako bi mogli koristiti svoj račun.</div>
+                                }
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="korisničko mail" style="width:100%" required autofocus />
+                                </div>
+
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="lozinka" style="width:100%" required />
+                                </div>
+                                <div class="input-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="zapamti" name="zapamti" class="arrow" value="1" />
+                                            Zapamti me
+                                        </label>
                                     </div>
+                                </div>
+                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                    <span style="font-size:15px">Nemate profil</span> @Ajax.ActionLink("Registruj se", "Dodaj", "Autentifikacija", new AjaxOptions() { UpdateTargetId = "zaAjaxRegistraciju" })
+                                </div>
+                                <div style="margin-top:10px" class="form-group">
 
-                                    <div class="modal-body">
+                                    <div class="col-sm-12 controls">
 
-                                        @using (Html.BeginForm("Provjera", "Autentifikacija", new { area = "" }, FormMethod.Get))
-                                        {
-                                            if (ViewData["Confirm"] != null)
-                                            {
-                                                <div>Poruka konfirmacije je poslana na Vaš mail. Molimo provjerite i potvrdite kako bi mogli koristiti svoj račun.</div>
-                                            }
-                                            <div style="margin-bottom: 25px" class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="korisničko mail" style="width:100%" required autofocus />
-                                            </div>
-
-                                            <div style="margin-bottom: 25px" class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="lozinka" style="width:100%" required />
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" id="zapamti" name="zapamti" class="arrow" value="1" />
-                                                        Zapamti me
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                                                <span style="font-size:15px">Nemate profil</span> @Ajax.ActionLink("Registruj se", "Dodaj", "Autentifikacija", new AjaxOptions() { UpdateTargetId = "zaAjaxRegistraciju" })
-                                            </div>
-                                            <div style="margin-top:10px" class="form-group">
-
-                                                <div class="col-sm-12 controls">
-
-                                                    <input type="submit" value="Prijavi se" class="btn btn-success" />
-                                                </div>
-                                            </div>
-                                            <br />
-                                        }
-
+                                        <input type="submit" value="Prijavi se" class="btn btn-success" />
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
+                                </div>
+                                <br />
+                        }
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-            }
+    }
             <ul class="nav navbar-nav navbar-right">
 
-             @if (korisnik != null)
-                {
-                    <li>
-                        <a href="@Url.Action("Index", "Narudzba", new { Area = "ModulKlijenti" })">
-                            @Model.BrojArtikalaUKorpi <i class="glyphicon glyphicon-shopping-cart"></i>
-                        </a>
-                    </li>
-
-                }
                 @if (korisnik != null)
-                {
-                    <li>
-                        <a href="@Url.Action("Index", "Profile", new { Area = "ModulKlijenti",korisnikId=korisnik.Id })">
-                            <i class="glyphicon glyphicon-user"></i> Moj profil
-                        </a>
-                    </li>
-                    <li><a href="/Autentifikacija/Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Narudzba", new { Area = "ModulKlijenti" })">
+                        @Model.BrojArtikalaUKorpi <i class="glyphicon glyphicon-shopping-cart"></i>
+                    </a>
+                </li>
 
-                }
+        }
+                @if (korisnik != null)
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Profile", new { Area = "ModulKlijenti",korisnikId=korisnik.Id })">
+                        <i class="glyphicon glyphicon-user"></i> Moj profil
+                    </a>
+                </li>
+                <li><a href="/Autentifikacija/Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+
+        }
             </ul>
 
         </div>

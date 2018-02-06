@@ -69,7 +69,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
             }
             return gradovi;
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Snimi(ProfilPodaciVM vm)
         {  
             Korisnik Korisnik = ctx.Korisnici.Find(Autentifikacija.GetLogiraniKorisnik(HttpContext).Id);

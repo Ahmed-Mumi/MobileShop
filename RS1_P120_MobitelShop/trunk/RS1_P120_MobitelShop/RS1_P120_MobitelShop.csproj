@@ -386,6 +386,7 @@
     <Compile Include="Areas\ModulKlijenti\ViewModel\HomeIndexVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\KorpaPrikaziVM.cs" />
     <Compile Include="Areas\ModulKlijenti\ViewModel\ProfilPodaciVM.cs" />
+    <Compile Include="Helper\PosaljiEmail.cs" />
     <Compile Include="Models\Galerija.cs" />
     <Compile Include="Models\Obavijest.cs" />
     <Compile Include="ViewModel\KorisnikVM.cs" />
