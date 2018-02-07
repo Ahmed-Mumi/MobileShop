@@ -14,7 +14,8 @@ using System.Web.Hosting;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using Google.Authenticator;
 
 namespace RS1_P120_MobitelShop.Controllers
 {
@@ -36,7 +37,6 @@ namespace RS1_P120_MobitelShop.Controllers
 
                 if(korisnik == null)
                 {
-                //return RedirectToAction("Index");
                 return RedirectToAction("Index", "Home", new { area = "" }); 
             }
 
@@ -54,20 +54,62 @@ namespace RS1_P120_MobitelShop.Controllers
                 Logout(); 
                 if (k.Login.IsValid == true)
                 {
-                    Autentifikacija.PokreniNovuSesiju(k, HttpContext, (zapamti == "on"));
-                    //return RedirectToAction("Index", "Home",new{ area="" }); 
-                    return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                    //mozda da ne pokrece dok se ne verifikuje
+                    string key = System.Guid.NewGuid().ToString().Substring(0, 12);
+                    string message = "";
+                    bool status = false;
+                    KorisnikVM kor = new KorisnikVM()
+                    {
+                        Korisnik = korisnik,
+                        Zapamti = zapamti,
+                        Email = korisnik.Email,
+                        Password = korisnik.Login.Password,
+                        Url = ControllerContext.HttpContext.Request.UrlReferrer.ToString()
+                    };
+                    status = true;
+                    message = "2FA Verification";
+                    Session["Email"] = k.Email;
+                    TwoFactorAuthenticator tfa = new TwoFactorAuthenticator();
+                    string UserUniqueKey = k.Email + key;
+                    Session["UserUniqueKey"] = UserUniqueKey;
+                    var setupInfo = tfa.GenerateSetupCode("MobiShop", k.Email, UserUniqueKey, 300, 300);
+                    ViewBag.BarcodeImageUrl = setupInfo.QrCodeSetupImageUrl;
+                    ViewBag.SetupCode = setupInfo.ManualEntryKey;
+                    ViewBag.Message = message;
+                    ViewBag.Status = status;
+                    return View("TwoFactorAuth", kor);
+                    //return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
 
                 }
                 else if(!k.Login.IsValid)
                 {
-                    //return RedirectToAction("Index");
                     return RedirectToAction("Index", "Home", new { area = "" }); 
                 }
             }
             return RedirectToAction("Index", "Home", new { area = "" });
+        }
 
-        } 
+
+        public ActionResult Verfiy2FA(KorisnikVM k)
+        {
+            var token = Request["passcode"];
+            TwoFactorAuthenticator tfa = new TwoFactorAuthenticator();
+            string UserUniqueKey = Session["UserUniqueKey"].ToString();
+            bool isValid = tfa.ValidateTwoFactorPIN(UserUniqueKey, token);
+            if (isValid)
+            {
+                Korisnik korisnik = ctx.Korisnici
+                .Include(x => x.Administrator)
+                .Include(x => x.Klijent)
+                .SingleOrDefault(x => x.Email == k.Email && x.Login.Password == k.Password);
+                Autentifikacija.PokreniNovuSesiju(korisnik, HttpContext, (k.Zapamti == "on")); 
+                Session["IsValid2FA"] = true;
+                return Redirect(k.Url);
+                //return RedirectToAction("Index", "Home", new { area = "" });
+
+            }
+            return RedirectToAction("Index", "Home", new { area = "" });        
+        }
 
         public ActionResult Logout()
         {
@@ -146,51 +188,5 @@ namespace RS1_P120_MobitelShop.Controllers
             body = body.ToString();
             PosaljiEmail.BuildEmailTemplate("Your account is successfully created", body, regInfo.Email);
         }
-
-        //private void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)
-        //{
-        //    string from, to, bcc, cc, subject, body;
-        //    from = "mobishopcenter@gmail.com";
-        //    to = sendTo.Trim();
-        //    bcc = "";
-        //    cc = "";
-        //    subject = subjectText;
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append(bodyText);
-        //    body = sb.ToString();
-        //    MailMessage mail = new MailMessage();
-        //    mail.From = new MailAddress(from);
-        //    mail.To.Add(new MailAddress(to));
-        //    if (!string.IsNullOrEmpty(bcc))
-        //    {
-        //        mail.Bcc.Add(new MailAddress(bcc));
-        //    }
-        //    if (!string.IsNullOrEmpty(cc))
-        //    {
-        //        mail.CC.Add(new MailAddress(cc));
-        //    }
-        //    mail.Subject = subject;
-        //    mail.Body = body;
-        //    mail.IsBodyHtml = true;
-        //    SendEmail(mail);
-        //}
-        //public static void SendEmail(MailMessage mail)
-        //{
-        //    SmtpClient client = new SmtpClient();
-        //    client.Host = "smtp.gmail.com";
-        //    client.Port = 587;
-        //    client.EnableSsl = true;
-        //    client.UseDefaultCredentials = false;
-        //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //    client.Credentials = new System.Net.NetworkCredential("mobishopcenter@gmail.com", "MobiShopCenter123");
-        //    try
-        //    {
-        //        client.Send(mail);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
     }
 }
