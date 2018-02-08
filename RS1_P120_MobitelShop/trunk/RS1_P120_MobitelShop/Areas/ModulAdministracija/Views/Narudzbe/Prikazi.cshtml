@@ -1,5 +1,6 @@
 ﻿@using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
 @model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.NarudzbePrikaziVM
+         
 @{
     //Layout = null;
 }
@@ -34,67 +35,75 @@
                                 <th>Status narudžbe</th>
                                 <th>STATUS</th>
                                 <th>Vrsta isporuke</th>
-                             
+
                             </tr>
                         </thead>
                         <tbody>
-    @foreach (NarudzbePrikaziVM.NarudzbeInfo x in Model.narudzbeStavke)
-    {
-        <tr>
+                            @foreach (NarudzbePrikaziVM.NarudzbeInfo x in Model.narudzbeStavke)
+                            {
+                                <tr>
 
-            <td>
-                @x.BrojNarudzbe
-            </td>
-            <td>@x.klijentIme</td>
-            <td>@x.DatumNarudzbe</td>
-            <td>@x.statusNarudzbe</td>
-            
-            <td>@(x.Otkazano == true ? "ISPORUČENO" : "NA ČEKANJU")</td>
-            <td>@x.isporukaVrsta</td>
+                                    <td>
+                                        @x.BrojNarudzbe
+                                    </td>
+                                    <td>@x.klijentIme</td>
+                                    <td>@x.DatumNarudzbe</td>
+                                    <td>@x.statusNarudzbe</td>
 
-            
-            <td>
-                <div class="btn-group open">
-                    <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>Izvrši izmjene</a>
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                        @*<span class="fa fa-caret-down" title="Toggle dropdown menu"></span>*@
-                    </a>
-                    <ul class="dropdown-menu" style="padding:5px">
-                        <li style="padding:5px;text-decoration:none">
-                            @Ajax.ActionLink("Promjeni status", "Promjena", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "uredi" }, new { @class = "btn btn-warning fa fa-pencil" })
+                                    <td>
+                                        <div>
+
+                                            <a class="btn btn-warning"><b>@(x.Otkazano == true ? "ISPORUČENO" : "NA ČEKANJU")</b></a>
+
+                                        </div>
+
+                                    </td>
+                                    <td>@x.isporukaVrsta</td>
 
 
-                        </li>
-                        <li style="padding:5px">
-                            @Ajax.ActionLink(" Obriši", "Obrisi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "obrisi" }, new { @class = "btn btn-danger fa fa-trash-o" })
-                        </li>
-                        <li style="padding:5px">
-                            @Ajax.ActionLink("Prikaži detalje", "Detalji", new { id = x.Id }, new AjaxOptions { UpdateTargetId = "detalji" }, new { @class = "btn btn-info fa fa-info-circle" })
-                        </li>
+                                    <td>
+                                        <div class="btn-group open">
+                                            <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>Izvrši izmjene</a>
+                                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                                @*<span class="fa fa-caret-down" title="Toggle dropdown menu"></span>*@
+                                            </a>
+                                            <ul class="dropdown-menu" style="padding:5px">
+                                                <li style="padding:5px;text-decoration:none">
+                                                    @Html.ActionLink("Promijeni status", "promjeniStatus", new { id = x.Id }, new { @class = "btn btn-warning" })
+                                                </li>
+                                                <li style="padding:5px">
+                                                    @Ajax.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "obrisi" }, new { @class = "btn btn-danger fa fa-trash-o" })
+                                                </li>
 
-                    </ul>
-                </div>
-            </td>
-          
-        </tr>
-   
-   
+                                                <li style="padding:5px">
 
-    }
+      
+
+                                                    @Ajax.ActionLink("Prikaži detalje", "Detalji", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "detalji" }, new { @class = "btn btn-info fa fa-info-circle" })
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+
+                            }
                         </tbody>
-                        
+
                         <tr>
                             <td>
-                            <div id="detalji" style="position:center">
-                                <span>Detalji narudžbe</span>
-                            </div>
-                                </td>
+                                <div id="detalji" style="position:center">
+                                    <span>Detalji narudžbe</span>
+                                </div>
+                            </td>
                         </tr>
-                            
+
 
 
                     </table>
-                 
+
                 </div>
             </div>
         </div>
@@ -104,3 +113,4 @@
     <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </body>
 </html>
+

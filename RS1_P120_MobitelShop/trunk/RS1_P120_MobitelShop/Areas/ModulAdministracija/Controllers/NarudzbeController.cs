@@ -1,6 +1,7 @@
 ﻿using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models;
 using RS1_P120_MobitelShop.DAL;
 using RS1_P120_MobitelShop.Helper;
+using RS1_P120_MobitelShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             };
             return View("Prikazi",Model);
         }
+        [HttpPost]
         public ActionResult Detalji(int id)
         {
             DetaljiNarudzbePrikaziVM Model = new DetaljiNarudzbePrikaziVM
@@ -55,8 +57,22 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 }).ToList(),
                 NarudzbaId = id
             };
-            return View("Detalji", Model);
+            return PartialView("Detalji");
         }
-        
+        public ActionResult promjeniStatus(int id)
+        {
+            Narudzba n = ctx.Narudzbe.Find(id);
+            if(n.Otkazano == false)
+            {
+                n.Otkazano = true;
+              
+            }
+            else
+            {
+                n.Otkazano = false;
+            }
+            ctx.SaveChanges();
+            return RedirectToAction("Prikazi");
+        }
     }
 }

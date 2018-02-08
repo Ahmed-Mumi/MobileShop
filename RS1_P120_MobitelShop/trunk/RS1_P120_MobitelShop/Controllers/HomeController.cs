@@ -16,15 +16,15 @@ using PagedList.Mvc;
 namespace RS1_P120_MobitelShop.Controllers
 {
     public class HomeController : Controller
-    { 
+    {
         MojContext ctx = new MojContext();
         PocetnaIndexVM ModelHomeIndex = new PocetnaIndexVM();
         ArtikliSpecifikacijeVM ModelArtikalDetalji = new ArtikliSpecifikacijeVM();
         public ActionResult Index(int? ArtikalId, int? page, string searchTerm, PocetnaIndexVM spec)
         {
             int pageSize = 8;
-            int pageNumber = (page ?? 1); 
-            ModelHomeIndex.listaNajnovijihArtikala=ctx.Popusti.OrderByDescending(x=>x.Artikal.DatumObjave).Select(p => new PocetnaIndexRow()
+            int pageNumber = (page ?? 1);
+            ModelHomeIndex.listaNajnovijihArtikala = ctx.Popusti.OrderByDescending(x => x.Artikal.DatumObjave).Select(p => new PocetnaIndexRow()
             {
                 Slika = p.Artikal.Slika,
                 Model = p.Artikal.Model,
@@ -36,7 +36,7 @@ namespace RS1_P120_MobitelShop.Controllers
                 OperativniSistem = p.Artikal.Specifikacije.OperativniSistem,
                 Popust = p.IznosPopusta,
                 VrstaEkrana = p.Artikal.Specifikacije.VrstaEkrana,
-                CijenaSaPopustom = ((100-p.IznosPopusta)*p.Artikal.Cijena)/100
+                CijenaSaPopustom = ((100 - p.IznosPopusta) * p.Artikal.Cijena) / 100
             }).Take(4).ToList();
             if (spec.specifikacijeList != null)
             {
@@ -54,14 +54,17 @@ namespace RS1_P120_MobitelShop.Controllers
             //ovo dodo samo nista vise
             if (ModelHomeIndex.listaArtikalaPoSearch.Count == 1)
             {
-                return RedirectToAction("Detalji","Uporedi", new {area="ModulKlijenti", artikalId = ModelHomeIndex.listaArtikalaPoSearch.FirstOrDefault().Id });     
+                return RedirectToAction("Detalji", "Uporedi", new { area = "ModulKlijenti", artikalId = ModelHomeIndex.listaArtikalaPoSearch.FirstOrDefault().Id });
             }
             Korisnik k = Autentifikacija.GetLogiraniKorisnik(HttpContext);
-            if(k!=null)
+            if (k != null)
                 ModelHomeIndex.BrojArtikalaUKorpi = ctx.Korpe.Count(x => x.KlijentId == k.Id);
             ModelHomeIndex.Korisnik = Autentifikacija.GetLogiraniKorisnik(HttpContext);
             ModelHomeIndex.specifikacijeList = IspisiSpecifikacije();
 
+
+            ModelHomeIndex.cijenaOd = spec.cijenaOd;
+            ModelHomeIndex.cijenaDo = spec.cijenaDo;
             ModelHomeIndex.Obavijesti = ctx.Obavijesti.OrderByDescending(x => x.DatumObavijesti).Take(5).ToList();
             return View("Index", ModelHomeIndex);
         }
@@ -119,7 +122,7 @@ namespace RS1_P120_MobitelShop.Controllers
             tempList = ctx.Artikli.ToList();
             string ram = null, memorija = null, ekran = null, os = null;
             foreach (var x in spec.specifikacijeList.ToList())
-            { 
+            {
                 tempList2 = tempList3;
                 if (x.isRamChecked)
                 {
@@ -137,7 +140,7 @@ namespace RS1_P120_MobitelShop.Controllers
                 }
                 else if (x.isEksternaMemorijaChecked)
                 {
-                    if (memorija==null)
+                    if (memorija == null)
                     {
                         tempList = tempList.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
                         memorija = "eksternamemorija";
@@ -146,7 +149,7 @@ namespace RS1_P120_MobitelShop.Controllers
                     {
                         tempList2 = tempList2.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
                         tempList2.AddRange(tempList);
-                        tempList = VisestrukaPodKategorija(tempList2, spec, memorija); 
+                        tempList = VisestrukaPodKategorija(tempList2, spec, memorija);
                     }
                 }
                 else if (x.isEkranChecked)
@@ -160,7 +163,7 @@ namespace RS1_P120_MobitelShop.Controllers
                     {
                         tempList2 = tempList2.Where(p => p.Specifikacije.Ekran == x.EkranNaziv).ToList();
                         tempList2.AddRange(tempList);
-                        tempList=VisestrukaPodKategorija(tempList2, spec, ekran);
+                        tempList = VisestrukaPodKategorija(tempList2, spec, ekran);
                     }
                 }
                 else if (x.isOperativniSistemChecked)
@@ -176,21 +179,24 @@ namespace RS1_P120_MobitelShop.Controllers
                         tempList2.AddRange(tempList);
                         tempList = VisestrukaPodKategorija(tempList2, spec, os);
                     }
-                } 
+                }
             }
-            return tempList;
+
+            //dodano
+            return tempList.Where(x => x.Cijena > spec.cijenaOd && x.Cijena < spec.cijenaDo).ToList();
         }
 
         public List<Artikal> VisestrukaPodKategorija(List<Artikal> tempList2, PocetnaIndexVM spec, string specifikacija)
         {
-            foreach(var x in spec.specifikacijeList.ToList())
+            foreach (var x in spec.specifikacijeList.ToList())
             {
                 if (x.isRamChecked)
                 {
                     if (specifikacija != "ram")
                         tempList2 = tempList2.Where(p => p.Specifikacije.RAM == x.RamNaziv).ToList();
                 }
-                else if(x.isEksternaMemorijaChecked){
+                else if (x.isEksternaMemorijaChecked)
+                {
                     if (specifikacija != "eksternamemorija")
                         tempList2 = tempList2.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
                 }
@@ -207,6 +213,5 @@ namespace RS1_P120_MobitelShop.Controllers
             }
             return tempList2;
         }
-  
     }
 }

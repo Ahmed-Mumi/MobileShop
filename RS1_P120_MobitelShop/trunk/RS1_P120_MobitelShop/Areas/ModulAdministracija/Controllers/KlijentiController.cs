@@ -37,8 +37,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                     Telefon = x.Korisnik.Telefon,
                     Adresa = x.Korisnik.Adresa,
                     KorisnickoIme = x.Korisnik.Login.Username,
-                    Grad = x.Korisnik.Grad.Naziv,
-                    GradId = x.Korisnik.GradId.Value
+                    Grad = x.Korisnik.Grad.Naziv
+                    //GradId = x.Korisnik.GradId.Value
                 }).ToList()
             };
             return View("Prikazi", Model);

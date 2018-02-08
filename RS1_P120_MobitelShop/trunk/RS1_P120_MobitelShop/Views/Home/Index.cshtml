@@ -387,11 +387,64 @@
 
                         </div>
                     </td>
+                   
+                </tr>
+                @*dodano*@
+                <tr>                   
+                    <td style="height:50px;padding-top:15px;cursor:pointer;">
+                        <h4 class="fa fa-database">
+                            <i class="fa-database"></i>
+                            Cijene OD - DO (KM)
+                        </h4>
+                        <form id="form1">
+
+                        <div id="slider">
+                            
+                        </div>
+                            <br />
+                           <b>Cijene : </b> <b> <span class="btn btn-info" id="ispis"></span></b>
+                        <br />
+                        @*<label for="OD">MIN</label>*@
+                            @Html.HiddenFor(x=>x.cijenaOd)
+                       
+                        @*<label for="DO">MAX</label>*@
+                            @Html.HiddenFor(x => x.cijenaDo)
+                       
+                        </form>
+                    </td>
                 </tr>
             </table>
             <button style="margin-top:30px;width:220px" type="submit" value="Pretraži" class="btn btn-secondary">Pretraži <i class="glyphicon glyphicon-refresh"></i></button>
 
         }
+        @*skripta za slider*@
+
+        <script>
+            $(document).ready(function () {
+
+                var ispis = $('#ispis');
+                var sliderElementi = $('#slider');
+
+                sliderElementi.slider(
+                    {
+                        range: true,
+                        min: 100,
+                        max: 5000,
+                        values : [100, 5000],
+                        slide: function(event,ui)
+                        {
+                            ispis.html(ui.values[0] + ' - ' + ui.values[1])
+                        },
+                        stop: function (event, ui) {
+                            $('#cijenaOd').val(ui.values[0]);
+                            $('#cijenaDo').val(ui.values[1]);
+                        },
+                    });
+                ispis.html(sliderElementi.slider('values', 0) + ' - ' + sliderElementi.slider('values', 1) + ' KM');
+                $('#cijenaOd').val(sliderElementi.slider('values', 0));
+                $('#cijenaDo').val(sliderElementi.slider('values', 1));
+            });
+        </script>
 
 
             <div class="wrapper"> 

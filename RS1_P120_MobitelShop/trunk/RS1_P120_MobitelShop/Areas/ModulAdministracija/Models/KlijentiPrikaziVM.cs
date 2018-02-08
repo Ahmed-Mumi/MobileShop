@@ -12,7 +12,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
             public int Id { get; set; }
             public string Ime { get; set; }
             public string Prezime { get; set; }
-            public DateTime DatumRodjenja { get; set; }
+            public DateTime? DatumRodjenja { get; set; }
             public string Email { get; set; }
             public string Telefon { get; set; }
             public string Adresa { get; set; }

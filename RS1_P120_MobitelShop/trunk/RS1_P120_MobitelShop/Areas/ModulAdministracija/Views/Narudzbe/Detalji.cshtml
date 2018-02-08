@@ -12,33 +12,51 @@
     <title>Prikazi</title>
 </head>
 <body>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
 
- <h3>Detalji narudžbe</h3>
-                    <table style="width:10%; height:10%">
-                        <thead>
-                            <tr>
-                                <th>Naziv artikla</th>
-                                <th>Količina</th>
-                                <th>Cijena</th>
-                                <th>Ukupno</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (DetaljiNarudzbePrikaziVM.DetaljiInfo x in Model.detaljiStavke)
-                            {
+            <div class="modal-content">
+                <div id="zaAjaxRegistraciju">
+
+                    <div class="modal-header">
+                        <h4>Login</h4>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    </div>
+
+                    <div class="modal-body">
+
+                        <h3>Detalji narudžbe</h3>
+                        <table style="width:10%; height:10%">
+                            <thead>
                                 <tr>
-                                   
-                                    <td>
-                                        @x.artikalNaziv
-                                    </td>
-                                    <td>@x.Kolicina</td>  
-                                    <td>@x.CijenaArtikla KM</td>  
-                                    <td>@x.Ukupno KM</td>                                                     
+                                    <th>Naziv artikla</th>
+                                    <th>Količina</th>
+                                    <th>Cijena</th>
+                                    <th>Ukupno</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>                
-      
-              
+                            </thead>
+                            <tbody>
+
+                                @foreach (DetaljiNarudzbePrikaziVM.DetaljiInfo x in Model.detaljiStavke)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            @x.artikalNaziv
+                                        </td>
+                                        <td>@x.Kolicina</td>
+                                        <td>@x.CijenaArtikla KM</td>
+                                        <td>@x.Ukupno KM</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

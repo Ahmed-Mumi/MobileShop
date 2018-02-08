@@ -40,6 +40,11 @@ namespace RS1_P120_MobitelShop.ViewModel
         public bool isEkranChecked { get; set; }
         public bool isEkran { get; set; }
     }
+    public class CijeneVM
+    {
+        public double cijenaOd { get; set;  }
+        public double cijeneDo { get; set; }
+    }
     public class PocetnaIndexVM
     {
         public List<PocetnaIndexRow> listaNajnovijihArtikala { get; set; }
@@ -50,6 +55,9 @@ namespace RS1_P120_MobitelShop.ViewModel
         public int BrojArtikalaUKorpi { get; set; }
         public Korisnik Korisnik { get; set; }
         public List<Obavijest> Obavijesti { get; set; }
+        public List<CijeneVM> cijeneRange { get; set; }
+        public double cijenaOd { get; set; }
+        public double cijenaDo { get; set; }
     }
   
 }
