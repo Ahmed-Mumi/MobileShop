@@ -1,0 +1,17 @@
+﻿@model RS1_P120_MobitelShop.Models.Obavijest
+@{
+    ViewBag.Title = "Obavijest";
+}
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <p>
+        <img src="@Model.Slika" style="width:35%;height:45%;margin-right:50px;float:left">
+        <h1 style="margin-bottom:5%">@Model.NaslovObavijesti</h1>
+        @Model.TekstObavijesti
+    </p>
+
+</body>
+</html>

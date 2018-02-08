@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Nexmo.Api;
 
 namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
 {
@@ -65,7 +66,14 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             if(n.Otkazano == false)
             {
                 n.Otkazano = true;
-              
+
+                //dodao
+                var results = SMS.Send(new SMS.SMSRequest
+                {
+                    from = Configuration.Instance.Settings["appsettings:NEXMO_FROM_NUMBER"],
+                    to = n.Klijent.Korisnik.Telefon,
+                    text = "Postovani "+n.Klijent.Korisnik.Ime+" "+n.Klijent.Korisnik.Prezime+ ",<br> Vasa narudzba je isporucena. Hvala Vam na ukazanom povjerenju.<br> Vas MobileShop."
+                });
             }
             else
             {

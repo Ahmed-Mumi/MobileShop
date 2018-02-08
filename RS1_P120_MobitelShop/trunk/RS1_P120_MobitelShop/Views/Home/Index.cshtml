@@ -268,9 +268,7 @@
  right: 0;
  border-width: 1em 1em 0 0;
 }
-</style>
-
-@*<h2 style="text-align:center; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">MOBITELI</h2>*@
+</style> 
 <div class="row">
     <div class="col-sm-2">
         @using (Html.BeginForm("Index", "Home"))
@@ -457,17 +455,23 @@
                                 @if (o.Slika != null)
     {
                             @*<img class="slika" src="@Url.Content(@o.Slika)" style="width:45px;height:45px">*@
-                            <p>
-                                <img src="@Url.Content(@o.Slika)" alt="Pineapple" style="width:45px;height:45px;margin-right:20px;float:left;padding-bottom:5px;">
-                                @o.NaslovObavijesti.Substring(0, 18)
-                            </p>
+                            <a href="/Obavijest/Index?ObavijestId=@o.Id">
+                                <p>
+                                    <img src="@Url.Content(@o.Slika)" style="width:45px;height:45px;margin-right:20px;float:left;padding-bottom:5px;">
+                                    @o.NaslovObavijesti.Substring(0, 18)
+                                </p>
+                            </a>
 
 }
 else
 {
-                            <p>
-                                @o.NaslovObavijesti.Substring(0, 18)
-                            </p>
+                            <a href="/Obavijest/Index?ObavijestId=@o.Id">
+
+                                <p>
+                                    @o.NaslovObavijesti.Substring(0, 18)
+                                </p>
+                            </a>
+
 }
 
 
