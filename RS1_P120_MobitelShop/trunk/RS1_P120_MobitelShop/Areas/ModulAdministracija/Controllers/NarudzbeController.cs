@@ -39,7 +39,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             };
             return View("Prikazi",Model);
         }
-        [HttpPost]
+      
         public ActionResult Detalji(int id)
         {
             DetaljiNarudzbePrikaziVM Model = new DetaljiNarudzbePrikaziVM
@@ -52,13 +52,12 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                     Kolicina = x.Kolicina,
                     artikalNaziv = x.Artikal.Model,
                     CijenaArtikla = x.Artikal.Cijena,
-                    Ukupno = x.Artikal.Cijena * x.Kolicina,
-                   
-                    //NarudzbaId = x.NarudzbaId,
+                    Ukupno = x.Artikal.Cijena * x.Kolicina,                    
+                    NarudzbaId = x.NarudzbaId,
                 }).ToList(),
                 NarudzbaId = id
             };
-            return PartialView("Detalji");
+            return PartialView("Detalji", Model);
         }
         public ActionResult promjeniStatus(int id)
         {

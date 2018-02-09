@@ -18,7 +18,8 @@ namespace RS1_P120_MobitelShop.Models
         public string KorisnickoIme { get; set; }
         public string LozinkaHash { get; set; }
         public string LozinkaSalt { get; set; }
-
+        public bool isBanned { get; set; }
+        
         public virtual Klijent Klijent { get; set; }
 
 

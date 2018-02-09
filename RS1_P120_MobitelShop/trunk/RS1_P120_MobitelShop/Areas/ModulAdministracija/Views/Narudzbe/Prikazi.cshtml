@@ -1,6 +1,6 @@
 ﻿@using RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
 @model RS1_P120_MobitelShop.Areas.ModulAdministracija.Models.NarudzbePrikaziVM
-         
+
 @{
     //Layout = null;
 }
@@ -74,22 +74,51 @@
                                                 <li style="padding:5px">
                                                     @Ajax.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "obrisi" }, new { @class = "btn btn-danger fa fa-trash-o" })
                                                 </li>
+                                              
+                                                        <li style="padding:5px">
 
-                                                <li style="padding:5px">
+                                                            <button type="button" data-id='@x.Id' class="anchorDetail btn btn-info btn-sm" data-toggle="modal"
+                                                                    data-target="#myModal">
+                                                                Prikaži detalje
+                                                            </button>
+                                                            <br>
+                                                            @Html.ActionLink("ModalPopUp", "#", new { id = x.Id }, new { @data_toggle = "modal", @data_target = "#myModal" })
 
-      
+                                                            
 
-                                                    @Ajax.ActionLink("Prikaži detalje", "Detalji", new { id = x.Id }, new AjaxOptions() { UpdateTargetId = "detalji" }, new { @class = "btn btn-info fa fa-info-circle" })
+                                                            @Html.Action("Detalji", "Narudzbe", new { id = x.Id })
 
-                                                </li>
+
+                                                        </li>
                                             </ul>
                                         </div>
+                                        <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        @*<h4 class="modal-title">Detalji narudžbe</h4>*@
+                                                    </div>
+                                                  
+                                                        @Html.Action("Detalji", "Narudzbe", new { id = x.Id })
+
+
+                                                    
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
+
+
 
                                 </tr>
 
 
                             }
+
                         </tbody>
 
                         <tr>
@@ -111,6 +140,10 @@
     <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
     <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+
+
 </body>
 </html>
+
 

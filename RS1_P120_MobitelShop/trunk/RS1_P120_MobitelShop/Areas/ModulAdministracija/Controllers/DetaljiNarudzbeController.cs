@@ -33,7 +33,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 }).ToList(),
                 NarudzbaId = id               
         };
-            return View("Prikazi",Model);
+            return View("Prikazi", Model);
         }
         //public ActionResult Detalji(int id)
         //{

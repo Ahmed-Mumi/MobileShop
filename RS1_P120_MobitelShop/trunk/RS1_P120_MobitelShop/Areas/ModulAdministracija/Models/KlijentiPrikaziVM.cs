@@ -21,6 +21,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.ViewModels
             public int GradId { get; set; }
             public int LoginId { get; set; }
             public int KlijentId { get; set; }
+            public bool IsBanned { get; set; }
         }
         public List<KlijentInfo> klijentStavke { get; set; }
     }

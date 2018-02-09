@@ -35,7 +35,7 @@ namespace RS1_P120_MobitelShop.Controllers
                 .Include(x => x.Klijent)
                 .SingleOrDefault(x => x.Email == email && x.Login.Password == password);
 
-                if(korisnik == null)
+                if(korisnik == null && korisnik.Klijent.Korisnik.isBanned == true)
                 {
                 return RedirectToAction("Index", "Home", new { area = "" }); 
             }

@@ -37,7 +37,8 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                     Telefon = x.Korisnik.Telefon,
                     Adresa = x.Korisnik.Adresa,
                     KorisnickoIme = x.Korisnik.Login.Username,
-                    Grad = x.Korisnik.Grad.Naziv
+                    Grad = x.Korisnik.Grad.Naziv,
+                    IsBanned = x.Korisnik.isBanned
                     //GradId = x.Korisnik.GradId.Value
                 }).ToList()
             };
@@ -73,7 +74,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
                 gradovi = ucitajGradove(),
                 LoginId = k.Korisnik.LoginId,
                 GradId = k.Korisnik.GradId.Value,
-                KlijentId = k.Korisnik.Klijent.Id
+                KlijentId = k.Korisnik.Klijent.Id,
             };
             return View("Uredi", Model);
         }
@@ -83,6 +84,21 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Controllers
             var grad = new List<SelectListItem>();
             grad.AddRange(ctx.Gradovi.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Naziv }));
             return grad;
+        }
+        public ActionResult BanUser(int id)
+        {
+            Korisnik k = ctx.Korisnici.Find(id);
+            if (k.isBanned == false)
+            {
+                k.isBanned= true;
+
+            }
+            else
+            {
+                k.isBanned = false;
+            }
+            ctx.SaveChanges();
+            return RedirectToAction("Prikazi");
         }
         public ActionResult Obrisi(int id)
         {

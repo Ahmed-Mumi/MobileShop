@@ -24,7 +24,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulAdministracija.Models
             public double? Ukupno { get; set; }
         }
         public List<NarudzbeInfo> narudzbeStavke { get; set; }
-
+     
         public class DetaljiNarudzbePrikaziVM
         {
             public class DetaljiInfo

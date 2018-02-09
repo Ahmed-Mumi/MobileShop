@@ -26,8 +26,7 @@
             <div class="row">
 
                 <div class="table">
-                    <table class="table" style="width:99%">
-                    
+                    <table class="table" style="width:50%">            
                             <thead>
                                 <tr>
                                     <th><b>Ime</b></th>
@@ -38,6 +37,7 @@
                                     <th>Adresa</th>
                                     <th>Korisničko ime</th>
                                     <th>Grad</th>
+                                    <th>Banned/NotBanned</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -46,7 +46,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @x.Ime
+                                            @x.Ime 
                                         </td>
                                         <td>@x.Prezime</td>
                                         <td>@x.DatumRodjenja</td>
@@ -55,6 +55,13 @@
                                         <td>@x.Adresa</td>
                                         <td>@x.KorisnickoIme</td>
                                         <td>@x.Grad</td>
+                                        
+                                        <td>
+                                            <div>
+
+                                                <a class="btn btn-danger"><b style="color:white">@(x.IsBanned == true ? "Banned" : "not Banned")</b></a>
+</div>
+                                        </td>
                                         <td>
                                             @*<p>
                                                 <div class="row">
@@ -78,6 +85,16 @@
                                                     <li style="padding:5px">
                                                         @Html.ActionLink(" Obriši", "Obrisi", new { id = x.KlijentId }, new { @class = "btn btn-danger fa fa-trash-o" })
 
+                                                    </li>
+                                                    <li>
+                                                        @if(x.IsBanned == false)
+                                                        {
+                                                        @Html.ActionLink("Ban user", "BanUser", new { id = x.KlijentId }, new { @class = "btn btn-danger" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.ActionLink("Unban user", "BanUser", new { id = x.KlijentId }, new { @class = "btn btn-danger" })
+                                                        }
                                                     </li>
                                                     @*<li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
             <li class="divider"></li>
