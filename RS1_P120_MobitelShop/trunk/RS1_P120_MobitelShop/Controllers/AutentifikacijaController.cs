@@ -35,7 +35,7 @@ namespace RS1_P120_MobitelShop.Controllers
                 .Include(x => x.Klijent)
                 .SingleOrDefault(x => x.Email == email && x.Login.Password == password);
 
-                if(korisnik == null && korisnik.Klijent.Korisnik.isBanned == true)
+                if(korisnik == null)
                 {
                 return RedirectToAction("Index", "Home", new { area = "" }); 
             }
@@ -52,7 +52,7 @@ namespace RS1_P120_MobitelShop.Controllers
             else if (k.Administrator == null && k.Klijent != null)
             {
                 Logout(); 
-                if (k.Login.IsValid == true)
+                if (k.Login.IsValid == true && korisnik.Klijent.Korisnik.isBanned == false)
                 {
                     //mozda da ne pokrece dok se ne verifikuje
                     string key = System.Guid.NewGuid().ToString().Substring(0, 12);

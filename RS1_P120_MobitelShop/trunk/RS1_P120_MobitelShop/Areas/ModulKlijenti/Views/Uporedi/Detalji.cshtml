@@ -138,37 +138,40 @@ else
                 </tr>
             </tbody>
         </table>
-        @if (korisnik != null)
+       
+        <p style="display:inline">
+            @if (korisnik != null)
     {
         using (Html.BeginForm("Staviukorpi", "Uporedi", new { ArtikalId = Model.ArtikalId, KlijentId = Model.KlijentId }))
         {
-            <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu <i class="glyphicon glyphicon-shopping-cart"></i></button>
-    }
-} 
-        <div class="bs-example"> 
-            <a href="#myModall" class="btn btn-primary" style="margin-top:15px" data-toggle="modal">  Uporedi mobitel &nbsp;</a> 
-            <div id="myModall" class="modal fade">
-                <div class="modal-dialog modal-lg">
+            <button type="submit" class="btn btn-primary btn-lg" style="float:left">Ubaci u korpu <i class="glyphicon glyphicon-shopping-cart"></i></button>
+}
+}
+            <a href="#myModall" class="btn btn-primary btn-lg" style="float:right;" data-toggle="modal">  Uporedi mobitel &nbsp;</a>
 
-                    <div class="modal-content">
-                        <div id="zaAjax">
+        </p>
 
-                            <div class="modal-header"> 
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-                            </div>
+        <div id="myModall" class="modal fade">
+            <div class="modal-dialog modal-lg">
 
-                            <div class="modal-body">
-                                @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
+                <div class="modal-content">
+                    <div id="zaAjax">
 
-                            </div>
-                            <div style="margin-top:10px" class="form-group"> 
-                                <div class="col-sm-12 controls">
-                                </div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            @Html.Action("Index", "Uporedi", new { artikalId = Model.ArtikalId, klijentId = Model.KlijentId })
+
+                        </div>
+                        <div style="margin-top:10px" class="form-group">
+                            <div class="col-sm-12 controls">
                             </div>
                         </div>
-                        <div class="modal-footer"> 
-                                <button  onclick="@("window.location.href='" + @Url.Action("Detalji", "Uporedi",new { artikalId=Model.ArtikalId}) + "'");" type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="@("window.location.href='" + @Url.Action("Detalji", "Uporedi",new { artikalId=Model.ArtikalId}) + "'");" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

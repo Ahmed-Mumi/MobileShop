@@ -36,7 +36,7 @@ namespace RS1_P120_MobitelShop.Controllers
                 OperativniSistem = p.Artikal.Specifikacije.OperativniSistem,
                 Popust = p.IznosPopusta,
                 VrstaEkrana = p.Artikal.Specifikacije.VrstaEkrana,
-                CijenaSaPopustom = ((100 - p.IznosPopusta) * p.Artikal.Cijena) / 100
+                CijenaSaPopustom = ((100 - p.IznosPopusta) * (int)Math.Round(p.Artikal.Cijena)) / 100
             }).Take(4).ToList();
             if (spec.specifikacijeList != null)
             {
@@ -65,7 +65,7 @@ namespace RS1_P120_MobitelShop.Controllers
 
             ModelHomeIndex.cijenaOd = spec.cijenaOd;
             ModelHomeIndex.cijenaDo = spec.cijenaDo;
-            ModelHomeIndex.Obavijesti = ctx.Obavijesti.OrderByDescending(x => x.DatumObavijesti).Take(5).ToList();
+            ModelHomeIndex.Obavijesti = ctx.Obavijesti.OrderByDescending(x => x.DatumObavijesti).Take(6).ToList();
             return View("Index", ModelHomeIndex);
         }
 

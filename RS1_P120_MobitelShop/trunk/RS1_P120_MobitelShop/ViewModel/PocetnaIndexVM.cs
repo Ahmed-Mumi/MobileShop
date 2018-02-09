@@ -18,7 +18,7 @@ namespace RS1_P120_MobitelShop.ViewModel
         public string Kamera { get; set; }
         public string OperativniSistem { get; set; } 
         public int? Popust { get; set; }
-        public double CijenaSaPopustom { get; set; }
+        public int CijenaSaPopustom { get; set; }
 
     }
     public class SpecVM

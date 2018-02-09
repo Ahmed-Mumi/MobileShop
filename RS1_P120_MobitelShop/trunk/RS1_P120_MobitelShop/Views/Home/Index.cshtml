@@ -65,12 +65,12 @@
 
     .box {
         margin: 3em auto;
-        padding: 2em;
-        width: 15em;
-        height: 20em;
+        margin-top: 0px;
+        padding: 1em;
+        width: 17em;
+        height: 25em;
         position: relative;
-        overflow: hidden;
-        top: 1em;
+        overflow: hidden; 
         background-color: #FFF;
         box-shadow: 7px 5px 4px rgba(0,0,0,0.5);
         border: 1px solid black;
@@ -193,7 +193,7 @@
     {
         using (Html.BeginForm("Staviukorpi", "Uporedi", new { area = "ModulKlijenti", ArtikalId = hir.ArtikalId, KlijentId = korisnik.Klijent.Id }))
         {
-                                        <button type="submit" class="btn btn-primary btn-lg">Ubaci u korpu <i class="glyphicon glyphicon-shopping-cart"></i></button>
+                                        <button type="submit" style="padding-bottom:2px" class="btn btn-primary btn-lg">Ubaci u korpu <i class="glyphicon glyphicon-shopping-cart"></i></button>
 }
 }
                                         </div>
@@ -272,149 +272,147 @@
 <div class="row">
     <div class="col-sm-2">
         @using (Html.BeginForm("Index", "Home"))
-        {
-            <table class="table table-bordered">
-                <tr>
-                    <td style="background-color:#337ab7;color:whitesmoke">Pretraži po filterima</td>
-                </tr>
-                <tr>
-                    <td style="height:50px;padding-top:15px;cursor:pointer;">
-                        <div style="width:200px;" data-toggle="collapse" href="#collapseRAM" aria-expanded="false" aria-controls="collapseRAM">
-                            RAM
-                            <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseRAM" aria-expanded="false" aria-controls="collapseRAM"></i>
+    {
+        <table class="table table-bordered">
+            <tr>
+                <td style="background-color:#337ab7;color:whitesmoke">Pretraži po filterima</td>
+            </tr>
+            <tr>
+                <td style="height:50px;padding-top:15px;cursor:pointer;">
+                    <div style="width:200px;" data-toggle="collapse" href="#collapseRAM" aria-expanded="false" aria-controls="collapseRAM">
+                        RAM
+                        <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseRAM" aria-expanded="false" aria-controls="collapseRAM"></i>
+                    </div>
+                    <div class="collapse" id="collapseRAM" style="background-color:white">
+                        <div style="margin-left:20px">
+                            <hr />
+                            @for (int i = 0; i < Model.specifikacijeList.Count; i++)
+                        {
+                            if (Model.specifikacijeList[i].isRam == true)
+                            {
+                                <div class="checkbox">
+
+                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isRamChecked, new { @class = "checkbox" })
+                                    @Model.specifikacijeList[i].RamNaziv <br />
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].RamId)
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].RamNaziv)
+                                </div>
+                        }
+                    }
                         </div>
-                        <div class="collapse" id="collapseRAM" style="background-color:white">
-                            <div style="margin-left:20px">
-                                <hr />
-                                @for (int i = 0; i < Model.specifikacijeList.Count; i++)
-                                {
-                                    if (Model.specifikacijeList[i].isRam == true)
-                                    {
-                                        <div class="checkbox">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="height:50px;padding-top:15px;cursor:pointer">
+                    <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija">
+                        Eksterna memorija
+                        <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija"></i>
+                    </div>
+                    <div class="collapse" id="collapseEkstMemorija">
+                        <div style="margin-left:20px">
+                            <hr />
 
-                                            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isRamChecked, new { @class = "checkbox" })
-                                            @Model.specifikacijeList[i].RamNaziv <br />
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].RamId)
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].RamNaziv)
-                                        </div>
-                                    }
-                                }
-                            </div>
+                            @for (int i = 0; i < Model.specifikacijeList.Count; i++)
+                        {
+                            if (Model.specifikacijeList[i].isEksternaMemorija == true)
+                            {
+                                <div class="checkbox">
+
+                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEksternaMemorijaChecked, new { @class = "checkbox" })
+                                    @Model.specifikacijeList[i].EksternaMemorijaNaziv <br />
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaId)
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv)
+                                </div>
+                        }
+                    }
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="height:50px;padding-top:15px;cursor:pointer">
-                        <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija">
-                            Eksterna memorija
-                            <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija"></i>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="height:50px;padding-top:15px;cursor:pointer;">
+                    <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem">
+                        Operativni sistem
+                        <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem"></i>
+                    </div>
+                    <div class="collapse" id="collapseOperSistem">
+                        <div style="margin-left:20px">
+                            <hr />
+
+                            @for (int i = 0; i < Model.specifikacijeList.Count; i++)
+                        {
+                            if (Model.specifikacijeList[i].isOperativniSistem == true)
+                            {
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isOperativniSistemChecked, new { @class = "checkbox" })
+                                    @Model.specifikacijeList[i].OperativniSistemNaziv <br />
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemId)
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv)
+                                </div>
+                        }
+                    }
                         </div>
-                        <div class="collapse" id="collapseEkstMemorija">
-                            <div style="margin-left:20px">
-                                <hr />
 
-                                @for (int i = 0; i < Model.specifikacijeList.Count; i++)
-                                {
-                                    if (Model.specifikacijeList[i].isEksternaMemorija == true)
-                                    {
-                                        <div class="checkbox">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="height:50px;padding-top:15px;cursor:pointer;">
+                    <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseEkran" aria-expanded="false" aria-controls="collapseEkran">
+                        Ekran <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseEkran" aria-expanded="false" aria-controls="collapseEkran"></i>
+                    </div>
+                    <div class="collapse" id="collapseEkran">
+                        <div style="margin-left:20px">
+                            <hr />
 
-                                            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEksternaMemorijaChecked, new { @class = "checkbox" })
-                                            @Model.specifikacijeList[i].EksternaMemorijaNaziv <br />
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaId)
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv)
-                                        </div>
-                                    }
-                                }
-                            </div>
+                            @for (int i = 0; i < Model.specifikacijeList.Count; i++)
+                        {
+                            if (Model.specifikacijeList[i].isEkran == true)
+                            {
+                                <div class="checkbox">
 
+                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEkranChecked, new { @class = "checkbox" })
+                                    @Model.specifikacijeList[i].EkranNaziv "<br />
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].EkranId)
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].EkranNaziv)
+                                </div>
+
+                        }
+                    }
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="height:50px;padding-top:15px;cursor:pointer;" >
-                        <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem">
-                            Operativni sistem
-                            <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem"></i>
-                        </div>
-                        <div class="collapse" id="collapseOperSistem">
-                            <div style="margin-left:20px">
-                                <hr />
 
-                                @for (int i = 0; i < Model.specifikacijeList.Count; i++)
-                                {
-                                    if (Model.specifikacijeList[i].isOperativniSistem == true)
-                                    {
-                                        <div class="checkbox">
-                                            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isOperativniSistemChecked, new { @class = "checkbox" })
-                                            @Model.specifikacijeList[i].OperativniSistemNaziv <br />
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemId)
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv)
-                                        </div>
-                                    }
-                                }
-                            </div>
+                    </div>
+                </td>
 
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="height:50px;padding-top:15px;cursor:pointer;" >
-                        <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseEkran" aria-expanded="false" aria-controls="collapseEkran">
-                            Ekran <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseEkran" aria-expanded="false" aria-controls="collapseEkran"></i>
-                        </div>
-                        <div class="collapse" id="collapseEkran">
-                            <div style="margin-left:20px">
-                                <hr />
-
-                                @for (int i = 0; i < Model.specifikacijeList.Count; i++)
-                                {
-                                    if (Model.specifikacijeList[i].isEkran == true)
-                                    {
-                                        <div class="checkbox">
-
-                                            @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEkranChecked, new { @class = "checkbox" })
-                                            @Model.specifikacijeList[i].EkranNaziv "<br />
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranId)
-                                            @Html.HiddenFor(m => Model.specifikacijeList[i].EkranNaziv)
-                                        </div>
-
-                                    }
-                                }
-                            </div>
-
-                        </div>
-                    </td>
-                   
-                </tr>
-                @*dodano*@
-                <tr>                   
-                    <td style="height:50px;padding-top:15px;cursor:pointer;">
-                        <h4 class="fa fa-database">
-                            <i class="fa-database"></i>
-                            Cijene OD - DO (KM)
-                        </h4>
-                        <form id="form1">
+            </tr>
+            @*dodano*@
+            <tr>
+                <td style="height:50px;padding-top:15px;cursor:pointer;">
+                    <h4 class="fa fa-database">
+                        <i class="fa-database"></i>
+                        Cijene OD - DO (KM)
+                    </h4>
+                    <form id="form1">
 
                         <div id="slider">
-                            
-                        </div>
-                            <br />
-                           <b>Cijene : </b> <b> <span class="btn btn-info" id="ispis"></span></b>
-                        <br />
-                        @*<label for="OD">MIN</label>*@
-                            @Html.HiddenFor(x=>x.cijenaOd)
-                       
-                        @*<label for="DO">MAX</label>*@
-                            @Html.HiddenFor(x => x.cijenaDo)
-                       
-                        </form>
-                    </td>
-                </tr>
-            </table>
-            <button style="margin-top:30px;width:220px" type="submit" value="Pretraži" class="btn btn-secondary">Pretraži <i class="glyphicon glyphicon-refresh"></i></button>
 
-        }
+                        </div>
+                        <br />
+                        <b>Cijene : </b> <b> <span class="btn btn-info" style="background-color:#337ab7;cursor:default" id="ispis"></span></b>
+                        <br />
+                        @Html.HiddenFor(x => x.cijenaOd)
+
+                        @Html.HiddenFor(x => x.cijenaDo)
+
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <button style="margin-top:7px;width:220px" type="submit" value="Pretraži" class="btn btn-secondary">Pretraži <i class="glyphicon glyphicon-refresh"></i></button>
+
+}
         @*skripta za slider*@
 
         <script>
@@ -428,9 +426,8 @@
                         range: true,
                         min: 100,
                         max: 5000,
-                        values : [100, 5000],
-                        slide: function(event,ui)
-                        {
+                        values: [100, 5000],
+                        slide: function (event, ui) {
                             ispis.html(ui.values[0] + ' - ' + ui.values[1])
                         },
                         stop: function (event, ui) {
@@ -445,46 +442,46 @@
         </script>
 
 
-            <div class="wrapper"> 
-                <div class="box"> 
-                    <marquee behavior="scroll" direction="down" height="300px" width="350" scrollamount="2" onmouseover="stop();" onmouseout="start();" loop="true">
-                        <div class="scroll" style="width:100%;height:50px">
-                            @foreach (Obavijest o in Model.Obavijesti)
-                { 
-                            <div>
-                                @if (o.Slika != null)
-    {
-                            @*<img class="slika" src="@Url.Content(@o.Slika)" style="width:45px;height:45px">*@
-                            <a href="/Obavijest/Index?ObavijestId=@o.Id">
-                                <p>
-                                    <img src="@Url.Content(@o.Slika)" style="width:45px;height:45px;margin-right:20px;float:left;padding-bottom:5px;">
-                                    @o.NaslovObavijesti.Substring(0, 18)
-                                </p>
-                            </a>
+        <div style="margin: 4em auto;">
+            <p style="border:1px solid black;border-radius:2px;background-color:#337ab7;padding:5px;margin-bottom:0px;color:whitesmoke;text-align:center;width:17em">Obavijesti</p>
+            <div class="box">
+                <marquee behavior="scroll" direction="up" height="300px" width="200" scrollamount="4" onmouseover="stop();" onmouseout="start();" loop="true">
+            
+                        @foreach (Obavijest o in Model.Obavijesti)
+                {
+                    <div>
+                        @if (o.Slika != null)
+                {
+                    @*<img class="slika" src="@Url.Content(@o.Slika)" style="width:45px;height:45px">*@
+                    <a href="/Obavijest/Index?ObavijestId=@o.Id">
+                        <p>
+                            <img src="@Url.Content(@o.Slika)" style="width:45px;height:45px;margin-right:16px;float:left;border:1px solid black;border-radius:2px">
+                            @o.NaslovObavijesti
+                        </p>
+                    </a>
+
+        }
+        else
+        {
+            <a href="/Obavijest/Index?ObavijestId=@o.Id">
+
+                <p>
+                    @o.NaslovObavijesti
+                </p>
+            </a>
 
 }
-else
-{
-                            <a href="/Obavijest/Index?ObavijestId=@o.Id">
-
-                                <p>
-                                    @o.NaslovObavijesti.Substring(0, 18)
-                                </p>
-                            </a>
-
-}
 
 
-                                <hr />
-                            </div>  
-    }
-                        </div>  
+                        <hr />
+                    </div>
+        } 
                 </marquee>
             </div>
-            </div>
         </div>
+    </div>
         <div class="col-sm-10">
-            <div id="divSearch" style="margin-left:10px">
+            <div id="divSearch" style="margin-left:30px;margin-top:4em">
                 <div class="content-wrapper">
                     <div class="container-fluid">
                         <div class="row">

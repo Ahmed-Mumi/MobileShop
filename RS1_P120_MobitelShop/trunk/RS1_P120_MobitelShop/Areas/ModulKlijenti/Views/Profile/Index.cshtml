@@ -37,7 +37,7 @@
             <label>Telefon</label>
             @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Telefon)
-            <span>Molimo Vas da koristite sljedeći format: <font style="color:orangered">primjer: 38762xxxxxx (bez razmaka)</font></span>
+            <span>Molimo Vas da koristite sljedeći format. <strong>Primjer: 38762xxxxxx (bez razmaka)</strong></span>
         </div>
 
         <div class="form-group">
@@ -47,9 +47,11 @@
         </div>
         <br />
         @Html.HiddenFor(x => x.GradId)
+        <p style="display:inline">
+            <a class="btn btn-info" onclick="history.go(-1); return false;" href="#">Back</a>
 
-        <input type="submit" value="Naruči" class="btn btn-info" />
-
+            <input type="submit" value="Naruči" class="btn btn-info" style="float:right" />
+        </p>
         <script src="~/Scripts/bootstrap.js"></script>
     }
 }
@@ -93,7 +95,7 @@ else
         <br />
         @Html.HiddenFor(x => x.GradId)
 
-        <input type="submit" value="Spremi" class="btn btn-info" />
+        <input type="submit" value="Spremi" class="btn btn-info" style="float:right" /><br /><br />
 
         <script src="~/Scripts/bootstrap.js"></script>
     }
