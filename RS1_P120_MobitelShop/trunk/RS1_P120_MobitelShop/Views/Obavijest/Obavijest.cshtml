@@ -1,17 +1,13 @@
 ﻿@model RS1_P120_MobitelShop.Models.Obavijest
-@{
-    ViewBag.Title = "Obavijest";
-}
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-    <p>
-        <img src="@Model.Slika" style="width:35%;height:45%;margin-right:50px;float:left">
-        <h1 style="margin-bottom:5%">@Model.NaslovObavijesti</h1>
-        @Model.TekstObavijesti
-    </p>
 
-</body>
-</html>
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@*<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<p>
+    <img src="@Model.Slika" style="width:35%;height:45%;margin-right:50px;float:left">
+    <h1 style="margin-bottom:5%">@Model.NaslovObavijesti</h1>
+    @Model.TekstObavijesti
+</p>

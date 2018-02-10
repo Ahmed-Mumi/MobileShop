@@ -1,21 +1,26 @@
 ﻿@model RS1_P120_MobitelShop.ViewModel.KorisnikVM
- 
-    <div style="font-size:20px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Skenirajte QR code sa programom Authenticator na Vašem mobilnom uređaju</div>
-    <div>
-        <img src="@ViewBag.BarcodeImageUrl" />
-    </div>
-    <div>
-        Manual Setup Code: <b>@ViewBag.SetupCode</b>
-    </div>
+<link href="~/Areas/ModulAdministracija/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@*<script src="~/Areas/ModulAdministracija/Content/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Areas/ModulAdministracija/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div style="font-size:20px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Skenirajte QR code sa programom Authenticator na Vašem mobilnom uređaju</div>
+<div>
+    <img src="@ViewBag.BarcodeImageUrl" />
+</div>
+<div>
+    Manual Setup Code: <b>@ViewBag.SetupCode</b>
+</div>
 <br />
-    <div>
-        @using (Html.BeginForm("Verfiy2FA", "Autentifikacija", FormMethod.Post))
-        {
-            @Html.HiddenFor(x => x.Email)
-            @Html.HiddenFor(x => x.Password)
-            @Html.HiddenFor(x => x.Zapamti)
-            @Html.HiddenFor(x => x.Url)
-            <input type="text" name="passcode" class="form-control" style="width:40%;display:inline-block"/>
-            <input type="submit" class="btn btn-success" style="margin-left:15px" />
-        }
-    </div> 
+<div>
+    @using (Html.BeginForm("Verfiy2FA", "Autentifikacija", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.Email)
+        @Html.HiddenFor(x => x.Password)
+        @Html.HiddenFor(x => x.Zapamti)
+        @Html.HiddenFor(x => x.Url)
+        <input type="text" name="passcode" class="form-control" style="width:40%;display:inline-block" />
+        <input type="submit" class="btn btn-success" style="margin-left:15px" />
+    }
+</div> 

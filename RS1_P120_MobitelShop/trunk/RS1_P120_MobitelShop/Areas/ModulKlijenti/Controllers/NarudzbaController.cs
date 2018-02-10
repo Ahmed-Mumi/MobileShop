@@ -29,7 +29,7 @@ namespace RS1_P120_MobitelShop.Areas.ModulKlijenti.Controllers
                     KorpaId=p.Id,
                     ArtikalId=p.ArtikalId,
                     Popust= ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault(),
-                    CijenaSaPopustom = ((100 - ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault()) * p.Artikal.Cijena) / 100,
+                    CijenaSaPopustom = ((100 - ctx.Popusti.Where(pop => pop.ArtikalId == p.ArtikalId).Select(s => s.IznosPopusta).FirstOrDefault()) * (int)Math.Round(p.Artikal.Cijena)) / 100,
                     KorisnikId=p.Klijent.Korisnik.Id
                 }).ToList()
         };
