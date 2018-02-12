@@ -82,30 +82,30 @@ namespace RS1_P120_MobitelShop.Controllers
                 if (specifikacijeList.Count == 0)
                 {
                     specifikacijeList.Add(new SpecVM { RamId = x.Id, RamNaziv = x.Specifikacije.RAM, isRamChecked = false, isRam = true });
-                    specifikacijeList.Add(new SpecVM { EksternaMemorijaId = x.Id, EksternaMemorijaNaziv = x.Specifikacije.EksternaMemorija, isEksternaMemorijaChecked = false, isEksternaMemorija = true });
-                    specifikacijeList.Add(new SpecVM { OperativniSistemId = x.Id, OperativniSistemNaziv = x.Specifikacije.OperativniSistem, isOperativniSistemChecked = false, isOperativniSistem = true });
+                    specifikacijeList.Add(new SpecVM { KameraId = x.Id, KameraNaziv = x.Specifikacije.Kamera, isKameraChecked = false, isKamera = true });
+                    specifikacijeList.Add(new SpecVM { MarkaId = x.Id, MarkaNaziv = x.Marka, isMarkaChecked = false, isMarka = true });
                     specifikacijeList.Add(new SpecVM { EkranId = x.Id, EkranNaziv = x.Specifikacije.Ekran, isEkranChecked = false, isEkran = true });
                 }
                 else
                 {
-                    bool sameRam = false, sameMemory = false, sameOS = false, sameEkran = false;
+                    bool sameRam = false, sameKamera = false, sameMarka = false, sameEkran = false;
                     foreach (var p in specifikacijeList.ToList())
                     {
                         if (p.RamNaziv == x.Specifikacije.RAM)
                             sameRam = true;
-                        if (p.EksternaMemorijaNaziv == x.Specifikacije.EksternaMemorija)
-                            sameMemory = true;
-                        if (p.OperativniSistemNaziv == x.Specifikacije.OperativniSistem)
-                            sameOS = true;
+                        if (p.KameraNaziv == x.Specifikacije.Kamera)
+                            sameKamera = true;
+                        if (p.MarkaNaziv == x.Marka)
+                            sameMarka = true;
                         if (p.EkranNaziv == x.Specifikacije.Ekran)
                             sameEkran = true;
                     }
                     if (!sameRam)
                         specifikacijeList.Add(new SpecVM { RamId = x.Id, RamNaziv = x.Specifikacije.RAM, isRamChecked = false, isRam = true });
-                    if (!sameMemory)
-                        specifikacijeList.Add(new SpecVM { EksternaMemorijaId = x.Id, EksternaMemorijaNaziv = x.Specifikacije.EksternaMemorija, isEksternaMemorijaChecked = false, isEksternaMemorija = true });
-                    if (!sameOS)
-                        specifikacijeList.Add(new SpecVM { OperativniSistemId = x.Id, OperativniSistemNaziv = x.Specifikacije.OperativniSistem, isOperativniSistemChecked = false, isOperativniSistem = true });
+                    if (!sameKamera)
+                        specifikacijeList.Add(new SpecVM { KameraId = x.Id, KameraNaziv = x.Specifikacije.Kamera, isKameraChecked = false, isKamera = true });
+                    if (!sameMarka)
+                        specifikacijeList.Add(new SpecVM { MarkaId = x.Id, MarkaNaziv = x.Marka, isMarkaChecked = false, isMarka = true });
                     if (!sameEkran)
                         specifikacijeList.Add(new SpecVM { EkranId = x.Id, EkranNaziv = x.Specifikacije.Ekran, isEkranChecked = false, isEkran = true });
                 }
@@ -120,7 +120,7 @@ namespace RS1_P120_MobitelShop.Controllers
             List<Artikal> tempList3 = new List<Artikal>();
             tempList3 = ctx.Artikli.ToList();
             tempList = ctx.Artikli.ToList();
-            string ram = null, memorija = null, ekran = null, os = null;
+            string ram = null, kamera = null, ekran = null, marka = null;
             foreach (var x in spec.specifikacijeList.ToList())
             {
                 tempList2 = tempList3;
@@ -138,18 +138,18 @@ namespace RS1_P120_MobitelShop.Controllers
                         tempList = VisestrukaPodKategorija(tempList2, spec, ram);
                     }
                 }
-                else if (x.isEksternaMemorijaChecked)
+                else if (x.isKameraChecked)
                 {
-                    if (memorija == null)
+                    if (kamera == null)
                     {
-                        tempList = tempList.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
-                        memorija = "eksternamemorija";
+                        tempList = tempList.Where(p => p.Specifikacije.Kamera == x.KameraNaziv).ToList();
+                        kamera = "kamera";
                     }
                     else
                     {
-                        tempList2 = tempList2.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
+                        tempList2 = tempList2.Where(p => p.Specifikacije.Kamera == x.KameraNaziv).ToList();
                         tempList2.AddRange(tempList);
-                        tempList = VisestrukaPodKategorija(tempList2, spec, memorija);
+                        tempList = VisestrukaPodKategorija(tempList2, spec, kamera);
                     }
                 }
                 else if (x.isEkranChecked)
@@ -166,18 +166,18 @@ namespace RS1_P120_MobitelShop.Controllers
                         tempList = VisestrukaPodKategorija(tempList2, spec, ekran);
                     }
                 }
-                else if (x.isOperativniSistemChecked)
+                else if (x.isMarkaChecked)
                 {
-                    if (os == null)
+                    if (marka == null)
                     {
-                        tempList = tempList.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();
-                        os = "operativnisistem";
+                        tempList = tempList.Where(p => p.Marka == x.MarkaNaziv).ToList();
+                        marka = "marka";
                     }
                     else
                     {
-                        tempList2 = tempList2.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();
+                        tempList2 = tempList2.Where(p => p.Marka == x.MarkaNaziv).ToList();
                         tempList2.AddRange(tempList);
-                        tempList = VisestrukaPodKategorija(tempList2, spec, os);
+                        tempList = VisestrukaPodKategorija(tempList2, spec, marka);
                     }
                 }
             }
@@ -195,20 +195,20 @@ namespace RS1_P120_MobitelShop.Controllers
                     if (specifikacija != "ram")
                         tempList2 = tempList2.Where(p => p.Specifikacije.RAM == x.RamNaziv).ToList();
                 }
-                else if (x.isEksternaMemorijaChecked)
+                else if (x.isKameraChecked)
                 {
-                    if (specifikacija != "eksternamemorija")
-                        tempList2 = tempList2.Where(p => p.Specifikacije.EksternaMemorija == x.EksternaMemorijaNaziv).ToList();
+                    if (specifikacija != "kamera")
+                        tempList2 = tempList2.Where(p => p.Specifikacije.Kamera == x.KameraNaziv).ToList();
                 }
                 else if (x.isEkranChecked)
                 {
                     if (specifikacija != "ekran")
                         tempList2 = tempList2.Where(p => p.Specifikacije.Ekran == x.EkranNaziv).ToList();
                 }
-                else if (x.isOperativniSistemChecked)
+                else if (x.isMarkaChecked)
                 {
-                    if (specifikacija != "operativnisistem")
-                        tempList2 = tempList2.Where(p => p.Specifikacije.OperativniSistem == x.OperativniSistemNaziv).ToList();
+                    if (specifikacija != "marka")
+                        tempList2 = tempList2.Where(p => p.Marka == x.MarkaNaziv).ToList();
                 }
             }
             return tempList2;

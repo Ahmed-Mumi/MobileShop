@@ -39,6 +39,14 @@ namespace RS1_P120_MobitelShop.ViewModel
         public string EkranNaziv { get; set; }
         public bool isEkranChecked { get; set; }
         public bool isEkran { get; set; }
+        public int KameraId { get; set; }
+        public string KameraNaziv { get; set; }
+        public bool isKameraChecked { get; set; }
+        public bool isKamera { get; set; }
+        public int MarkaId { get; set; }
+        public string MarkaNaziv { get; set; }
+        public bool isMarkaChecked { get; set; }
+        public bool isMarka { get; set; }
     }
     public class CijeneVM
     {

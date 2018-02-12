@@ -305,24 +305,24 @@
             </tr>
             <tr>
                 <td style="height:50px;padding-top:15px;cursor:pointer">
-                    <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija">
-                        Eksterna memorija
-                        <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseEkstMemorija" aria-expanded="false" aria-controls="collapseEkstMemorija"></i>
+                    <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseKamera" aria-expanded="false" aria-controls="collapseKamera">
+                        Kamera
+                        <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseKamera" aria-expanded="false" aria-controls="collapseKamera"></i>
                     </div>
-                    <div class="collapse" id="collapseEkstMemorija">
+                    <div class="collapse" id="collapseKamera">
                         <div style="margin-left:20px">
                             <hr />
 
                             @for (int i = 0; i < Model.specifikacijeList.Count; i++)
                         {
-                            if (Model.specifikacijeList[i].isEksternaMemorija == true)
+                            if (Model.specifikacijeList[i].isKamera == true)
                             {
                                 <div class="checkbox">
 
-                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isEksternaMemorijaChecked, new { @class = "checkbox" })
-                                    @Model.specifikacijeList[i].EksternaMemorijaNaziv <br />
-                                    @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaId)
-                                    @Html.HiddenFor(m => Model.specifikacijeList[i].EksternaMemorijaNaziv)
+                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isKameraChecked, new { @class = "checkbox" })
+                                    @Model.specifikacijeList[i].KameraNaziv <br />
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].KameraId)
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].KameraNaziv)
                                 </div>
                         }
                     }
@@ -333,23 +333,23 @@
             </tr>
             <tr>
                 <td style="height:50px;padding-top:15px;cursor:pointer;">
-                    <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem">
-                        Operativni sistem
-                        <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseOperSistem" aria-expanded="false" aria-controls="collapseOperSistem"></i>
+                    <div style="cursor:pointer;width:200px;" data-toggle="collapse" href="#collapseMarka" aria-expanded="false" aria-controls="collapseMarka">
+                        Marka
+                        <i class="glyphicon glyphicon-chevron-down" style="float:right;cursor:pointer;position:relative;z-index:99;color:#337ab7" data-toggle="collapse" href="#collapseMarka" aria-expanded="false" aria-controls="collapseMarka"></i>
                     </div>
-                    <div class="collapse" id="collapseOperSistem">
+                    <div class="collapse" id="collapseMarka">
                         <div style="margin-left:20px">
                             <hr />
 
                             @for (int i = 0; i < Model.specifikacijeList.Count; i++)
                         {
-                            if (Model.specifikacijeList[i].isOperativniSistem == true)
+                            if (Model.specifikacijeList[i].isMarka == true)
                             {
                                 <div class="checkbox">
-                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isOperativniSistemChecked, new { @class = "checkbox" })
-                                    @Model.specifikacijeList[i].OperativniSistemNaziv <br />
-                                    @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemId)
-                                    @Html.HiddenFor(m => Model.specifikacijeList[i].OperativniSistemNaziv)
+                                    @Html.CheckBoxFor(m => Model.specifikacijeList[i].isMarkaChecked, new { @class = "checkbox" })
+                                    @Model.specifikacijeList[i].MarkaNaziv <br />
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].MarkaId)
+                                    @Html.HiddenFor(m => Model.specifikacijeList[i].MarkaNaziv)
                                 </div>
                         }
                     }
@@ -443,7 +443,7 @@
 
 
         <div style="margin: 4em auto;">
-            <p style="border:1px solid black;border-radius:2px;background-color:#337ab7;padding:5px;margin-bottom:0px;color:whitesmoke;text-align:center;width:17em">Obavijesti</p>
+            <p style="border:1px solid black;border-radius:2px;background-color:#337ab7;padding:5px;margin-bottom:0px;color:whitesmoke;text-align:center;width:17em;box-shadow: 7px 5px 4px rgba(0,0,0,0.5);">Obavijesti</p>
             <div class="box">
                 <marquee behavior="scroll" direction="up" height="300px" width="200" scrollamount="4" onmouseover="stop();" onmouseout="start();" loop="true">
             
@@ -451,8 +451,7 @@
                 {
                     <div>
                         @if (o.Slika != null)
-                {
-                    @*<img class="slika" src="@Url.Content(@o.Slika)" style="width:45px;height:45px">*@
+                { 
                     <a href="/Obavijest/Index?ObavijestId=@o.Id">
                         <p>
                             <img src="@Url.Content(@o.Slika)" style="width:45px;height:45px;margin-right:16px;float:left;border:1px solid black;border-radius:2px">
