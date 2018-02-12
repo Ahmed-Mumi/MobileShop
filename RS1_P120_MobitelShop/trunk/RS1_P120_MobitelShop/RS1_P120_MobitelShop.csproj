@@ -406,6 +406,7 @@
     <Content Include="Areas\ModulKlijenti\Views\Narudzba\Text2.cshtml" />
     <Content Include="Areas\ModulAdministracija\Views\Narudzbe\Detalji.cshtml" />
     <Content Include="Views\Obavijest\Obavijest.cshtml" />
+    <None Include="Properties\PublishProfiles\rs1120.app.fit.ba - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
